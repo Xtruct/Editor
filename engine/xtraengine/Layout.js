@@ -117,15 +117,21 @@ module.exports = class Layout {
 		});
 
 		this.goldenLayout.registerComponent('Layout', function (container, state) {
-			container.getElement().html('');
+			$.get("layout/Objects.html", (response) => {
+				container.getElement().html(response);
+			});
 		});
 
 		this.goldenLayout.registerComponent('Preview', function (container, state) {
-			container.getElement().html('');
+			$.get("layout/Preview.html", (response) => {
+				container.getElement().html(response);
+			});
 		});
 
 		this.goldenLayout.registerComponent('Properties', function (container, state) {
-			container.getElement().html('');
+			$.get("layout/Objects.html", (response) => {
+				container.getElement().html(response);
+			});
 		});
 
 		this.goldenLayout.init();
