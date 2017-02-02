@@ -1,2 +1,2 @@
 # XtraEngine source code
-## Part of an [Xtruct](https://github.com/aolko/xtruct)
+## A new 2D game engine with an Editor
