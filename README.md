@@ -2,4 +2,4 @@
 # Xtruct Editor
 ### Part of a [Xtruct](https://github.com/Xtruct/Xtruct)
 -
-### Please note, this is a development repository, please direct all of the issues to the main repository.
+### Please note, this is a development repository, please direct all of the issues to the [main repository](https://github.com/Xtruct/Xtruct/issues).
