@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+
+    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-base.css">
+    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
+    <link rel="stylesheet" href="node_modules/nprogress/nprogress.css">
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+
+    <link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+
+<div id="versions">
+    Xtra Engine 0.0.1 pre-alpha
+    <br>
+    Node.js
+    <script>document.write(process.versions.node)</script>
+    <br>
+    Chromium
+    <script>document.write(process.versions.chrome)</script>
+    <br>
+    Electron
+    <script>document.write(process.versions.electron)</script>
+    <br>
+</div>
+</body>
+
+<script>
+	require('./renderer.js')
+</script>
+</html>

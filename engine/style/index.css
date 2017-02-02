@@ -1,0 +1,9 @@
+body {
+  background: #212121;
+  color: white;
+}
+#versions {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
