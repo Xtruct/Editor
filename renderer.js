@@ -1,5 +1,5 @@
 let $ = window.$ = require("jquery");
-let Layout = require("./xtraengine/xtraengine.js").Layout;
+let Layout = require("./core/Core.js").Layout;
 let nprogress = require("nprogress");
 
 $(function() {

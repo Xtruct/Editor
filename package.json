@@ -1,14 +1,14 @@
 {
-  "name": "XtraEngine",
+  "name": "Xtruct",
   "version": "0.0.1",
   "description": "...",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/XtraEngine/sources",
+  "repository": "https://github.com",
   "keywords": [
-    "XtraEngine"
+    "Xtruct"
   ],
   "author": "Armaldio",
   "license": "MIT",
