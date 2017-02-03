@@ -4,6 +4,14 @@ const Console      = require("./core/Core.js").Console;
 
 const nprogress   = require("nprogress");
 
+//TODO add game console
+//TODO rename console to editor console
+
+//catch all errors
+window.onerror = function(message, url, lineNumber) {
+	Console.say(`${message}<br>__________  (${url}) - Line ${lineNumber}`, "#F44336");
+	return true;
+};
 
 $(document).ready(function () {
 	//nprogress.start();
@@ -18,4 +26,6 @@ $(window).load(() => {
 
 	Preview.start();
 	Console.say("IDE ready", "#4CAF50");
+
+	throw new Error("Lol");
 });
