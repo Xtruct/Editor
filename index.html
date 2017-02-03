@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-base.css">
+    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
+    <link rel="stylesheet" href="node_modules/nprogress/nprogress.css">
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+
+    <link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+
+<!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
+
+<ul id="projects-dropdown" class="dropdown-content">
+    <li><a href="#">New</a></li>
+    <li><a href="#">Open</a></li>
+    <li><a href="#">Save</a></li>
+    <!-- <li class="divider"></li> -->
+</ul>
+
+<ul id="game-dropdown" class="dropdown-content">
+    <li><a href="#">Start</a></li>
+    <li><a href="#">Stop</a></li>
+    <li><a href="#">Reload</a></li>
+    <li><a href="#">Open in Browser</a></li>
+</ul>
+
+<nav id="nav" class="grey darken-4">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
+        <ul id="nav-mobile" class="left">
+            <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates="projects-dropdown">Projects<i
+                    class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates="game-dropdown">Game<i
+                    class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="#">Options</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
+
+
+<!-- FAB -------------------------------------------------------------------------------------------------------------->
+<div class="fixed-action-btn toolbar">
+    <a class="btn-floating btn-large grey darken-3 z-depth-4">
+        <i class="large material-icons">add_circle</i>
+    </a>
+    <ul id="quick-add">
+        <li class="waves-effect waves-light"><a href="#!">New object<!-- <i class="material-icons">insert_chart</i> --> </a></li>
+        <li class="waves-effect waves-light"><a href="#!">New action page<!-- <i class="material-icons">attach_file</i> --> </a></li>
+        <li class="waves-effect waves-light"><a href="#!">New layout<!-- <i class="material-icons">publish</i> --> </a></li>
+        <li class="waves-effect waves-light"><a href="#!">New layer<!-- <i class="material-icons">attach_file</i> --> </a></li>
+        <li class="waves-effect waves-light"><a href="#!">Import resource<!-- <i class="material-icons">format_quote</i> --> </a></li>
+    </ul>
+</div>
+<!-- FAB -------------------------------------------------------------------------------------------------------------->
+
+
+<div id="versions">
+    Xtruct 0.0.1 pre-alpha
+    <br>
+    Node.js
+    <script>document.write(process.versions.node)</script>
+    <br>
+    Chromium
+    <script>document.write(process.versions.chrome)</script>
+    <br>
+    Electron
+    <script>document.write(process.versions.electron)</script>
+    <br>
+</div>
+</body>
+
+<script>window.$ = window.jQuery = require('jquery');</script>
+<script>
+	require('./renderer.js');
+</script>
+
+</html>
