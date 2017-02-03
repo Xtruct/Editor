@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "serve": "gulp serve"
+    "serve": "gulp serve",
+    "pack": "build --dir --ia32 --x64",
+    "dist": "build --ia32 --x64"
   },
   "repository": "https://github.com",
   "keywords": [
@@ -15,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.4.1",
+    "electron-builder": "^12.3.1",
     "electron-connect": "^0.6.1",
     "gulp": "^3.9.1"
   },
@@ -27,8 +30,15 @@
     "moment": "^2.17.1",
     "monaco-editor": "^0.8.1",
     "nprogress": "^0.2.0",
-    "phaser-ce": "^2.7.3",
-    "picker": "^0.1.4",
-    "pickerjs": "^0.1.1"
+    "phaser-ce": "^2.7.3"
+  },
+  "postinstall": "install-app-deps",
+  "build": {
+    "appId": "com.editor.xtruct",
+    "copyright" : "Copyright © 2017 Armaldio",
+    "compression":"maximum",
+    "win": {
+      "iconUrl": "logos/Icon.ico"
+    }
   }
 }

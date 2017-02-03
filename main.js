@@ -1,7 +1,8 @@
+console.log("a");
+
 let electron      = require('electron');
 let app           = electron.app;
 let BrowserWindow = electron.BrowserWindow;
-let client        = require('electron-connect').client;
 const isDev       = require('electron-is-dev');
 
 const path = require('path');
@@ -9,7 +10,10 @@ const url  = require('url');
 
 let mainWindow;
 
+console.log("1");
+
 function createWindow() {
+	console.log("2");
 	let screen = electron.screen;
 
 	const {width, height} = screen.getPrimaryDisplay().workAreaSize;
@@ -21,6 +25,7 @@ function createWindow() {
 		slashes : true
 	}));
 
+
 	mainWindow.setMenu(null);
 
 	mainWindow.maximize();
@@ -28,14 +33,18 @@ function createWindow() {
 	if (isDev) {
 		console.log('Running in development');
 		mainWindow.webContents.openDevTools();
+
+		//let client        = require('electron-connect').client;
+		//client.create(mainWindow);
 	} else {
 		console.log('Running in production');
 	}
 
-	client.create(mainWindow);
+
 
 	mainWindow.on('closed', function () {
-		mainWindow = null
+		mainWindow = null;
+		app.quit();
 	});
 }
 
@@ -46,13 +55,13 @@ app.on('browser-window-created', function (e, window) {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', function () {
-	if (process.platform !== 'darwin') {
-		app.quit()
-	}
+	//if (process.platform !== 'darwin') {
+		app.quit();
+	//}
 });
 
 app.on('activate', function () {
 	if (mainWindow === null) {
-		createWindow()
+		createWindow();
 	}
 });

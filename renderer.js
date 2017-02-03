@@ -10,6 +10,7 @@ const nprogress   = require("nprogress");
 //catch all errors
 window.onerror = function(message, url, lineNumber) {
 	Console.say(`${message}<br>__________  (${url}) - Line ${lineNumber}`, "#F44336");
+	console.error(`${message}<br>__________  (${url}) - Line ${lineNumber}`);
 	return true;
 };
 
@@ -27,5 +28,5 @@ $(window).load(() => {
 	Preview.start();
 	Console.say("IDE ready", "#4CAF50");
 
-	throw new Error("Lol");
+	//throw new Error("Lol");
 });

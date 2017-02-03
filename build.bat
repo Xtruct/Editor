@@ -1,1 +1,0 @@
-electron-packager . Xtruct-Editor --platform=win32 --arch=ia32 --out="builds" --overwrite --asar
