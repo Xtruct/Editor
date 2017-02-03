@@ -8,6 +8,42 @@ body {
 
 #versions {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  left: 3px;
+  bottom: 3px;
+  z-index: 9999;
+}
+
+/**
+Layouts
+ */
+
+// Navbar
+
+#projects-dropdown {
+  z-index: 9999;
+}
+
+.brand-logo {
+  margin-top: 7px;
+}
+
+.dropdown-content
+{
+  background-color: @dark-background;
+  li a {
+    color: @text-color;
+  }
+}
+
+// FAB
+#quick-add {
+}
+
+// Properties
+tr:hover {
+  background-color: #4c4c4c !important;
+}
+
+tr {
+  height: 50px !important;
 }

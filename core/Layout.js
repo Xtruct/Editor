@@ -1,5 +1,8 @@
+let $            = require("jquery");
 let GoldenLayout = require("golden-layout");
 let low          = require('lowdb');
+
+require("materialize-css");
 
 const db = low('db.json');
 
@@ -35,61 +38,107 @@ module.exports = class Layout {
 				"popin"   : "pop in"
 			},
 			"content"        : [{
-				"type"          : "row",
+				"type"          : "column",
 				"isClosable"    : true,
 				"reorderEnabled": true,
 				"title"         : "",
+				"width"         : 100,
 				"content"       : [{
-					"type"           : "stack",
-					"width"          : 20,
-					"isClosable"     : true,
-					"reorderEnabled" : true,
-					"title"          : "",
-					"activeItemIndex": 0,
-					"content"        : [{
-						"type"          : "component",
-						"componentName" : "Objects",
-						"componentState": {"text": "Component 1"},
-						"isClosable"    : false,
+					"type"          : "row",
+					"isClosable"    : true,
+					"reorderEnabled": true,
+					"title"         : "",
+					"height"        : 87.04402515723272,
+					"content"       : [{
+						"type"          : "row",
+						"isClosable"    : true,
 						"reorderEnabled": true,
-						"title"         : "Objects"
-					}]
-				}, {
-					"type"           : "stack",
-					"width"          : 60,
-					"isClosable"     : true,
-					"reorderEnabled" : true,
-					"title"          : "",
-					"activeItemIndex": 0,
-					"content"        : [{
-						"type"          : "component",
-						"componentName" : "Layout",
-						"componentState": {"text": "Component 2"},
-						"isClosable"    : false,
-						"reorderEnabled": true,
-						"title"         : "Layout"
+						"title"         : "",
+						"height"        : 100,
+						"width"         : 85.8485639686684,
+						"content"       : [{
+							"type"           : "stack",
+							"isClosable"     : true,
+							"reorderEnabled" : true,
+							"title"          : "",
+							"activeItemIndex": 0,
+							"width"          : 15.245799626633477,
+							"content"        : [{
+								"type"          : "component",
+								"componentName" : "Objects",
+								"componentState": {"text": "Component 1"},
+								"isClosable"    : false,
+								"reorderEnabled": true,
+								"title"         : "Objects"
+							}]
+						}, {
+							"type"          : "column",
+							"isClosable"    : true,
+							"reorderEnabled": true,
+							"title"         : "",
+							"width"         : 84.75420037336652,
+							"content"       : [{
+								"type"           : "stack",
+								"isClosable"     : true,
+								"reorderEnabled" : true,
+								"title"          : "",
+								"activeItemIndex": 2,
+								"width"          : 71.66900420757362,
+								"height"         : 85.8806404657933,
+								"content"        : [{
+									"type"          : "component",
+									"componentName" : "Layout",
+									"componentState": {"text": "Component 2"},
+									"isClosable"    : false,
+									"reorderEnabled": true,
+									"title"         : "Layout"
+								}, {
+									"type"          : "component",
+									"componentName" : "Preview",
+									"componentState": {"text": "Component 2"},
+									"isClosable"    : false,
+									"reorderEnabled": true,
+									"title"         : "Preview"
+								}, {
+									"type"          : "component",
+									"componentName" : "Editor",
+									"componentState": {"text": "Component 2"},
+									"isClosable"    : false,
+									"reorderEnabled": true,
+									"title"         : "Editor"
+								}]
+							}, {
+								"type"           : "stack",
+								"isClosable"     : true,
+								"reorderEnabled" : true,
+								"title"          : "",
+								"activeItemIndex": 0,
+								"height"         : 14.1193595342067,
+								"content"        : [{
+									"type"          : "component",
+									"componentName" : "Console",
+									"componentState": {"text": "Component 2"},
+									"isClosable"    : false,
+									"reorderEnabled": true,
+									"title"         : "Console"
+								}]
+							}]
+						}]
 					}, {
-						"type"          : "component",
-						"componentName" : "Preview",
-						"componentState": {"text": "Component 2"},
-						"isClosable"    : false,
-						"reorderEnabled": true,
-						"title"         : "Preview"
-					}]
-				}, {
-					"type"           : "stack",
-					"width"          : 20,
-					"isClosable"     : true,
-					"reorderEnabled" : true,
-					"title"          : "",
-					"activeItemIndex": 0,
-					"content"        : [{
-						"type"          : "component",
-						"componentName" : "Properties",
-						"componentState": {"text": "Component 3"},
-						"isClosable"    : false,
-						"reorderEnabled": true,
-						"title"         : "Properties"
+						"type"           : "stack",
+						"isClosable"     : true,
+						"reorderEnabled" : true,
+						"title"          : "",
+						"activeItemIndex": 0,
+						"width"          : 14.151436031331587,
+						"content"        : [{
+							"type"          : "component",
+							"componentName" : "Properties",
+							"componentState": {"text": "Component 3"},
+							"isClosable"    : false,
+							"reorderEnabled": true,
+							"title"         : "Properties"
+						}]
 					}]
 				}]
 			}],
@@ -105,6 +154,10 @@ module.exports = class Layout {
 		if (state !== undefined) {
 			this.config = JSON.parse(state);
 		}
+
+		$.get("layout/Navbar.html", (response) => {
+			$("#navbar").html(response);
+		});
 
 		this.goldenLayout = new GoldenLayout(this.config);
 	};
@@ -129,7 +182,19 @@ module.exports = class Layout {
 		});
 
 		this.goldenLayout.registerComponent('Properties', function (container, state) {
-			$.get("layout/Objects.html", (response) => {
+			$.get("layout/Properties.html", (response) => {
+				container.getElement().html(response);
+			});
+		});
+
+		this.goldenLayout.registerComponent('Editor', function (container, state) {
+			$.get("layout/Editor.html", (response) => {
+				container.getElement().html(response);
+			});
+		});
+
+		this.goldenLayout.registerComponent('Console', function (container, state) {
+			$.get("layout/Console.html", (response) => {
 				container.getElement().html(response);
 			});
 		});

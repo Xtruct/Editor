@@ -4,8 +4,10 @@
 
 let Layout = require("./layout");
 let Settings = require("./Settings");
+let Preview = require("./Preview/Preview");
 
 module.exports = {
 	Layout  : new Layout(),
-	Settings: new Settings()
+	Settings: new Settings(),
+	Preview: new Preview()
 };

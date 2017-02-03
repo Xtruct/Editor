@@ -1,16 +1,20 @@
-#game {
-  position: absolute;
-  width: 100%;
+
+#preview {
+  display: flex; /* contexte sur le parent */
+  flex-direction: column; /* direction d'affichage verticale */
+  justify-content: center; /* alignement vertical */
   height: 100%;
 
-  canvas {
-    padding: 0;
-    margin: auto;
-    display: block;
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  #game {
+    width: 100%;
+
+    canvas {
+      margin: 0 auto;
+    }
   }
+}
+
+#nav-mobile ul
+{
+  text-align: center;
 }

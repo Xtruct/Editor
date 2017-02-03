@@ -1,10 +1,19 @@
-let $ = window.$ = require("jquery");
-let Layout = require("./core/Core.js").Layout;
-let nprogress = require("nprogress");
+const Layout      = require("./core/Core.js").Layout;
+const Preview      = require("./core/Core.js").Preview;
 
-$(function() {
-	nprogress.start();
-	nprogress.set(0.5);
+const nprogress   = require("nprogress");
+
+
+$(document).ready(function () {
+	//nprogress.start();
+	//nprogress.set(0.5);
 	Layout.setup();
-	Layout.saveLayout();
+
+});
+
+
+$(window).load(() => {
+	$(".dropdown-button").dropdown();
+
+	Preview.start();
 });

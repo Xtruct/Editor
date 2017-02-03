@@ -4,6 +4,28 @@ body {
 }
 #versions {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  left: 3px;
+  bottom: 3px;
+  z-index: 9999;
+}
+/**
+Layouts
+ */
+#projects-dropdown {
+  z-index: 9999;
+}
+.brand-logo {
+  margin-top: 7px;
+}
+.dropdown-content {
+  background-color: #212121;
+}
+.dropdown-content li a {
+  color: white;
+}
+tr:hover {
+  background-color: #4c4c4c !important;
+}
+tr {
+  height: 50px !important;
 }

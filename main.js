@@ -1,7 +1,8 @@
 let electron      = require('electron');
 let app           = electron.app;
 let BrowserWindow = electron.BrowserWindow;
-
+let client        = require('electron-connect').client;
+const isDev       = require('electron-is-dev');
 
 const path = require('path');
 const url  = require('url');
@@ -24,11 +25,18 @@ function createWindow() {
 
 	mainWindow.maximize();
 
-	//mainWindow.webContents.openDevTools();
+	if (isDev) {
+		console.log('Running in development');
+		mainWindow.webContents.openDevTools();
+	} else {
+		console.log('Running in production');
+	}
+
+	client.create(mainWindow);
 
 	mainWindow.on('closed', function () {
 		mainWindow = null
-	})
+	});
 }
 
 app.on('browser-window-created', function (e, window) {
