@@ -29,3 +29,8 @@ tr:hover {
 tr {
   height: 50px !important;
 }
+#console {
+  padding-left: 10px;
+  height: 65%;
+  overflow-y: scroll;
+}

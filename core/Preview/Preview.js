@@ -6,6 +6,7 @@ window.PIXI = require('phaser-ce/build/custom/pixi');
 window.p2     = require('phaser-ce/build/custom/p2');
 window.Phaser = require('phaser-ce/build/custom/phaser-split');
 
+let Console      = require("../../core/Core.js").Console;
 
 module.exports = class Preview {
 	constructor() {
@@ -18,7 +19,7 @@ module.exports = class Preview {
 	};
 
 	start() {
-		console.log("Starting Phaser");
+		//Console.say("Starting Phaser");
 
 		let game = new Phaser.Game(this.size.width, this.size.height, Phaser.AUTO, 'game', {
 			preload: preload,

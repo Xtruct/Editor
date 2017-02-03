@@ -170,7 +170,7 @@ module.exports = class Layout {
 		});
 
 		this.goldenLayout.registerComponent('Layout', function (container, state) {
-			$.get("layout/Objects.html", (response) => {
+			$.get("layout/Layout.html", (response) => {
 				container.getElement().html(response);
 			});
 		});
@@ -194,9 +194,12 @@ module.exports = class Layout {
 		});
 
 		this.goldenLayout.registerComponent('Console', function (container, state) {
+			/*
 			$.get("layout/Console.html", (response) => {
 				container.getElement().html(response);
 			});
+			*/
+			container.getElement().html('<div id="console"></div>');
 		});
 
 		this.goldenLayout.init();
