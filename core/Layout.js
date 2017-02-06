@@ -116,11 +116,26 @@ module.exports = class Layout {
 								"height"         : 14.1193595342067,
 								"content"        : [{
 									"type"          : "component",
-									"componentName" : "Console",
+									"componentName" : "EditorConsole",
 									"componentState": {"text": "Component 2"},
 									"isClosable"    : false,
 									"reorderEnabled": true,
-									"title"         : "Console"
+									"title"         : "Editor Console"
+								}]
+							}, {
+								"type"           : "stack",
+								"isClosable"     : true,
+								"reorderEnabled" : true,
+								"title"          : "",
+								"activeItemIndex": 0,
+								"height"         : 14.1193595342067,
+								"content"        : [{
+									"type"          : "component",
+									"componentName" : "GameConsole",
+									"componentState": {"text": "Component 2"},
+									"isClosable"    : false,
+									"reorderEnabled": true,
+									"title"         : "Game Console"
 								}]
 							}]
 						}]
@@ -155,9 +170,11 @@ module.exports = class Layout {
 			this.config = JSON.parse(state);
 		}
 
+		/*
 		$.get("layout/Navbar.html", (response) => {
 			$("#navbar").html(response);
 		});
+		*/
 
 		this.goldenLayout = new GoldenLayout(this.config);
 	};
@@ -234,13 +251,22 @@ module.exports = class Layout {
 			});
 		});
 
-		this.goldenLayout.registerComponent('Console', function (container, state) {
+		this.goldenLayout.registerComponent('GameConsole', function (container, state) {
 			/*
 			 $.get("layout/Console.html", (response) => {
 			 container.getElement().html(response);
 			 });
 			 */
-			container.getElement().html('<div id="console"></div>');
+			container.getElement().html('<div id="gameconsole"></div>');
+		});
+
+		this.goldenLayout.registerComponent('EditorConsole', function (container, state) {
+			/*
+			 $.get("layout/Console.html", (response) => {
+			 container.getElement().html(response);
+			 });
+			 */
+			container.getElement().html('<div id="editorconsole"></div>');
 		});
 
 		this.goldenLayout.init();

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "serve": "gulp serve",
-    "pack": "build --dir --ia32 --x64",
+    "pack": "build --dir --ia32",
     "dist": "build --ia32 --x64"
   },
   "repository": "https://github.com",
@@ -34,9 +34,10 @@
   },
   "postinstall": "install-app-deps",
   "build": {
+    "asar": true,
     "appId": "com.editor.xtruct",
-    "copyright" : "Copyright © 2017 Armaldio",
-    "compression":"maximum",
+    "copyright": "Copyright © 2017 Armaldio",
+    "compression": "maximum",
     "win": {
       "iconUrl": "logos/Icon.ico"
     }

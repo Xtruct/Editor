@@ -1,16 +1,34 @@
 const moment = require("moment");
 
-module.exports = class Console {
-	constructor() {
-		this.element = "console";
+class BaseConsole {
+	constructor(element) {
+		this.element = element;
 	}
 
-	say(text, color="white")
-	{
+	say(text, color = "white") {
 		let dateTime = moment().format("HH:mm:ss");
 
 		let output = `<span style="color: grey;">[${dateTime}]</span> <span style="color: ${color};">${text}</span>`;
 		$("#" + this.element).append(`${output}<br>`);
-		console.log(output);
+		console.log(`[${dateTime}] ${text}`);
+	}
+}
+
+class GameConsole extends BaseConsole {
+	constructor() {
+		super("gameconsole");
+	}
+}
+
+class EditorConsole extends BaseConsole {
+	constructor() {
+		super("editorconsole");
+	}
+}
+
+module.exports = class Console {
+	constructor() {
+		this.game   = new GameConsole();
+		this.editor = new EditorConsole();
 	}
 };
