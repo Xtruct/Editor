@@ -30,9 +30,9 @@ function createWindow() {
 
 	mainWindow.maximize();
 
-	mainWindow.webContents.openDevTools();
 
 	if (isDev) {
+		mainWindow.webContents.openDevTools();
 		console.log('Running in development');
 		//let client        = require('electron-connect').client;
 		//client.create(mainWindow);

@@ -48,14 +48,14 @@ module.exports = class Layout {
 					"isClosable"    : true,
 					"reorderEnabled": true,
 					"title"         : "",
-					"height"        : 87.04402515723272,
+					"height"        : 100,
 					"content"       : [{
 						"type"          : "row",
 						"isClosable"    : true,
 						"reorderEnabled": true,
 						"title"         : "",
 						"height"        : 100,
-						"width"         : 85.8485639686684,
+						"width"         : 87.9373368146214,
 						"content"       : [{
 							"type"           : "stack",
 							"isClosable"     : true,
@@ -83,8 +83,8 @@ module.exports = class Layout {
 								"reorderEnabled" : true,
 								"title"          : "",
 								"activeItemIndex": 2,
-								"width"          : 71.66900420757362,
-								"height"         : 85.8806404657933,
+								"width"          : 100,
+								"height"         : 81.91699604743086,
 								"content"        : [{
 									"type"          : "component",
 									"componentName" : "Layout",
@@ -94,26 +94,27 @@ module.exports = class Layout {
 									"title"         : "Layout"
 								}, {
 									"type"          : "component",
-									"componentName" : "Preview",
-									"componentState": {"text": "Component 2"},
-									"isClosable"    : false,
-									"reorderEnabled": true,
-									"title"         : "Preview"
-								}, {
-									"type"          : "component",
 									"componentName" : "Editor",
 									"componentState": {"text": "Component 2"},
 									"isClosable"    : false,
 									"reorderEnabled": true,
 									"title"         : "Editor"
+								}, {
+									"type"          : "component",
+									"componentName" : "Preview",
+									"componentState": {"text": "Component 2"},
+									"isClosable"    : false,
+									"reorderEnabled": true,
+									"title"         : "Preview"
 								}]
 							}, {
 								"type"           : "stack",
 								"isClosable"     : true,
 								"reorderEnabled" : true,
 								"title"          : "",
-								"activeItemIndex": 0,
-								"height"         : 14.1193595342067,
+								"activeItemIndex": 1,
+								"height"         : 18.08300395256917,
+								"width"          : 100,
 								"content"        : [{
 									"type"          : "component",
 									"componentName" : "EditorConsole",
@@ -121,15 +122,7 @@ module.exports = class Layout {
 									"isClosable"    : false,
 									"reorderEnabled": true,
 									"title"         : "Editor Console"
-								}]
-							}, {
-								"type"           : "stack",
-								"isClosable"     : true,
-								"reorderEnabled" : true,
-								"title"          : "",
-								"activeItemIndex": 0,
-								"height"         : 14.1193595342067,
-								"content"        : [{
+								}, {
 									"type"          : "component",
 									"componentName" : "GameConsole",
 									"componentState": {"text": "Component 2"},
@@ -145,7 +138,7 @@ module.exports = class Layout {
 						"reorderEnabled" : true,
 						"title"          : "",
 						"activeItemIndex": 0,
-						"width"          : 14.151436031331587,
+						"width"          : 12.062663185378584,
 						"content"        : [{
 							"type"          : "component",
 							"componentName" : "Properties",
@@ -171,10 +164,10 @@ module.exports = class Layout {
 		}
 
 		/*
-		$.get("layout/Navbar.html", (response) => {
-			$("#navbar").html(response);
-		});
-		*/
+		 $.get("layout/Navbar.html", (response) => {
+		 $("#navbar").html(response);
+		 });
+		 */
 
 		this.goldenLayout = new GoldenLayout(this.config);
 	};
@@ -273,7 +266,7 @@ module.exports = class Layout {
 
 		this.goldenLayout.on('stateChanged', () => {
 			let state = JSON.stringify(this.goldenLayout.toConfig());
-			this.saveLayout(state);
+			//this.saveLayout(state);
 		});
 	};
 
