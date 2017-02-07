@@ -49,65 +49,55 @@
 </script>
 -->
 
-<!-- http://camohub.github.io/jquery-sortable-lists/ -->
-<div id="list-parent">
-    <ul class="sTree2 listsClass" id="sTree2">
 
-        <li class="sortableListsOpen" id="item_b" data-module="b"
-            style="width: auto; position: relative; top: 0px; left: 0px; visibility: visible;">
-            <div><span class="sortableListsOpener"
-                       style="float: left; display: inline-block; background-position: center center; background-repeat: no-repeat; margin-left: -35px; margin-right: 5px; font-size: 1.1em;"><i
-                    class="fa fa-minus c3"></i></span>Group 1
-            </div>
-            <ul class="" style="display: block;">
-                <li id="item_a" data-module="a" class=""
-                    style="width: auto; position: relative; top: 0px; left: 0px; visibility: visible;">
-                    <div>Do some actions</div>
-                </li>
-                <li id="item_b1" data-module="b">
-                    <div>Do some other actions</div>
-                </li>
-                <li id="item_b2" data-module="b">
-                    <div><span class="clickable">Item</span></div>
-                </li>
-                <li id="item_b3" data-module="b">
-                    <div>Item</div>
-                </li>
-                <li id="item_b4" data-module="b">
-                    <div>Item</div>
-                </li>
-                <li id="item_b5" data-module="b" class="sortableListsOpen">
-                    <div>If (condition true)<span class="sortableListsOpener"
-                                                  style="float: left; display: inline-block; background-position: center center; background-repeat: no-repeat; margin-left: -35px; margin-right: 5px; font-size: 1.1em;"><i
-                            class="fa fa-minus c3"></i></span></div>
-                    <ul style="display: block;">
-                        <li class="sortableListsOpen" id="item_c" data-module="c"
-                            style="width: auto; position: relative; top: 0px; left: 0px; visibility: visible;">
-                            <div><span class="sortableListsOpener"
-                                       style="float: left; display: inline-block; background-position: center center; background-repeat: no-repeat; margin-left: -35px; margin-right: 5px; font-size: 1.1em;"><i
-                                    class="fa fa-minus c3"></i></span>If (condition false)
-                            </div>
-                            <ul class="" style="display: block;">
-                                <li id="item_c1" data-module="c">
-                                    <div>Item</div>
-                                </li>
-                                <li id="item_c2" data-module="c">
-                                    <div>Item</div>
-                                </li>
-                                <li id="item_c3" data-module="c">
-                                    <div>Item</div>
-                                </li>
-                                <li id="item_c4" data-module="c">
-                                    <div>Item</div>
-                                </li>
-                                <li id="item_c5" data-module="c">
-                                    <div>Item</div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+<link rel="stylesheet" href="style/Editor.css">
+<link rel="stylesheet" href="lib/minimap.min.css">
+
+<script src="lib/minimap.min.js"></script>
+
+<!-- http://camohub.github.io/jquery-sortable-lists/ -->
+<div id="editor">
+
+    <div id="list-parent">
+        <ul class="sTree2 listsClass" id="sTree2">
+            <li class="sortableListsOpen" id="item_b" data-module="b"
+                style="width: auto; position: relative; top: 0; left: 0; visibility: visible;">
+                <div><span class="sortableListsOpener"
+                           style="float: left; display: inline-block; background-position: center center; background-repeat: no-repeat; margin-left: -35px; margin-right: 5px; font-size: 1.1em;"><i
+                        class="fa fa-minus c3"></i></span><i class="material-icons tiny green-text">forward</i> On Scene
+                    <c class="object">Scene1</c> start
+                </div>
+                <ul class="" style="display: block;">
+                    <li id="item_a" data-module="a" class=""
+                        style="width: auto; position: relative; top: 0px; left: 0px; visibility: visible;">
+                        <div>Set <c class="object">GameStarted</c> to <c class="variable">True</c></div>
+                    </li>
+                    <li id="item_b1" data-module="b">
+                        <div>Do some other actions</div>
+                    </li>
+                    <li id="item_b5" data-module="b" class="sortableListsOpen">
+                        <div><i class="material-icons tiny green-text">help</i> If (<c class="object">Player</c>.<c class="function">isAlive</c>)
+                            <span class="sortableListsOpener"
+                                   style="float: left; display: inline-block; background-position: center center; background-repeat: no-repeat; margin-left: -35px; margin-right: 5px; font-size: 1.1em;"><i
+                                    class="fa fa-minus c3"></i></span></div>
+                        <ul style="display: block;">
+                            <li class="sortableListsOpen" id="item_c" data-module="c"
+                                style="width: auto; position: relative; top: 0px; left: 0px; visibility: visible;">
+                                <div><span class="sortableListsOpener"
+                                           style="float: left; display: inline-block; background-position: center center; background-repeat: no-repeat; margin-left: -35px; margin-right: 5px; font-size: 1.1em;"><i
+                                        class="fa fa-minus c3"></i></span><i
+                                        class="material-icons tiny green-text">help</i> If (<c class="object">Player</c>.<c class="function">haveWeapon</c> == <c class="variable">False</c>)
+                                </div>
+                                <ul class="" style="display: block;">
+                                    <li id="item_c1" data-module="c">
+                                        <div>Assign <c class="object">Gun</c> to <c class="object">Player</c></div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </div>

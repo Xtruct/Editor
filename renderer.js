@@ -36,6 +36,4 @@ $(window).load(() => {
 
 	Preview.start();
 	Console.editor.say("IDE ready", "#4CAF50");
-
-	//throw new Error("Lol");
 });

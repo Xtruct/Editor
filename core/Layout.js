@@ -82,7 +82,7 @@ module.exports = class Layout {
 								"isClosable"     : true,
 								"reorderEnabled" : true,
 								"title"          : "",
-								"activeItemIndex": 2,
+								"activeItemIndex": 0,
 								"width"          : 100,
 								"height"         : 81.91699604743086,
 								"content"        : [{
@@ -241,6 +241,7 @@ module.exports = class Layout {
 					ignoreClass   : 'clickable'
 				};
 				$('#sTree2').sortableLists(options);
+				let previewBody = $('#editor').minimap();
 			});
 		});
 

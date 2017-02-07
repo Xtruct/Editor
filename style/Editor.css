@@ -1,168 +1,146 @@
-.sTree2 html, .sTree2 body, .sTree2 ul, .sTree2 li {
+.sTree2 html,
+.sTree2 body,
+.sTree2 ul,
+.sTree2 li {
   margin: 0;
   padding: 0;
 }
-
-.sTree2 ul, .sTree2 li {
+.sTree2 ul,
+.sTree2 li {
   list-style-type: none;
   color: #fff;
   border: 1px solid #3f3f3f;
 }
-
-.sTree2 ul, #sTree2, #sTreePlus {
+.sTree2 ul,
+#sTree2,
+#sTreePlus {
   padding: 0;
   background-color: #151515;
 }
-
-#sTree2 li, #sTreePlus li, ul#sortableListsBase li {
+#sTree2 li,
+#sTreePlus li,
+ul#sortableListsBase li {
   padding-left: 25px;
   margin: 5px;
   border: 1px solid #3f3f3f;
   background-color: #3f3f3f;
 }
-
 .sTree2 li div {
   padding: 5px;
   background-color: #222;
 }
-
-.sTree2 li, .sTree2 ul, .sTree2 div {
+.sTree2 li,
+.sTree2 ul,
+.sTree2 div {
   border-radius: 2px;
 }
-
 .c1 {
   color: #b5e853;
 }
-
 .c2 {
   color: #63c0f5;
 }
-
 .c3 {
   color: #f77720;
 }
-
 .c4 {
   color: #888;
 }
-
 .c5 {
   color: #666667;
 }
-
 .c6 {
   color: #888;
 }
-
-.bgC1, .gray {
+.bgC1,
+.gray {
   background-color: #ccc;
 }
-
-.bgC2, .yellow {
+.bgC2,
+.yellow {
   background-color: #ff8;
 }
-
-.bgC3, .red {
+.bgC3,
+.red {
   background-color: #ff9999;
 }
-
-.bgC4, .blue {
+.bgC4,
+.blue {
   background-color: #aaaaff;
 }
-
-.bgC5, .green {
+.bgC5,
+.green {
   background-color: #99ff99;
 }
-
-.bgC6, .gree2 {
+.bgC6,
+.gree2 {
   background-color: #bbffbb;
 }
-
-.bgC7, .brown {
+.bgC7,
+.brown {
   background-color: #c26b2b;
 }
-
 .pT20 {
   padding-top: 20px;
 }
-
 .pV10 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
 .pR {
   position: relative;
 }
-
 .t10 {
   top: 10px;
 }
-
 .dN {
   display: none;
 }
-
 .zI1000 {
   z-index: 1000;
 }
-
 .small1 {
   font-size: 0.8em;
 }
-
 .small2 {
   font-size: 0.7em;
 }
-
 .small3 {
   font-size: 0.6em;
 }
-
 .tAR {
   text-align: right;
 }
-
 .clear {
   clear: both;
 }
-
 img.descPicture {
   display: block;
   width: 100%;
   margin: 0 7px 30px 0;
   float: left;
-  cursor: pointer; /*transition: all 0.5s ease;*/
+  cursor: pointer;
+  /*transition: all 0.5s ease;*/
 }
-
 img.descPicture.descPictureClose {
   width: 150px;
 }
-
-#sTree2, #sTreePlus {
+#sTree2,
+#sTreePlus {
   margin: 10px auto;
 }
-
-@md_orange : #FF9800;
-@md_blue : #2196F3;
-@md_purple : #9C27B0;
-
 .object {
-  color: @md_orange;
+  color: #FF9800;
   font-weight: bold;
-
 }
-
 .function {
-  color: @md_blue;
+  color: #2196F3;
   font-weight: bold;
 }
-
 .variable {
-  color: @md_purple;
+  color: #9C27B0;
   font-style: italic;
 }
-
 #editor {
   width: 80%;
   padding-left: 10px;

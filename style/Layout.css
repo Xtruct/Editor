@@ -1,0 +1,11 @@
+#scene {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#currentLayout {
+  outline: 2px dashed grey;
+  outline-offset: 5px;
+  background-color: white;
+}

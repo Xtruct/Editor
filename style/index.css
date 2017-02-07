@@ -1,3 +1,8 @@
+html {
+  height: 100%;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-rendering: optimizeSpeed;
+}
 body {
   background: #212121;
   color: white;
@@ -28,6 +33,14 @@ tr:hover {
 }
 tr {
   height: 50px !important;
+}
+#sTree2 li {
+  background-color: #ddf;
+  padding-left: 50px;
+}
+#list-parent {
+  overflow-y: scroll !important;
+  height: 100%;
 }
 #console {
   padding-left: 10px;

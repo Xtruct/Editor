@@ -36,6 +36,8 @@ module.exports = class Preview {
 		function preload() {
 			game.time.advancedTiming = true;
 
+			game.stage.backgroundColor = "#ffffff";
+
 			game.load.image('pad', 'ExampleProject/paddle.png');
 			game.load.image('ball', 'ExampleProject/ball.png');
 		}
