@@ -11,6 +11,10 @@ let mainWindow;
 app.commandLine.appendSwitch('force-device-scale-factor', '1');
 app.commandLine.appendSwitch('disable-gpu');
 
+app.setAppUserModelId("com.editor.xtruct");
+
+//TODO asar extract ressources
+
 function createWindow() {
 	let screen = electron.screen;
 
@@ -31,6 +35,11 @@ function createWindow() {
 
 	mainWindow.maximize();
 
+	process.argv.forEach(function (value) {
+		console.log(value);
+		if (value === "-dev")
+			mainWindow.webContents.openDevTools();
+	});
 
 	if (isDev) {
 		mainWindow.webContents.openDevTools();

@@ -10,8 +10,8 @@
 	//TODO animated sprite https://jsfiddle.net/ryanoc/4F6sT/
     //TODO https://github.com/pixolith/fabricjs-customise-controls-extension
 
-	const f      = require("fabric");
-	const fabric = f.fabric;
+	//const f      = require("fabric");
+	//const fabric = f.fabric;
 
 	// create a wrapper around native canvas element (with id="c")
 	let canvas      = new fabric.Canvas('currentLayout');
@@ -72,6 +72,11 @@
 		canvas.add(img);
 	});
 
+	let gamepad = new fabric.Image.fromURL('Exampleproject/gamepad.svg', function (img) {
+		img.set({left: canvas.width / 2, top: (canvas.height / 2) - (img.height / 2)});
+		canvas.add(img);
+	});
+
     /*
      // create a rectangle object
      let rect     = new fabric.Rect({
@@ -86,4 +91,16 @@
      */
 
 	canvas.renderAll();
+</script>
+
+<script>
+    /*
+	activeObj.animate('opacity', '0', {
+		duration: 1000,
+		onChange: canvas.renderAll.bind(canvas),
+		onComplete: function() {
+			canvas.remove(activeObj);
+		}
+	});
+	*/
 </script>

@@ -1,13 +1,13 @@
 {
   "name": "Xtruct",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "...",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "serve": "gulp serve",
     "pack": "build --dir --x64 --ia32",
-    "dist": "build --ia32 --x64"
+    "dist": "build --x64 --ia32"
   },
   "repository": "https://github.com",
   "keywords": [
@@ -16,14 +16,13 @@
   "author": "Armaldio",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.4.1",
+    "electron": "^1.6.0",
     "electron-builder": "^12.3.1",
     "electron-connect": "^0.6.1",
     "gulp": "^3.9.1"
   },
   "dependencies": {
     "electron-is-dev": "^0.1.2",
-    "fabric": "^1.7.3",
     "golden-layout": "^1.5.7",
     "jquery": "^3.1.1",
     "lowdb": "^0.14.0",
@@ -35,7 +34,12 @@
   },
   "postinstall": "install-app-deps",
   "build": {
-    "asar": true,
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "electronVersion": "1.6.0",
+    "asar": false,
     "appId": "com.editor.xtruct",
     "copyright": "Copyright © 2017 Armaldio",
     "compression": "maximum",
