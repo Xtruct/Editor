@@ -1,11 +1,14 @@
-// @flow
-
 global.req  = require('app-root-path').require;
 global.ROOT = require('app-root-path');
 
-const Layout  = req("core/Core.js").Layout;
-const Preview = req("core/Core.js").Preview;
-const Console = req("core/Core.js").Console;
+const remote = require('electron').remote;
+
+const Layout         = req("core/Core.js").Layout;
+const Preview        = req("core/Core.js").Preview;
+const Console        = req("core/Core.js").Console;
+const VersionManager = req('modules/versionManager.js');
+
+let vm = new VersionManager();
 
 const _Navbar = req("core/Navbar.js");
 let Navbar    = new _Navbar();
@@ -53,6 +56,12 @@ $(window).on('load', () => {
 
 						  }
 					  });
+
+	//------------------------------------------------------------------------------------------------------------------
+
+	$("#xtruct-version").text("Xtruct " + vm.toString());
+
+	//------------------------------------------------------------------------------------------------------------------
 
 	Preview.start();
 	Console.editor.say("IDE ready", "#4CAF50");

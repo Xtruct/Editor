@@ -1,84 +1,85 @@
-const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
-const isDev = require('electron-is-dev');
+const electron      = require('electron');
+const app           = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const isDev         = require('electron-is-dev');
+const fs            = require('fs');
+const VersionManager = require('./modules/versionManager.js');
 
-const path = require('path')
-const url = require('url')
+global.req  = require('app-root-path').require;
+global.ROOT = require('app-root-path');
 
-let mainWindow
+const path = require('path');
+const url  = require('url');
+
+let mainWindow;
 
 app.commandLine.appendSwitch('--force-device-scale-factor', '1');
 app.commandLine.appendSwitch('--disable-gpu');
 
 app.setAppUserModelId("com.editor.xtruct");
 
-function createWindow() {
+let vm = new VersionManager();
+vm.patchBuild();
 
-    let screen = electron.screen;
+function createWindow () {
 
-    const {
-        width,
-        height
-    } = screen.getPrimaryDisplay().workAreaSize;
+	let screen = electron.screen;
 
-    mainWindow = new BrowserWindow({
-        title: "Xtruct Editor",
-        icon: path.join(__dirname, 'build/icon.ico'),
-        backgroundColor: '#2e2c29',
-        width: width,
-        height: height
-    });
+	const {
+			  width, height
+		  } = screen.getPrimaryDisplay().workAreaSize;
 
-    // and load the index.html of the app.
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
+	mainWindow = new BrowserWindow({
+		title          : "Xtruct Editor",
+		icon           : path.join(__dirname, 'build/icon.ico'),
+		backgroundColor: '#2e2c29',
+		width          : width,
+		height         : height
+	});
 
-    mainWindow.setMenu(null);
+	// and load the index.html of the app.
+	mainWindow.loadURL(url.format({
+									  pathname: path.join(__dirname, 'index.html'),
+									  protocol: 'file:',
+									  slashes : true
+								  }));
 
-    mainWindow.maximize();
+	mainWindow.setMenu(null);
 
-    process.argv.forEach(function(value) {
-        console.log(value);
-        if (value === "-dev")
-            mainWindow.webContents.openDevTools();
-    });
+	mainWindow.maximize();
 
-    if (isDev) {
-        mainWindow.webContents.openDevTools();
-        console.log('Running in development');
-        //let client        = require('electron-connect').client;
-        //client.create(mainWindow);
-    } else {
-        console.log('Running in production');
-    }
+	process.argv.forEach(function (value) {
+		console.log(value);
+		if (value === "-dev") mainWindow.webContents.openDevTools();
+	});
 
-    mainWindow.on('closed', function() {
-        mainWindow = null;
-        app.quit();
-        console.log('quit');
-    });
+	if (isDev) {
+		mainWindow.webContents.openDevTools();
+		console.log('Running in development');
+	} else {
+		console.log('Running in production');
+	}
+
+	mainWindow.on('closed', function () {
+		mainWindow = null;
+		app.quit();
+	});
 }
 
-app.on('browser-window-created', function(e, window) {
-    window.setMenu(null);
-    console.log('quit');
+app.on('browser-window-created', function (e, window) {
+	window.setMenu(null);
 });
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
-app.on('window-all-closed', function() {
-    //if (process.platform !== 'darwin') {
-    app.quit();
-    //}
+app.on('window-all-closed', function () {
+	//if (process.platform !== 'darwin') {
+	app.quit();
+	//}
 });
 
-app.on('activate', function() {
-    if (mainWindow === null) {
-        createWindow();
-        console.log('quit');
-    }
+app.on('activate', function () {
+	if (mainWindow === null) {
+		createWindow();
+	}
 });
