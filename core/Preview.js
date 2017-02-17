@@ -6,7 +6,7 @@ window.PIXI = require('phaser-ce/build/custom/pixi');
 window.p2     = require('phaser-ce/build/custom/p2');
 window.Phaser = require('phaser-ce/build/custom/phaser-split');
 
-let Console = require("../Console.js");
+let Console = require("./Console.js");
 
 let out = new Console();
 
@@ -38,8 +38,8 @@ module.exports = class Preview {
 
 			game.stage.backgroundColor = "#ffffff";
 
-			game.load.image('pad', 'ExampleProject/paddle.png');
-			game.load.image('ball', 'ExampleProject/ball.png');
+			game.load.image('pad', 'ExampleProject/assets/paddle.png');
+			game.load.image('ball', 'ExampleProject/assets/ball.png');
 		}
 
 		function create() {
