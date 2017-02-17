@@ -1,11 +1,16 @@
-const Layout  = require("./core/Core.js").Layout;
-const Preview = require("./core/Core.js").Preview;
-const Console = require("./core/Core.js").Console;
+// @flow
+
+global.req  = require('app-root-path').require;
+global.ROOT = require('app-root-path');
+
+const Layout  = req("core/Core.js").Layout;
+const Preview = req("core/Core.js").Preview;
+const Console = req("core/Core.js").Console;
+
+const _Navbar = req("core/Navbar.js");
+let Navbar    = new _Navbar();
 
 const nprogress = require("nprogress");
-
-//TODO add game console
-//TODO rename console to editor console
 
 $(document).on("mousedown", function (ev) {
 	if (ev.which == 2) {
@@ -14,25 +19,40 @@ $(document).on("mousedown", function (ev) {
 	}
 });
 
-//catch all errors
-/*
-window.onerror = function (message, url, lineNumber) {
-	Console.say(`${message}<br>__________  (${url}) - Line ${lineNumber}`, "#F44336");
-	console.error(`${message}<br>__________  (${url}) - Line ${lineNumber}`);
-	return true;
-};
-*/
-
-$(document).ready(function () {
+$(document).ready(() => {
 	//nprogress.start();
 	//nprogress.set(0.5);
 	Layout.setup();
 	Console.editor.say("Layout setup");
+
+	Navbar.init();
 });
 
+$("#FABaddNewObject").on("click", () => {
+	$("#chooseObjectModal").modal("open");
+});
 
-$(window).load(() => {
+$("#FABaddNewScene").on("click", () => {
+	if (global.project) {
+
+	}
+});
+
+$(window).on('load', () => {
 	$(".dropdown-button").dropdown();
+	$('.modal').modal({
+						  dismissible: false,
+						  opacity    : .5,
+						  inDuration : 300,
+						  outDuration: 200,
+						  startingTop: '50%',
+						  endingTop  : '25%',
+						  ready      : function (modal, trigger) {
+						  },
+						  complete   : function () {
+
+						  }
+					  });
 
 	Preview.start();
 	Console.editor.say("IDE ready", "#4CAF50");

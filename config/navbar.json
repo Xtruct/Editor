@@ -1,0 +1,8 @@
+{
+  "#example http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string",
+  "Projects": {
+    "New project": "newproject",
+    "Open": "open",
+    "Save": "save"
+  }
+}

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-base.css">
     <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
     <link rel="stylesheet" href="node_modules/nprogress/nprogress.css">
-    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="lib/materialize/sass/materialize.css">
 
     <link rel="stylesheet" href="style/index.css">
 </head>
@@ -19,9 +19,9 @@
 <!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
 
 <ul id="projects-dropdown" class="dropdown-content">
-    <li><a href="#">New</a></li>
-    <li><a href="#">Open</a></li>
-    <li><a href="#">Save</a></li>
+    <li><a id="navbar-new" href="#">New</a></li>
+    <li><a id="navbar-open" href="#">Open</a></li>
+    <li><a id="navbar-save" href="#">Save</a></li>
     <!-- <li class="divider"></li> -->
 </ul>
 
@@ -36,34 +36,180 @@
     <div class="nav-wrapper">
         <a href="#" class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
         <ul id="nav-mobile" class="left">
-            <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates="projects-dropdown">Projects<i
+            <li><a class="dropdown-button" href="#" data-beloworigin="true"
+                   data-activates="projects-dropdown">Projects<i
                     class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates="game-dropdown">Game<i
+            <li><a class="dropdown-button" href="#" data-beloworigin="true" data-activates="game-dropdown">Game<i
                     class="material-icons right">arrow_drop_down</i></a></li>
             <li><a href="#">Options</a></li>
         </ul>
+        <p class="right" id="project-name">No opened project</p>
     </div>
 </nav>
 
+<!-- New project Modal -->
+<div id="newProjectModal" class="modal mod80">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s6 modal-background-box">
+                <h4 class="newProject-header">New project</h4>
+
+                <div class="row">
+                    <div class="input-field">
+                        <input id="name" type="text" class="validate">
+                        <label for="name" data-error="wrong" data-success="right" class="">Project name</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="version" type="text" class="validate">
+                        <label for="version" data-error="wrong" data-success="right" class="">Version</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="description" type="text" class="validate">
+                        <label for="description" data-error="wrong" data-success="right" class="">Description</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="id" type="text" class="validate">
+                        <label for="id" data-error="wrong" data-success="right" class="">ID</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="author" type="text" class="validate">
+                        <label for="author" data-error="wrong" data-success="right" class="">Author</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="email" type="text" class="validate">
+                        <label for="email" data-error="wrong" data-success="right" class="">Email</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="website" type="text" class="validate">
+                        <label for="website" data-error="wrong" data-success="right" class="">Website</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="width" type="number" class="validate">
+                        <label for="width" data-error="wrong" data-success="right" class="">Width</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="height" type="number" class="validate">
+                        <label for="height" data-error="wrong" data-success="right" class="">Height</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- TODO stepper https://kinark.github.io/Materialize-stepper/ -->
+            <div class="col s6 modal-background-box">
+                <h4 class="newProject-header">Templates</h4>
+                <ul class="collection">
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle blue">stop</i>
+                        <span class="title">Title</span>
+                        <p>First Line <br>
+                            Second Line
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle">folder</i>
+                        <span class="title">Title</span>
+                        <p>First Line <br>
+                            Second Line
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle green">insert_chart</i>
+                        <span class="title">Title</span>
+                        <p>First Line <br>
+                            Second Line
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle red">play_arrow</i>
+                        <span class="title">Title</span>
+                        <p>First Line <br>
+                            Second Line
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a id="modalValidateCustomProject"
+           class="modal-action modal-close waves-effect waves-green btn-flat white-text">OK</a>
+        <a class="modal-action modal-close waves-effect waves-red btn-flat white-text">Cancel</a>
+    </div>
+</div>
+
 <!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
+
+<!-- Choose Object Modal-->
+<div id="chooseObjectModal" class="modal mod80">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s3 section center">
+                <img class="center" width="32" src="./logos/icon.ico" alt="icon">
+                <h5>Sprite</h5>
+            </div>
+
+            <div class="col s3 section center">
+                <img class="center" width="32" src="./logos/icon.ico" alt="icon">
+                <h5>Text</h5>
+            </div>
+
+            <div class="col s3 section center">
+                <img class="center" width="32" src="./logos/icon.ico" alt="icon">
+                <h5>Mouse</h5>
+            </div>
+
+            <div class="col s3 section center">
+                <img class="center" width="32" src="./logos/icon.ico" alt="icon">
+                <h5>Keyboard</h5>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a id="modalValidateAddObject"
+           class="modal-action modal-close waves-effect waves-green btn-flat white-text">Add</a>
+        <a class="modal-action modal-close waves-effect waves-red btn-flat white-text">Cancel</a>
+    </div>
+</div>
 
 
 <!-- FAB -------------------------------------------------------------------------------------------------------------->
-<div class="fixed-action-btn toolbar">
+<div class="fixed-action-btn horizontal">
     <a class="btn-floating btn-large grey darken-3 z-depth-4">
         <i class="large material-icons">add_circle</i>
     </a>
     <ul id="quick-add">
-        <li class="waves-effect waves-light"><a href="#!">New object
-            <!-- <i class="material-icons">insert_chart</i> --> </a></li>
-        <li class="waves-effect waves-light"><a href="#!">New action page
-            <!-- <i class="material-icons">attach_file</i> --> </a></li>
-        <li class="waves-effect waves-light"><a href="#!">New layout<!-- <i class="material-icons">publish</i> --> </a>
+        <li class="waves-effect waves-light"><a id="FABaddNewObject" class="btn btn-floating red tooltipped"
+                                                data-position="top"
+                                                data-delay="50" data-tooltip="New object"><i class="material-icons">insert_chart</i></a>
         </li>
-        <li class="waves-effect waves-light"><a href="#!">New layer
-            <!-- <i class="material-icons">attach_file</i> --> </a></li>
-        <li class="waves-effect waves-light"><a href="#!">Import resource
-            <!-- <i class="material-icons">format_quote</i> --> </a></li>
+        <li class="waves-effect waves-light"><a id="FABaddNewScene" class="btn-floating red tooltipped" data-position="top"
+                                                data-delay="50" data-tooltip="New Actions page"><i
+                class="material-icons">insert_chart</i></a>
+        </li>
+        <li class="waves-effect waves-light"><a class="btn-floating red tooltipped" data-position="top"
+                                                data-delay="50" data-tooltip="New Scene"><i class="material-icons">insert_chart</i></a>
+        </li>
+        <li class="waves-effect waves-light"><a class="btn-floating red tooltipped" data-position="top"
+                                                data-delay="50" data-tooltip="New layer"><i class="material-icons">insert_chart</i></a>
+        </li>
+        <li class="waves-effect waves-light"><a class="btn-floating red tooltipped" data-position="top"
+                                                data-delay="50" data-tooltip="Import ressource"><i
+                class="material-icons">insert_chart</i></a>
+        </li>
     </ul>
 </div>
 <!-- FAB -------------------------------------------------------------------------------------------------------------->
@@ -84,7 +230,10 @@
 </div>
 </body>
 
-<script>window.$ = window.jQuery = require('jquery');</script>
+<!-- <script>window.$ = window.jQuery = require('jquery');</script> -->
+<script src="node_modules/hammerjs/hammer.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="lib/materialize/js/bin/materialize.js"></script>
 <script src="lib/jquery-sortable-lists.min.js"></script>
 <script src="lib/fabric.min.js"></script>
 <script>

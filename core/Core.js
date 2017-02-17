@@ -4,7 +4,7 @@
 
 let Layout = require("./Layout.js");
 let Settings = require("./Settings.js");
-let Preview = require("./Preview/Preview.js");
+let Preview = require("./Preview.js");
 let Console = require("./Console.js");
 
 module.exports = {

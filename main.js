@@ -8,8 +8,9 @@ const url  = require('url');
 
 let mainWindow;
 
-app.commandLine.appendSwitch('force-device-scale-factor', '1');
-app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('--force-device-scale-factor', '1');
+app.commandLine.appendSwitch('--disable-gpu');
+
 
 app.setAppUserModelId("com.editor.xtruct");
 

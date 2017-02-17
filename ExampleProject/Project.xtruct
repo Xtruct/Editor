@@ -1,0 +1,7 @@
+{
+  "name": "MyFirstProject",
+  "windowWidth": "400",
+  "windowHeight": "300",
+  "defaultPreview": "in-editor",
+  "startScene": "scene1"
+}

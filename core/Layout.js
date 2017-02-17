@@ -1,6 +1,8 @@
 let $            = require("jquery");
 let GoldenLayout = require("golden-layout");
 let low          = require('lowdb');
+let fs           = require("fs");
+let path         = require("path");
 
 require("materialize-css");
 
@@ -9,165 +11,13 @@ const db = low('db.json');
 
 module.exports = class Layout {
 	constructor() {
-		this.config = {
-			"settings"       : {
-				"hasHeaders"              : true,
-				"constrainDragToContainer": true,
-				"reorderEnabled"          : true,
-				"selectionEnabled"        : true,
-				"popoutWholeStack"        : false,
-				"blockedPopoutsThrowError": false,
-				"closePopoutsOnUnload"    : false,
-				"showPopoutIcon"          : false,
-				"showMaximiseIcon"        : false,
-				"showCloseIcon"           : false
-			},
-			"dimensions"     : {
-				"borderWidth"    : 5,
-				"minItemHeight"  : 10,
-				"minItemWidth"   : 10,
-				"headerHeight"   : 20,
-				"dragProxyWidth" : 300,
-				"dragProxyHeight": 200
-			},
-			"labels"         : {
-				"close"   : "close",
-				"maximise": "maximise",
-				"minimise": "minimise",
-				"popout"  : "open in new window",
-				"popin"   : "pop in"
-			},
-			"content"        : [{
-				"type"          : "column",
-				"isClosable"    : true,
-				"reorderEnabled": true,
-				"title"         : "",
-				"width"         : 100,
-				"content"       : [{
-					"type"          : "row",
-					"isClosable"    : true,
-					"reorderEnabled": true,
-					"title"         : "",
-					"height"        : 100,
-					"content"       : [{
-						"type"          : "row",
-						"isClosable"    : true,
-						"reorderEnabled": true,
-						"title"         : "",
-						"height"        : 100,
-						"width"         : 87.9373368146214,
-						"content"       : [{
-							"type"           : "stack",
-							"isClosable"     : true,
-							"reorderEnabled" : true,
-							"title"          : "",
-							"activeItemIndex": 0,
-							"width"          : 15.245799626633477,
-							"content"        : [{
-								"type"          : "component",
-								"componentName" : "Objects",
-								"componentState": {"text": "Component 1"},
-								"isClosable"    : false,
-								"reorderEnabled": true,
-								"title"         : "Objects"
-							}]
-						}, {
-							"type"          : "column",
-							"isClosable"    : true,
-							"reorderEnabled": true,
-							"title"         : "",
-							"width"         : 84.75420037336652,
-							"content"       : [{
-								"type"           : "stack",
-								"isClosable"     : true,
-								"reorderEnabled" : true,
-								"title"          : "",
-								"activeItemIndex": 0,
-								"width"          : 100,
-								"height"         : 81.91699604743086,
-								"content"        : [{
-									"type"          : "component",
-									"componentName" : "Layout",
-									"componentState": {"text": "Component 2"},
-									"isClosable"    : false,
-									"reorderEnabled": true,
-									"title"         : "Layout"
-								}, {
-									"type"          : "component",
-									"componentName" : "Editor",
-									"componentState": {"text": "Component 2"},
-									"isClosable"    : false,
-									"reorderEnabled": true,
-									"title"         : "Editor"
-								}, {
-									"type"          : "component",
-									"componentName" : "Preview",
-									"componentState": {"text": "Component 2"},
-									"isClosable"    : false,
-									"reorderEnabled": true,
-									"title"         : "Preview"
-								}]
-							}, {
-								"type"           : "stack",
-								"isClosable"     : true,
-								"reorderEnabled" : true,
-								"title"          : "",
-								"activeItemIndex": 1,
-								"height"         : 18.08300395256917,
-								"width"          : 100,
-								"content"        : [{
-									"type"          : "component",
-									"componentName" : "EditorConsole",
-									"componentState": {"text": "Component 2"},
-									"isClosable"    : false,
-									"reorderEnabled": true,
-									"title"         : "Editor Console"
-								}, {
-									"type"          : "component",
-									"componentName" : "GameConsole",
-									"componentState": {"text": "Component 2"},
-									"isClosable"    : false,
-									"reorderEnabled": true,
-									"title"         : "Game Console"
-								}]
-							}]
-						}]
-					}, {
-						"type"           : "stack",
-						"isClosable"     : true,
-						"reorderEnabled" : true,
-						"title"          : "",
-						"activeItemIndex": 0,
-						"width"          : 12.062663185378584,
-						"content"        : [{
-							"type"          : "component",
-							"componentName" : "Properties",
-							"componentState": {"text": "Component 3"},
-							"isClosable"    : false,
-							"reorderEnabled": true,
-							"title"         : "Properties"
-						}]
-					}]
-				}]
-			}],
-			"isClosable"     : true,
-			"reorderEnabled" : true,
-			"title"          : "",
-			"openPopouts"    : [],
-			"maximisedItemId": null
-		};
+		this.config = JSON.parse(fs.readFileSync(path.join(ROOT.toString(), "config/layout.json")));
 
 		let state = db.get('layout.state').value();
 
 		if (state !== undefined) {
 			this.config = JSON.parse(state);
 		}
-
-		/*
-		 $.get("layout/Navbar.html", (response) => {
-		 $("#navbar").html(response);
-		 });
-		 */
 
 		this.goldenLayout = new GoldenLayout(this.config);
 	};
@@ -180,8 +30,85 @@ module.exports = class Layout {
 		});
 
 		this.goldenLayout.registerComponent('Layout', function (container, state) {
-			$.get("layout/Layout.html", (response) => {
+			$.get("layout/Scene.html", (response) => {
 				container.getElement().html(response);
+
+				//TODO animated sprite https://jsfiddle.net/ryanoc/4F6sT/
+				//TODO https://github.com/pixolith/fabricjs-customise-controls-extension
+
+				// create a wrapper around native canvas element (with id="c")
+				let canvas      = new fabric.Canvas('currentLayout');
+
+				/**
+				 * Set canvas selection
+				 */
+				canvas.selectionBorderColor = 'rgba(255, 0, 0, 0.3)';
+
+				resizeCanvas();
+
+				fabric.Object.prototype.set({
+					transparentCorners: false,
+					cornerColor: '#0000ff',
+					borderColor: '#ff0000',
+					cornerSize: 12,
+					padding: 5
+				});
+				/** **/
+
+				window.addEventListener('resize', resizeCanvas, false);
+
+				function resizeCanvas() {
+
+					let layout = $("#layout");
+
+					canvas.setHeight(layout.parent().height() * 0.8);
+					canvas.setWidth(layout.parent().width() * 0.8);
+					canvas.renderAll();
+				}
+
+				// resize on init
+				resizeCanvas();
+
+				/**
+				 * Animated sprite
+				 */
+				/*
+				 let animated = new fabric.Image.fromURL('assets/animation.png', function (img) {
+				 img.scale(0.5).set({left: 400, top: 100});
+				 canvas.add(img);
+				 });
+				 */
+				/** **/
+
+				let pad1 = new fabric.Image.fromURL('Exampleproject/assets/paddle.png', function (img) {
+					img.set({left: 16, top: (canvas.height / 2) - (img.height / 2)});
+					canvas.add(img);
+				});
+
+				let pad2 = new fabric.Image.fromURL('Exampleproject/assets/paddle.png', function (img) {
+					img.set({left: canvas.width - 64, top: (canvas.height / 2) - (img.height / 2)});
+					canvas.add(img);
+				});
+
+				let ball = new fabric.Image.fromURL('Exampleproject/assets/ball.png', function (img) {
+					img.set({left: canvas.width / 2, top: (canvas.height / 2) - (img.height / 2)});
+					canvas.add(img);
+				});
+
+				/*
+				 // create a rectangle object
+				 let rect     = new fabric.Rect({
+				 left  : 100,
+				 top   : 100,
+				 fill  : 'red',
+				 width : 50,
+				 height: 50
+				 });
+
+				 canvas.add(rect);
+				 */
+
+				canvas.renderAll();
 			});
 		});
 
@@ -246,20 +173,10 @@ module.exports = class Layout {
 		});
 
 		this.goldenLayout.registerComponent('GameConsole', function (container, state) {
-			/*
-			 $.get("layout/Console.html", (response) => {
-			 container.getElement().html(response);
-			 });
-			 */
 			container.getElement().html('<div id="gameconsole"></div>');
 		});
 
 		this.goldenLayout.registerComponent('EditorConsole', function (container, state) {
-			/*
-			 $.get("layout/Console.html", (response) => {
-			 container.getElement().html(response);
-			 });
-			 */
 			container.getElement().html('<div id="editorconsole"></div>');
 		});
 
