@@ -1,34 +1,34 @@
-global.req  = require('app-root-path').require;
-global.ROOT = require('app-root-path');
+global.req         = require('app-root-path').require;
+global.ROOT        = require('app-root-path');
+global.project     = {};
+global.projectPath = "";
+global.plugins     = [];
 
 const remote = require('electron').remote;
 
-const Layout         = req("core/Core.js").Layout;
-const Preview        = req("core/Core.js").Preview;
-const Console        = req("core/Core.js").Console;
+const core = req("core/Core.js");
+
+const Layout         = core.Layout;
+const Preview        = core.Preview;
+const Console        = core.Console;
+const PluginLoader   = core.PluginLoader;
+const Navbar         = core.Navbar;
 const VersionManager = req('modules/versionManager.js');
 
 let vm = new VersionManager();
-
-const _Navbar = req("core/Navbar.js");
-let Navbar    = new _Navbar();
+vm.patchBuild();
 
 const nprogress = require("nprogress");
 
-$(document).on("mousedown", function (ev) {
-	if (ev.which == 2) {
-		ev.preventDefault();
-		return false;
-	}
-});
-
 $(document).ready(() => {
-	//nprogress.start();
-	//nprogress.set(0.5);
+	nprogress.start();
 	Layout.setup();
 	Console.editor.say("Layout setup");
 
 	Navbar.init();
+	PluginLoader.loadPlugins();
+	nprogress.done();
+	Console.editor.say("IDE ready", "#4CAF50");
 });
 
 $("#FABaddNewObject").on("click", () => {
@@ -42,20 +42,21 @@ $("#FABaddNewScene").on("click", () => {
 });
 
 $(window).on('load', () => {
+
 	$(".dropdown-button").dropdown();
 	$('.modal').modal({
-						  dismissible: false,
-						  opacity    : .5,
-						  inDuration : 300,
-						  outDuration: 200,
-						  startingTop: '50%',
-						  endingTop  : '25%',
-						  ready      : function (modal, trigger) {
-						  },
-						  complete   : function () {
+		dismissible: false,
+		opacity    : .5,
+		inDuration : 300,
+		outDuration: 200,
+		startingTop: '50%',
+		endingTop  : '25%',
+		ready      : function (modal, trigger) {
+		},
+		complete   : function () {
 
-						  }
-					  });
+		}
+	});
 
 	//------------------------------------------------------------------------------------------------------------------
 
@@ -63,6 +64,5 @@ $(window).on('load', () => {
 
 	//------------------------------------------------------------------------------------------------------------------
 
-	Preview.start();
-	Console.editor.say("IDE ready", "#4CAF50");
+	//Preview.start();
 });

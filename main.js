@@ -18,9 +18,6 @@ app.commandLine.appendSwitch('--disable-gpu');
 
 app.setAppUserModelId("com.editor.xtruct");
 
-let vm = new VersionManager();
-vm.patchBuild();
-
 function createWindow () {
 
 	let screen = electron.screen;

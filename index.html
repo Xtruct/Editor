@@ -19,29 +19,29 @@
 <!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
 
 <ul id="projects-dropdown" class="dropdown-content">
-    <li><a id="navbar-new" href="#">New</a></li>
-    <li><a id="navbar-open" href="#">Open</a></li>
-    <li><a id="navbar-save" href="#">Save</a></li>
+    <li><a id="navbar-new" >New</a></li>
+    <li><a id="navbar-open" >Open</a></li>
+    <li><a id="navbar-save" >Save</a></li>
     <!-- <li class="divider"></li> -->
 </ul>
 
 <ul id="game-dropdown" class="dropdown-content">
-    <li><a href="#">Start</a></li>
-    <li><a href="#">Stop</a></li>
-    <li><a href="#">Reload</a></li>
-    <li><a href="#">Open in Browser</a></li>
+    <li><a >Start</a></li>
+    <li><a>Stop</a></li>
+    <li><a>Reload</a></li>
+    <li><a>Open in Browser</a></li>
 </ul>
 
 <nav id="nav" class="grey darken-4">
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
+        <a class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
         <ul id="nav-mobile" class="left">
-            <li><a class="dropdown-button" href="#" data-beloworigin="true"
+            <li><a class="dropdown-button" data-beloworigin="true"
                    data-activates="projects-dropdown">Projects<i
                     class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-button" href="#" data-beloworigin="true" data-activates="game-dropdown">Game<i
+            <li><a class="dropdown-button" data-beloworigin="true" data-activates="game-dropdown">Game<i
                     class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a href="#">Options</a></li>
+            <li><a>Options</a></li>
         </ul>
         <p class="right" id="project-name">No opened project</p>
     </div>
@@ -156,32 +156,26 @@
 <!-- Choose Object Modal-->
 <div id="chooseObjectModal" class="modal mod80">
     <div class="modal-content">
-        <div class="row">
-            <div class="col s3 section center">
-                <img class="center" width="32" src="./logos/Icon.ico" alt="icon">
-                <h5>Sprite</h5>
-            </div>
-
-            <div class="col s3 section center">
-                <img class="center" width="32" src="./logos/Icon.ico" alt="icon">
-                <h5>Text</h5>
-            </div>
-
-            <div class="col s3 section center">
-                <img class="center" width="32" src="./logos/Icon.ico" alt="icon">
-                <h5>Mouse</h5>
-            </div>
-
-            <div class="col s3 section center">
-                <img class="center" width="32" src="./logos/Icon.ico" alt="icon">
-                <h5>Keyboard</h5>
-            </div>
+        <div class="row" id="objects-modal-list">
         </div>
     </div>
     <div class="modal-footer">
         <a id="modalValidateAddObject"
            class="modal-action modal-close waves-effect waves-green btn-flat white-text">Add</a>
         <a class="modal-action modal-close waves-effect waves-red btn-flat white-text">Cancel</a>
+    </div>
+</div>
+
+<!-- Modal textures -->
+<div id="texturesModal" class="modal mod80">
+    <div class="modal-content">
+        <div class="row" id="texture-modal-list">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a id="modalImportTexture"
+           class="modal-action modal-close waves-effect waves-green btn-flat white-text">Import</a>
+        <a class="modal-action modal-close waves-effect waves-red btn-flat white-text">Back</a>
     </div>
 </div>
 
@@ -196,7 +190,8 @@
                                                 data-position="top"
                                                 data-delay="50" data-tooltip="New object"><i class="material-icons">insert_chart</i></a>
         </li>
-        <li class="waves-effect waves-light"><a id="FABaddNewScene" class="btn-floating red tooltipped" data-position="top"
+        <li class="waves-effect waves-light"><a id="FABaddNewScene" class="btn-floating red tooltipped"
+                                                data-position="top"
                                                 data-delay="50" data-tooltip="New Actions page"><i
                 class="material-icons">insert_chart</i></a>
         </li>

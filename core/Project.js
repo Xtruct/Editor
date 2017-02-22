@@ -49,7 +49,7 @@ module.exports = class Project {
 
 			//Create objects folder
 			mkdirp(path.join(p, "objects"), function (err) {
-				if (err) console.error(err); else Console.editor.say('Objects creted!')
+				if (err) console.error(err); else Console.editor.say('Objects created!')
 			});
 
 		});
@@ -63,6 +63,8 @@ module.exports = class Project {
 		console.log(global.project.name);
 
 		this.loadScenes(global.project.startScene);
+
+		this.loadTextures();
 	};
 
 	loadAskPath () {
@@ -135,96 +137,99 @@ module.exports = class Project {
 		});
 
 		//Resize object stroke on scale
-		canvas.observe('object:modified', function (e) {
-			e.target.resizeToScale();
-		});
+		/*canvas.observe('object:modified', function (e) {
+		 e.target.resizeToScale();
+		 });*/
 
-		fabric.Object.prototype.resizeToScale = function () {
-			switch (this.type) {
-				case "circle":
-					this.radius *= this.scaleX;
-					this.scaleX = 1;
-					this.scaleY = 1;
-					break;
-				case "ellipse":
-					this.rx *= this.scaleX;
-					this.ry *= this.scaleY;
-					this.width  = this.rx * 2;
-					this.height = this.ry * 2;
-					this.scaleX = 1;
-					this.scaleY = 1;
-					break;
-				case "polygon":
-				case "polyline":
-					let points = this.get('points');
-					for (let i = 0; i < points.length; i++) {
-						let p = points[i];
-						p.x *= this.scaleX;
-						p.y *= this.scaleY;
-					}
-					this.scaleX = 1;
-					this.scaleY = 1;
-					this.width  = this.getBoundingBox().width;
-					this.height = this.getBoundingBox().height;
-					break;
-				case "triangle":
-				case "line":
-				case "rect":
-					this.width *= this.scaleX;
-					this.height *= this.scaleY;
-					this.scaleX = 1;
-					this.scaleY = 1;
-				default:
-					break;
-			}
-		};
+		/*
+		 fabric.Object.prototype.resizeToScale = function () {
+		 switch (this.type) {
+		 case "circle":
+		 this.radius *= this.scaleX;
+		 this.scaleX = 1;
+		 this.scaleY = 1;
+		 break;
+		 case "ellipse":
+		 this.rx *= this.scaleX;
+		 this.ry *= this.scaleY;
+		 this.width  = this.rx * 2;
+		 this.height = this.ry * 2;
+		 this.scaleX = 1;
+		 this.scaleY = 1;
+		 break;
+		 case "polygon":
+		 case "polyline":
+		 let points = this.get('points');
+		 for (let i = 0; i < points.length; i++) {
+		 let p = points[i];
+		 p.x *= this.scaleX;
+		 p.y *= this.scaleY;
+		 }
+		 this.scaleX = 1;
+		 this.scaleY = 1;
+		 this.width  = this.getBoundingBox().width;
+		 this.height = this.getBoundingBox().height;
+		 break;
+		 case "triangle":
+		 case "line":
+		 case "rect":
+		 this.width *= this.scaleX;
+		 this.height *= this.scaleY;
+		 this.scaleX = 1;
+		 this.scaleY = 1;
+		 default:
+		 break;
+		 }
+		 };
+		 */
 
-		fabric.Object.prototype.getBoundingBox = function () {
-			let minX = null;
-			let minY = null;
-			let maxX = null;
-			let maxY = null;
-			switch (this.type) {
-				case "polygon":
-				case "polyline":
-					let points = this.get('points');
+		/*
+		 fabric.Object.prototype.getBoundingBox = function () {
+		 let minX = null;
+		 let minY = null;
+		 let maxX = null;
+		 let maxY = null;
+		 switch (this.type) {
+		 case "polygon":
+		 case "polyline":
+		 let points = this.get('points');
 
-					for (let i = 0; i < points.length; i++) {
-						if (typeof (minX) == undefined) {
-							minX = points[i].x;
-						} else if (points[i].x < minX) {
-							minX = points[i].x;
-						}
-						if (typeof (minY) == undefined) {
-							minY = points[i].y;
-						} else if (points[i].y < minY) {
-							minY = points[i].y;
-						}
-						if (typeof (maxX) == undefined) {
-							maxX = points[i].x;
-						} else if (points[i].x > maxX) {
-							maxX = points[i].x;
-						}
-						if (typeof (maxY) == undefined) {
-							maxY = points[i].y;
-						} else if (points[i].y > maxY) {
-							maxY = points[i].y;
-						}
-					}
-					break;
-				default:
-					minX = this.left;
-					minY = this.top;
-					maxX = this.left + this.width;
-					maxY = this.top + this.height;
-			}
-			return {
-				topLeft    : new fabric.Point(minX, minY),
-				bottomRight: new fabric.Point(maxX, maxY),
-				width      : maxX - minX,
-				height     : maxY - minY
-			}
-		};
+		 for (let i = 0; i < points.length; i++) {
+		 if (typeof (minX) == undefined) {
+		 minX = points[i].x;
+		 } else if (points[i].x < minX) {
+		 minX = points[i].x;
+		 }
+		 if (typeof (minY) == undefined) {
+		 minY = points[i].y;
+		 } else if (points[i].y < minY) {
+		 minY = points[i].y;
+		 }
+		 if (typeof (maxX) == undefined) {
+		 maxX = points[i].x;
+		 } else if (points[i].x > maxX) {
+		 maxX = points[i].x;
+		 }
+		 if (typeof (maxY) == undefined) {
+		 maxY = points[i].y;
+		 } else if (points[i].y > maxY) {
+		 maxY = points[i].y;
+		 }
+		 }
+		 break;
+		 default:
+		 minX = this.left;
+		 minY = this.top;
+		 maxX = this.left + this.width;
+		 maxY = this.top + this.height;
+		 }
+		 return {
+		 topLeft    : new fabric.Point(minX, minY),
+		 bottomRight: new fabric.Point(maxX, maxY),
+		 width      : maxX - minX,
+		 height     : maxY - minY
+		 }
+		 };*/
 
 		//Zoom
 		document.addEventListener("mousewheel", function (e) {
@@ -232,25 +237,71 @@ module.exports = class Project {
 			let delta   = evt.detail ? evt.detail * (-120) : evt.wheelDelta;
 			let curZoom = canvas.getZoom(), newZoom = curZoom + delta / 4000, x = e.offsetX, y = e.offsetY;
 			//applying zoom values.
-			canvas.zoomToPoint({x   : x,
-								   y: y
-							   }, newZoom);
+			canvas.zoomToPoint({
+				x: x,
+				y: y
+			}, newZoom);
 			if (e != null) e.preventDefault();
 			return false;
 		}, false);
 
+		$(document).on("dblclick", () => {
+			$("#objects-modal-list").empty();
+			$.each(global.plugins, (index, value) => {
+				if (!value.instanciable)
+					return true;
+				$("#objects-modal-list").append(`<div class="col s3 section center">
+                <img class="center" height="32" src="${global.projectPath}/assets/${value.path}" alt="icon">
+                <h5>${value.name}</h5>
+            </div>`);
+			});
+
+			$("#chooseObjectModal").modal('open');
+		});
+
 		//Set default selector
 		fabric.Object.prototype.set({
-										transparentCorners: false,
-										cornerColor       : '#0000ff',
-										borderColor       : '#ff0000',
-										cornerSize        : 12,
-										padding           : 5
-									});
+			transparentCorners: false,
+			cornerColor       : '#0000ff',
+			borderColor       : '#ff0000',
+			cornerSize        : 12,
+			padding           : 5
+		});
 
 		canvas.selectionBorderColor = 'rgba(255, 0, 0, 0.3)';
 		canvas.setBackgroundColor('rgba(220, 220, 220, 1)', canvas.renderAll.bind(canvas));
 
 		return (canvas);
 	}
+
+	loadTextures () {
+		let textures = global.project.textures;
+		textures     = [{
+			name: "paddle",
+			path: "paddle.png"
+		}, {
+			name: "gamepad",
+			path: "gamepad.svg"
+		}, {
+			name: "ball",
+			path: "ball.png"
+		}, {
+			name: "paddle",
+			path: "paddle.png"
+		}, {
+			name: "gamepad",
+			path: "gamepad.svg"
+		}, {
+			name: "ball",
+			path: "ball.png"
+		}];
+
+		$("#texture-modal-list").empty();
+		$.each(textures, (index, value) => {
+			$("#texture-modal-list").append(`<div class="col s3 section center">
+                <img class="center" height="32" src="${global.projectPath}/assets/${value.path}" alt="icon">
+                <h5>${value.name}</h5>
+            </div>`);
+		});
+	};
 };
