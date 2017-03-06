@@ -1,15 +1,33 @@
 @text-color: white;
 @dark-background: #212121;
+@dark-1-background: #313131;
 
 html {
   height: 100%;
 
   -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeSpeed;
+
+  font-size: 14px !important;
+
 }
 
 body {
+  background: @dark-background !important;
+  color: @text-color !important;
+}
+
+.modal-content {
   background: @dark-background;
+  color: @text-color;
+}
+
+.modal {
+  background: @dark-background;
+}
+
+.modal-footer {
+  background: @dark-1-background !important;
   color: @text-color;
 }
 
@@ -37,8 +55,17 @@ Layouts
 .dropdown-content {
   background-color: @dark-background;
   li a {
-    color: @text-color;
+	color: @text-color;
   }
+}
+
+.dropdown-button {
+  font-size: 14px !important;
+}
+
+#project-name {
+  padding-right: 85px;
+  margin-top: 0;
 }
 
 // FAB
@@ -71,4 +98,64 @@ tr {
   padding-left: 10px;
   height: 65%;
   overflow-y: scroll;
+}
+
+//Modals
+.newProject-header {
+  text-align: center;
+}
+
+.modal .mod80 {
+  height: 80%;
+  top: auto !important;
+}
+
+.modal-background-box {
+  background-color: @dark-1-background;
+  padding-top: 10px !important;
+  border-radius: 2px !important;
+}
+
+.collection {
+  overflow-y: scroll;
+  max-height: 250px;
+}
+
+// Scrollbars
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0, 0, 0, 0.61);
+  -webkit-border-radius: 100px;
+}
+
+.avail-plugins {
+  border-radius: 2px;
+  padding-top: 50%;
+  * {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+  }
+  &:hover {
+	background-color: #353535;
+  }
+}
+
+.modal-description {
+  background-color: #383838;
+  border-radius: 10px 10px 0 0;
 }

@@ -2,9 +2,21 @@ html {
   height: 100%;
   -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeSpeed;
+  font-size: 14px !important;
 }
 body {
+  background: #212121 !important;
+  color: white !important;
+}
+.modal-content {
   background: #212121;
+  color: white;
+}
+.modal {
+  background: #212121;
+}
+.modal-footer {
+  background: #313131 !important;
   color: white;
 }
 #versions {
@@ -28,6 +40,13 @@ Layouts
 .dropdown-content li a {
   color: white;
 }
+.dropdown-button {
+  font-size: 14px !important;
+}
+#project-name {
+  padding-right: 85px;
+  margin-top: 0;
+}
 tr:hover {
   background-color: #4c4c4c !important;
 }
@@ -46,4 +65,52 @@ tr {
   padding-left: 10px;
   height: 65%;
   overflow-y: scroll;
+}
+.newProject-header {
+  text-align: center;
+}
+.modal .mod80 {
+  height: 80%;
+  top: auto !important;
+}
+.modal-background-box {
+  background-color: #313131;
+  padding-top: 10px !important;
+  border-radius: 2px !important;
+}
+.collection {
+  overflow-y: scroll;
+  max-height: 250px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-border-radius: 100px;
+}
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+::-webkit-scrollbar-thumb:vertical {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0, 0, 0, 0.61);
+  -webkit-border-radius: 100px;
+}
+.avail-plugins {
+  border-radius: 2px;
+  padding-top: 50%;
+}
+.avail-plugins * {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.avail-plugins:hover {
+  background-color: #353535;
+}
+.modal-description {
+  background-color: #383838;
+  border-radius: 10px 10px 0 0;
 }

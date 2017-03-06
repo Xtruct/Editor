@@ -1,0 +1,24 @@
+{
+  "Projects": {
+    "New project": "newproject",
+    "Open": "open",
+    "Save": "save"
+  },
+  "Game": {
+    "Start": "start",
+    "Stop": "stop",
+    "Reload": "reload",
+    "Open in browser": "openinbrowser"
+  },
+  "Options": "options",
+  "Export": {
+    "Desktop": {
+      "Windows": "windows",
+      "Mac": "mac",
+      "Linux": "linux"
+    },
+    "Mobile": "mobile",
+    "Web": "web"
+  },
+  "Reopen last project" : "reopen"
+}

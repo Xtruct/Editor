@@ -1,0 +1,11 @@
+{
+  "project": {
+    "windowWidth" : "800",
+    "windowHeight" : "600",
+    "defaultPreview" : "in-editor",
+    "startScene" : ""
+  },
+  "assetsPath": "assets",
+  "objectsPath": "object",
+  "scenesPath": "scenes"
+}

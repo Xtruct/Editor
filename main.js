@@ -1,42 +1,56 @@
-const electron      = require('electron');
-const app           = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const isDev         = require('electron-is-dev');
+const electron       = require('electron');
+const app            = electron.app;
+const BrowserWindow  = electron.BrowserWindow;
+const isDev          = require('electron-is-dev');
+const fs             = require('fs');
+const VersionManager = require('./modules/versionManager.js');
+
+global.req  = require('app-root-path').require;
+global.ROOT = require('app-root-path');
 
 const path = require('path');
 const url  = require('url');
 
 let mainWindow;
 
-app.commandLine.appendSwitch('force-device-scale-factor', '1');
-app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('--force-device-scale-factor', '1');
+app.commandLine.appendSwitch('--disable-gpu');
 
-function createWindow() {
+app.setAppUserModelId("com.editor.xtruct");
+
+function createWindow () {
+
 	let screen = electron.screen;
 
 	const {width, height} = screen.getPrimaryDisplay().workAreaSize;
-	mainWindow            = new BrowserWindow({
+
+	mainWindow = new BrowserWindow({
 		title          : "Xtruct Editor",
-		protocol       : 'file:',
-		slashes        : true,
 		icon           : path.join(__dirname, 'build/icon.ico'),
 		backgroundColor: '#2e2c29',
 		width          : width,
 		height         : height
 	});
 
-	mainWindow.loadURL(url.format(path.join(__dirname, 'index.html')));
+	// and load the index.html of the app.
+	mainWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'index.html'),
+		protocol: 'file:',
+		slashes : true
+	}));
 
 	mainWindow.setMenu(null);
 
 	mainWindow.maximize();
 
+	process.argv.forEach(function (value) {
+		console.log(value);
+		if (value === "-dev") mainWindow.webContents.openDevTools();
+	});
 
 	if (isDev) {
 		mainWindow.webContents.openDevTools();
 		console.log('Running in development');
-		//let client        = require('electron-connect').client;
-		//client.create(mainWindow);
 	} else {
 		console.log('Running in production');
 	}

@@ -1,39 +1,63 @@
-const Layout  = require("./core/Core.js").Layout;
-const Preview = require("./core/Core.js").Preview;
-const Console = require("./core/Core.js").Console;
+/* Required */
+global.req  = require('app-root-path').require;
+global.ROOT = require('app-root-path');
+
+/* Global Editor */
+/* TODO refactor in a class Editor */
+global.project     = {};
+global.projectPath = "";
+global.plugins     = [];
+
+const remote = require('electron').remote;
+
+const core = req("core/Core.js");
+
+/* TODO Put that in Editor global object to allow global.Editor.Console for example */
+const Layout         = core.Layout;
+const Preview        = core.Preview;
+const Console        = core.Console;
+const PluginLoader   = core.PluginLoader;
+const Navbar         = core.Navbar;
+const VersionManager = req('modules/versionManager.js');
+const _Project       = req("core/Project.js");
+
+let vm = new VersionManager();
+vm.patchBuild();
+
+let Project = new _Project();
 
 const nprogress = require("nprogress");
 
-//TODO add game console
-//TODO rename console to editor console
-
-$(document).on("mousedown", function (ev) {
-	if (ev.which == 2) {
-		ev.preventDefault();
-		return false;
-	}
-});
-
-//catch all errors
-/*
-window.onerror = function (message, url, lineNumber) {
-	Console.say(`${message}<br>__________  (${url}) - Line ${lineNumber}`, "#F44336");
-	console.error(`${message}<br>__________  (${url}) - Line ${lineNumber}`);
-	return true;
-};
-*/
-
-$(document).ready(function () {
-	//nprogress.start();
-	//nprogress.set(0.5);
+$(document).ready(() => {
+	nprogress.start();
 	Layout.setup();
 	Console.editor.say("Layout setup");
+
+	Navbar.init();
+	PluginLoader.loadPlugins();
+	nprogress.done();
+	Console.editor.say("IDE ready", "#4CAF50");
 });
 
+$(window).on('load', () => {
 
-$(window).load(() => {
-	$(".dropdown-button").dropdown();
+	$('.modal').modal({
+		dismissible: false,
+		opacity    : .5,
+		inDuration : 300,
+		outDuration: 200,
+		startingTop: '50%',
+		endingTop  : '25%',
+		ready      : function (modal, trigger) {
+		},
+		complete   : function () {
+		}
+	});
 
-	Preview.start();
-	Console.editor.say("IDE ready", "#4CAF50");
+	//------------------------------------------------------------------------------------------------------------------
+
+	$("#xtruct-version").text("Xtruct " + vm.toString());
+
+	//------------------------------------------------------------------------------------------------------------------
+	//Preview.start();
 });

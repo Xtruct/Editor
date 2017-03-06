@@ -5,6 +5,7 @@
 
 ##Hacking the editor
 In this editor, everything is a **plugin**
+
 You can extend the editor as well as the UI itself.
 
 You can :
@@ -13,4 +14,5 @@ You can :
 - [x] override default plugins functions with yours. No need to duplicate a plugin to make a fix or an enhancement.
 This way, even if the offical plugin is updated, you can still use yours with your functions
 
-### [Submit an issues](https://github.com/Xtruct/Editor/issues).
+### [Submit an issue](https://github.com/Xtruct/Editor/issues).
+
