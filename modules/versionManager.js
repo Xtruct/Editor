@@ -17,16 +17,20 @@ module.exports = class VersionManager {
 
 	patchMajor () {
 		this.config.major++;
+		this.config.minor = 0;
+		this.config.patch = 0;
 		fs.writeFileSync(path.join(ROOT.toString(), this.file), JSON.stringify(this.config), 'utf8');
 	}
 
 	patchMinor () {
 		this.config.minor++;
+		this.config.patch = 0;
 		fs.writeFileSync(path.join(ROOT.toString(), this.file), JSON.stringify(this.config), 'utf8');
 	}
 
 	patchPatch () {
 		this.config.patch++;
+		this.config.build = 1;
 		fs.writeFileSync(path.join(ROOT.toString(), this.file), JSON.stringify(this.config), 'utf8');
 	}
 

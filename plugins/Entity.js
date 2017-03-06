@@ -1,20 +1,58 @@
-/**
- * Created by Armaldio on 06/02/2017.
- */
+const Console = req("core/Console.js");
 
+/**
+ * The base type for plugins
+ * @type {Entity}
+ */
 module.exports = class Entity {
-	constructor (name = "Entity", type = "entity") {
-		this.name         = name;
-		this.type         = type;
+	constructor () {
 		this.actions      = [];
 		this.conditions   = [];
 		this.expressions  = [];
+		this.icon         = "";
 		this.instanciable = true;
+	}
 
-		console.log(this.name + " - " + this.type + " loaded");
+	setup () {
 
 	}
 
+	/**
+	 * Get name of the instance
+	 */
+	get name () {
+		return this.constructor.name
+	}
+
+	/**
+	 * Get name of instance parent
+	 */
+	get parentName () {
+		return Object.getPrototypeOf(this.constructor).name
+	}
+
+	/**
+	 * Get full parent tree
+	 * @returns {Array.<*>}
+	 */
+	get inheritanceTree () {
+		let path = [];
+		let obj  = this;
+
+		while (obj.name != "Entity") {
+			obj = Object.getPrototypeOf(obj);
+			path.push(obj.name);
+		}
+		return path.reverse();
+	}
+
+	/**
+	 * Add an action to the plugin
+	 * @param {String} _name
+	 * @param {String} _script
+	 * @param {String} _description
+	 * @param {Function} _function
+	 */
 	addAction (_name, _script, _description, _function) {
 		let action = {
 			name       : _name,
@@ -25,6 +63,12 @@ module.exports = class Entity {
 		this.actions.push(action);
 	}
 
+	/**
+	 * Add an expression to the plugin
+	 * @param {String} _name
+	 * @param {String} _script
+	 * @param {String} _description
+	 */
 	addExpression (_name, _script, _description) {
 		let expression = {
 			name       : _name,
@@ -34,6 +78,12 @@ module.exports = class Entity {
 		this.expressions.push(expression);
 	}
 
+	/**
+	 * Add a condition to the plugin
+	 * @param {String} _name
+	 * @param {String} _script
+	 * @param {String} _description
+	 */
 	addCondition (_name, _script, _description) {
 		let condition = {
 			name       : _name,
@@ -43,6 +93,9 @@ module.exports = class Entity {
 		this.conditions.push(condition);
 	}
 
+	/**
+	 * Show all ACEs of the plugin
+	 */
 	dump () {
 		console.log(this.name + " : " + this.type);
 		console.log("\tActions", this.actions);
@@ -50,7 +103,11 @@ module.exports = class Entity {
 		console.log("\tExpressions", this.expressions);
 	}
 
+	/**
+	 * Function runned on plugin load
+	 */
 	load () {
 		this.instanciable = false;
+		console.log(this.name + " loaded");
 	}
 };

@@ -18,31 +18,14 @@
 
 <!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
 
-<ul id="projects-dropdown" class="dropdown-content">
-    <li><a id="navbar-new" >New</a></li>
-    <li><a id="navbar-open" >Open</a></li>
-    <li><a id="navbar-save" >Save</a></li>
-    <!-- <li class="divider"></li> -->
-</ul>
+<div id="navbardropdowns">
 
-<ul id="game-dropdown" class="dropdown-content">
-    <li><a >Start</a></li>
-    <li><a>Stop</a></li>
-    <li><a>Reload</a></li>
-    <li><a>Open in Browser</a></li>
-</ul>
+</div>
 
 <nav id="nav" class="grey darken-4">
     <div class="nav-wrapper">
         <a class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
-        <ul id="nav-mobile" class="left">
-            <li><a class="dropdown-button" data-beloworigin="true"
-                   data-activates="projects-dropdown">Projects<i
-                    class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-button" data-beloworigin="true" data-activates="game-dropdown">Game<i
-                    class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a>Options</a></li>
-        </ul>
+        <ul id="navbar" class="left"></ul>
         <p class="right" id="project-name">No opened project</p>
     </div>
 </nav>
@@ -158,6 +141,9 @@
     <div class="modal-content">
         <div class="row" id="objects-modal-list">
         </div>
+    </div>
+    <div class="modal-content modal-description">
+        <p id="modal-description"></p>
     </div>
     <div class="modal-footer">
         <a id="modalValidateAddObject"

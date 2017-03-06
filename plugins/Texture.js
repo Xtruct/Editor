@@ -1,15 +1,9 @@
-/**
- * Created by Armaldio on 06/02/2017.
- */
-
 let Entity = req("plugins/Entity.js");
 
 module.exports = class Texture extends Entity {
 	constructor (path) {
-		super("Texture", "texture");
+		super();
 		this.path = path;
-
-		this.setup();
 	}
 
 	preload () {

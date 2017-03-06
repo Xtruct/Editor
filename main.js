@@ -1,8 +1,8 @@
-const electron      = require('electron');
-const app           = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const isDev         = require('electron-is-dev');
-const fs            = require('fs');
+const electron       = require('electron');
+const app            = electron.app;
+const BrowserWindow  = electron.BrowserWindow;
+const isDev          = require('electron-is-dev');
+const fs             = require('fs');
 const VersionManager = require('./modules/versionManager.js');
 
 global.req  = require('app-root-path').require;
@@ -22,9 +22,7 @@ function createWindow () {
 
 	let screen = electron.screen;
 
-	const {
-			  width, height
-		  } = screen.getPrimaryDisplay().workAreaSize;
+	const {width, height} = screen.getPrimaryDisplay().workAreaSize;
 
 	mainWindow = new BrowserWindow({
 		title          : "Xtruct Editor",
@@ -36,10 +34,10 @@ function createWindow () {
 
 	// and load the index.html of the app.
 	mainWindow.loadURL(url.format({
-									  pathname: path.join(__dirname, 'index.html'),
-									  protocol: 'file:',
-									  slashes : true
-								  }));
+		pathname: path.join(__dirname, 'index.html'),
+		protocol: 'file:',
+		slashes : true
+	}));
 
 	mainWindow.setMenu(null);
 

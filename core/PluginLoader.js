@@ -1,25 +1,19 @@
-/**
- * Created by Armaldio on 06/02/2017.
- */
-
-let fs = require('fs');
-
 module.exports = class PluginLoader {
 	constructor () {
 		//this.path = path;
 	}
 
 	loadPlugins () {
+		let count = 0;
 		let plugins = require('require-all')({
 			dirname: ROOT.toString() + "/plugins", //filter : /(.+Controller)\.js$/,
 			resolve: function (Plugin) {
 				let c = new Plugin();
+				c.setup();
+				c.load();
+				c.uid = count;
 				global.plugins.push(c);
-				try {
-					c.load();
-				} catch (e) {
-
-				}
+				count++;
 			}
 		});
 		console.log(global.plugins);

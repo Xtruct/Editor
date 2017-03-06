@@ -1,5 +1,9 @@
-global.req         = require('app-root-path').require;
-global.ROOT        = require('app-root-path');
+/* Required */
+global.req  = require('app-root-path').require;
+global.ROOT = require('app-root-path');
+
+/* Global Editor */
+/* TODO refactor in a class Editor */
 global.project     = {};
 global.projectPath = "";
 global.plugins     = [];
@@ -8,15 +12,19 @@ const remote = require('electron').remote;
 
 const core = req("core/Core.js");
 
+/* TODO Put that in Editor global object to allow global.Editor.Console for example */
 const Layout         = core.Layout;
 const Preview        = core.Preview;
 const Console        = core.Console;
 const PluginLoader   = core.PluginLoader;
 const Navbar         = core.Navbar;
 const VersionManager = req('modules/versionManager.js');
+const _Project       = req("core/Project.js");
 
 let vm = new VersionManager();
 vm.patchBuild();
+
+let Project = new _Project();
 
 const nprogress = require("nprogress");
 
@@ -31,19 +39,8 @@ $(document).ready(() => {
 	Console.editor.say("IDE ready", "#4CAF50");
 });
 
-$("#FABaddNewObject").on("click", () => {
-	$("#chooseObjectModal").modal("open");
-});
-
-$("#FABaddNewScene").on("click", () => {
-	if (global.project) {
-
-	}
-});
-
 $(window).on('load', () => {
 
-	$(".dropdown-button").dropdown();
 	$('.modal').modal({
 		dismissible: false,
 		opacity    : .5,
@@ -54,7 +51,6 @@ $(window).on('load', () => {
 		ready      : function (modal, trigger) {
 		},
 		complete   : function () {
-
 		}
 	});
 
@@ -63,6 +59,5 @@ $(window).on('load', () => {
 	$("#xtruct-version").text("Xtruct " + vm.toString());
 
 	//------------------------------------------------------------------------------------------------------------------
-
 	//Preview.start();
 });

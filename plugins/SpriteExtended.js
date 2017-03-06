@@ -1,15 +1,15 @@
-let Entity = req("plugins/Entity.js");
+let Sprite = req("plugins/Sprite.js");
 
 /**
- * Sprite plugin
- * @type {Sprite}
+ * An extended sprite plugin
+ * @type {SpriteExtended}
  */
-module.exports = class Sprite extends Entity {
-	constructor (texture) {
+module.exports = class SpriteExtended extends Sprite {
+	constructor (name, texture) {
 		super();
 		this.texture = texture;
-		this.icon    = "Sprite.png";
-		this.description = "A basic sprite"
+
+		this.setup();
 	}
 
 	/**
@@ -30,13 +30,5 @@ module.exports = class Sprite extends Entity {
 
 		this.addExpression("Get X", "GetX", "Get X position of the sprite", () => {
 		});
-	}
-
-	/**
-	 * Must exists, otherwise will not be instantiable
-	 * Run once the plugin in loaded into the editor
-	 */
-	load () {
-
 	}
 };

@@ -9,8 +9,11 @@ body {
   color: white !important;
 }
 .modal-content {
-  background: #212121 !important;
+  background: #212121;
   color: white;
+}
+.modal {
+  background: #212121;
 }
 .modal-footer {
   background: #313131 !important;
@@ -94,4 +97,20 @@ tr {
 ::-webkit-scrollbar-thumb:vertical:active {
   background: rgba(0, 0, 0, 0.61);
   -webkit-border-radius: 100px;
+}
+.avail-plugins {
+  border-radius: 2px;
+  padding-top: 50%;
+}
+.avail-plugins * {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.avail-plugins:hover {
+  background-color: #353535;
+}
+.modal-description {
+  background-color: #383838;
+  border-radius: 10px 10px 0 0;
 }

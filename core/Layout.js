@@ -5,10 +5,6 @@ let path         = require("path");
 
 const db = low('db.json');
 
-/**
- * Events
- */
-
 module.exports = class Layout {
 	constructor () {
 		this.config = JSON.parse(fs.readFileSync(path.join(ROOT.toString(), "config/layout.json")));

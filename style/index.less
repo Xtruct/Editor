@@ -18,8 +18,12 @@ body {
 }
 
 .modal-content {
-  background: @dark-background !important;
+  background: @dark-background;
   color: @text-color;
+}
+
+.modal {
+  background: @dark-background;
 }
 
 .modal-footer {
@@ -56,11 +60,10 @@ Layouts
 }
 
 .dropdown-button {
-    font-size: 14px !important;
+  font-size: 14px !important;
 }
 
-#project-name
-{
+#project-name {
   padding-right: 85px;
   margin-top: 0;
 }
@@ -137,4 +140,22 @@ tr {
 ::-webkit-scrollbar-thumb:vertical:active {
   background: rgba(0, 0, 0, 0.61);
   -webkit-border-radius: 100px;
+}
+
+.avail-plugins {
+  border-radius: 2px;
+  padding-top: 50%;
+  * {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+  }
+  &:hover {
+	background-color: #353535;
+  }
+}
+
+.modal-description {
+  background-color: #383838;
+  border-radius: 10px 10px 0 0;
 }
