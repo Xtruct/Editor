@@ -1,4 +1,4 @@
-const Console = req("core/Console.js");
+const Console = x.require("core.Console");
 
 /**
  * The base type for plugins
@@ -108,6 +108,5 @@ module.exports = class Entity {
 	 */
 	load () {
 		this.instanciable = false;
-		console.log(this.name + " loaded");
 	}
 };

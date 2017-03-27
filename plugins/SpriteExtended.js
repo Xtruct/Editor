@@ -1,4 +1,4 @@
-let Sprite = req("plugins/Sprite.js");
+let Sprite = x.require("plugins.Sprite");
 
 /**
  * An extended sprite plugin

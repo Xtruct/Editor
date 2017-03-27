@@ -114,3 +114,6 @@ tr {
   background-color: #383838;
   border-radius: 10px 10px 0 0;
 }
+.step-actions {
+  background: #333 !important;
+}

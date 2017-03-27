@@ -6,18 +6,15 @@ const server = require('node-static');
 const tmp    = require('tmp');
 const opn    = require("opn");
 
-const db = low('db.json');
+const db     = low('db.json');
 
-const _Console = req("core/Console.js");
-let Console    = new _Console();
+const Preview = x.require("core.Preview");
+const Console = x.require("core.Console");
 
-const _ConfigurationLoader = req("core/ConfigurationLoader.js");
-let ConfigurationLoader    = new _ConfigurationLoader();
+const ConfigurationLoader = x.require("core.ConfigurationLoader");
 
 const dialog = require('electron').remote.dialog;
 let window   = require('electron').remote.getCurrentWindow();
-
-let Camera = req("plugins/Camera.js");
 
 const LEFT_CLICK   = 1;
 const MIDDLE_CLICK = 2;
@@ -37,6 +34,7 @@ module.exports = class Project {
 	newProject () {
 		let self = this;
 
+		//Open a dialog that ask where to save your project
 		dialog.showOpenDialog(window, {
 			properties: ['openDirectory', 'createDirectory']
 		}, (pathname) => {
@@ -45,7 +43,7 @@ module.exports = class Project {
 
 			//Create project file
 			fs.writeFileSync(path.join(p, "Project.xtruct"), ConfigurationLoader.load("defaultproject", false), 'utf8');
-			RegularConsole.say("Project file created");
+			Console.say("Project file created");
 
 			//Create assets folder
 			mkdirp(path.join(p, "assets"), function (err) {
@@ -74,19 +72,19 @@ module.exports = class Project {
 	}
 
 	/**
-	 * Load a project from a .xstruct file
+	 * Load a project from a .xtruct file
 	 * @param p
 	 */
 	load (p) {
-		global.project     = JSON.parse(fs.readFileSync(p, 'utf8'));
-		global.projectPath = path.dirname(p);
+		global.Editor.project     = JSON.parse(fs.readFileSync(p, 'utf8'));
+		global.Editor.projectPath = path.dirname(p);
 
 		db.set('editor.lastProjectPath', p).value();
 
-		$("#project-name").text(global.project.name);
-		console.log(global.project.name);
+		$("#project-name").text(global.Editor.project.name);
+		console.log(global.Editor.project.name);
 
-		this.loadScenes(global.project.startScene);
+		this.loadScenes(global.Editor.project.startScene);
 
 		this.loadTextures();
 	};
@@ -109,18 +107,17 @@ module.exports = class Project {
 	 */
 	loadScenes (scene) {
 
-		global.canvas = this.canvasSetup();
+		Editor.canvas = this.canvasSetup();
 
-		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(global.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
-		canvas.loadFromJSON(sceneAsJson, canvas.renderAll.bind(canvas), (o, object) => {
+		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
+		Editor.canvas.loadFromJSON(sceneAsJson, Editor.canvas.renderAll.bind(Editor.canvas), (o, object) => {
 
 			console.log(o, object);
-			console.log(canvas.toJSON());
+			console.log(Editor.canvas.toJSON());
 		});
 
-		this.resizeCanvas(canvas);
+		this.resizeCanvas(Editor.canvas);
 		$("#currentLayout").show();
-
 	}
 
 	/**
@@ -172,6 +169,7 @@ module.exports = class Project {
 			e.target.resizeToScale();
 		});
 
+		//Better scale without losing aspect ratio
 		fabric.Object.prototype.resizeToScale = function () {
 			switch (this.type) {
 				case "circle":
@@ -275,7 +273,7 @@ module.exports = class Project {
 
 		$(document).on("dblclick", () => {
 			$("#objects-modal-list").empty();
-			$.each(global.plugins, (index, value) => {
+			$.each(global.Editor.plugins, (index, value) => {
 				if (!value.instanciable)
 					return true;
 				$("#objects-modal-list").append(`<div class="col s2 section center">
@@ -286,13 +284,21 @@ module.exports = class Project {
             	</div>`);
 			});
 
-			//TODO onclick show all inheritance
-
 			$("#chooseObjectModal").modal('open');
+		});
+
+		$("#modalValidateAddObject").on("click", () => {
+			let uid = $(".avail-plugins.selected").data("uid");
+
+			//this.addEntity(global.Editor.plugins[uid]);
+			console.log("Adding ", global.Editor.plugins[uid]);
 		});
 
 		$(document).on("click", ".avail-plugins", (el) => {
 			let item = $(el.currentTarget);
+
+			$(".avail-plugins").removeClass("selected");
+			item.addClass("selected");
 
 			$(".avail-plugins").css("background-color", "#212121");
 			item.css("background-color", "#353535");
@@ -301,7 +307,7 @@ module.exports = class Project {
 			let pluginId = item.data("uid");
 			console.log("Plugin Id", pluginId);
 
-			let plugin = global.plugins[pluginId];
+			let plugin = global.Editor.plugins[pluginId];
 			$("#modal-description").html(`
 					<p><b>${plugin.inheritanceTree.join("</b> > <b>")}</b></p>
 					<p>${(plugin.description === undefined ? "<b>No description</b>" : plugin.description)}</p>`);
@@ -327,7 +333,7 @@ module.exports = class Project {
 	 * Load textures from project
 	 */
 	loadTextures () {
-		let textures = global.project.textures;
+		let textures = Editor.project.textures;
 		textures     = [{
 			name: "paddle",
 			path: "paddle.png"
@@ -351,7 +357,7 @@ module.exports = class Project {
 		$("#texture-modal-list").empty();
 		$.each(textures, (index, value) => {
 			$("#texture-modal-list").append(`<div class="col s3 section center">
-                <img class="center" height="32" src="${global.projectPath}/assets/${value.path}" alt="icon">
+                <img class="center" height="32" src="${Editor.projectPath}/assets/${value.path}" alt="icon">
                 <h5>${value.name}</h5>
             </div>`);
 		});
@@ -360,25 +366,32 @@ module.exports = class Project {
 	/**
 	 * Run the project in chrome
 	 */
-	openExternal () {
-		let tmpobj = tmp.dirSync();
-		console.log('Dir: ', tmpobj.name);
+	openExternal () {/*
+	 let tmpobj = tmp.dirSync();
+	 console.log('Dir: ', tmpobj.name);
 
-		fs.writeFileSync(tmpobj.name + "/index.html", `
-			<p>Hello world!</p>`, 'utf8');
+	 fs.writeFileSync(tmpobj.name + "/index.html", `
+	 <p>Hello world!</p>`, 'utf8');
 
-		let folder = new server.Server(tmpobj.name);
+	 let folder = new server.Server(tmpobj.name);
 
-		opn('http://127.0.0.1:8080');
-		require('http').createServer(function (request, response) {
-			console.log(request, response);
+	 opn('http://127.0.0.1:8080');
+	 require('http').createServer(function (request, response) {
+	 console.log(request, response);
 
-			request.addListener('end', function () {
-				folder.serve(request, response);
+	 request.addListener('end', function () {
+	 folder.serve(request, response);
 
-			}).resume();
-		}).listen(8080);
+	 }).resume();
+	 }).listen(8080);*/
+
+		this.startPreview();
 
 		//tmpobj.removeCallback();
+	}
+
+	startPreview () {
+		let preview = new Preview();
+		preview.start();
 	}
 };

@@ -1,4 +1,4 @@
-let Entity = req("plugins/Entity.js");
+let Entity = x.require("plugins.Entity");
 
 /**
  * Sprite plugin

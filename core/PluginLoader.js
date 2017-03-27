@@ -1,10 +1,25 @@
 module.exports = class PluginLoader {
 	constructor () {
-		//this.path = path;
+	}
+
+	creatGamePlugin () {
+		fabric.NamedImage = fabric.util.createClass(fabric.Image, {
+
+			type: 'named-image',
+
+			initialize: function (element, options) {
+				this.callSuper('initialize', element, options);
+				options && this.set('name', options.name);
+			},
+
+			toObject: function () {
+				return fabric.util.object.extend(this.callSuper('toObject'), {name: this.name});
+			}
+		});
 	}
 
 	loadPlugins () {
-		let count = 0;
+		let count   = 0;
 		let plugins = require('require-all')({
 			dirname: ROOT.toString() + "/plugins", //filter : /(.+Controller)\.js$/,
 			resolve: function (Plugin) {
@@ -12,10 +27,10 @@ module.exports = class PluginLoader {
 				c.setup();
 				c.load();
 				c.uid = count;
-				global.plugins.push(c);
+				global.Editor.plugins.push(c);
 				count++;
 			}
 		});
-		console.log(global.plugins);
+		console.table(global.Editor.plugins);
 	}
 };

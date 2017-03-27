@@ -108,3 +108,4 @@ module.exports = class Layout {
 		db.set('layout.state', layout).value()
 	};
 };
+

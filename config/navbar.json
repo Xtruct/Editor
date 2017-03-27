@@ -4,13 +4,21 @@
     "Open": "open",
     "Save": "save"
   },
+  "View": {
+    "Save": "saveview",
+    "Load": "loadview",
+    "Set default view": "setdefaultview"
+  },
   "Game": {
     "Start": "start",
     "Stop": "stop",
     "Reload": "reload",
     "Open in browser": "openinbrowser"
   },
-  "Options": "options",
+  "Options": {
+    "Editor settings": "editorsettings",
+    "Account settings": "accountsettings"
+  },
   "Export": {
     "Desktop": {
       "Windows": "windows",
@@ -20,5 +28,5 @@
     "Mobile": "mobile",
     "Web": "web"
   },
-  "Reopen last project" : "reopen"
+  "Reopen last project": "reopen"
 }

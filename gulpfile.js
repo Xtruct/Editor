@@ -8,5 +8,5 @@ gulp.task('serve', function () {
 	gulp.watch('main.js', electron.restart);
 
 	//TODO move on to scss to use material variables from materializecss
-	gulp.watch(['renderer.js', 'layout/*.html', 'index.html', "style/**/*.css"], electron.reload);
+	gulp.watch(['renderer.js', 'layout/*.html', 'index.html', 'testfile.html', "style/**/*.css"], electron.reload);
 });

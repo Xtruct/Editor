@@ -1,42 +1,69 @@
 /* Required */
-global.req  = require('app-root-path').require;
-global.ROOT = require('app-root-path');
-
-/* Global Editor */
-/* TODO refactor in a class Editor */
-global.project     = {};
-global.projectPath = "";
-global.plugins     = [];
-
+global.ROOT  = require('app-root-path');
+global.x     = require("./core/x.js");
 const remote = require('electron').remote;
 
-const core = req("core/Core.js");
+global.Editor  = x.require("core.Editor");
+global.Project = x.require("core.Project", true);
 
-/* TODO Put that in Editor global object to allow global.Editor.Console for example */
-const Layout         = core.Layout;
-const Preview        = core.Preview;
-const Console        = core.Console;
-const PluginLoader   = core.PluginLoader;
-const Navbar         = core.Navbar;
-const VersionManager = req('modules/versionManager.js');
-const _Project       = req("core/Project.js");
+Editor.project     = {};
+Editor.projectPath = "";
+Editor.plugins     = [];
 
-let vm = new VersionManager();
-vm.patchBuild();
+let Layout         = x.require("core.Layout", true);
+let Preview        = x.require("core.Preview", true);
+let Console        = x.require("core.Console");
+let PluginLoader   = x.require("core.PluginLoader", true);
+let Navbar         = x.require("core.Navbar", true);
+let VersionManager = x.require('core.versionManager', true);
 
-let Project = new _Project();
+const Modal = x.require("core.Modal", false);
+
+VersionManager.patchBuild();
 
 const nprogress = require("nprogress");
 
 $(document).ready(() => {
 	nprogress.start();
+
+	/* UNCOMMENT TO TEST
+	let modal1 = new Modal({
+		title  : "Title",
+		message: "Message",
+		buttons: [
+			{
+				name : "Cancel",
+				id   : "cancel",
+				color: "red",
+				func : () => {
+					console.log("Cancelled");
+				}
+			},
+			{
+				name : "Ok",
+				id   : "ok",
+				color: "#ff0000",
+				func : () => {
+					console.log("OK");
+				}
+			},
+		]
+	});
+
+	modal1.show();
+	*/
+
 	Layout.setup();
-	Console.editor.say("Layout setup");
+	Console.say("Layout loaded");
 
 	Navbar.init();
+	Console.say("Navar loaded");
+
 	PluginLoader.loadPlugins();
+	Console.say("Plugins loaded")
+
+	Console.say("IDE ready", "#4CAF50");
 	nprogress.done();
-	Console.editor.say("IDE ready", "#4CAF50");
 });
 
 $(window).on('load', () => {
@@ -46,18 +73,15 @@ $(window).on('load', () => {
 		opacity    : .5,
 		inDuration : 300,
 		outDuration: 200,
-		startingTop: '50%',
-		endingTop  : '25%',
+		startingTop: '24%',
+		endingTop  : '26%',
 		ready      : function (modal, trigger) {
+			global.ModalInUse = true;
 		},
 		complete   : function () {
+			global.ModalInUse = false;
 		}
 	});
 
-	//------------------------------------------------------------------------------------------------------------------
-
-	$("#xtruct-version").text("Xtruct " + vm.toString());
-
-	//------------------------------------------------------------------------------------------------------------------
-	//Preview.start();
+	$("#xtruct-version").text("Xtruct " + VersionManager.toString());
 });

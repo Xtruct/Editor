@@ -1,4 +1,4 @@
-let Entity = req("plugins/Entity.js");
+let Entity = x.require("plugins.Entity");
 
 module.exports = class Texture extends Entity {
 	constructor (path) {

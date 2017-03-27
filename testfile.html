@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="lib/materialize/sass/materialize.css">
+    <link rel="stylesheet" href="lib/materialize-stepper.min.css">
+    <link rel="stylesheet" href="style/index.css">
+
+    <style>
+        .stepper {
+            width: 800px;
+            height: 400px;
+            border: 1px solid red;
+        }
+    </style>
+
+</head>
+
+<body>
+<!-- Put your test view here and use livereload -->
+
+
+<!-- END -->
+</body>
+
+<script>require('electron-connect').client.create()</script>
+
+<script src="node_modules/hammerjs/hammer.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="lib/materialize/js/bin/materialize.js"></script>
+<script src="lib/materialize-stepper.min.js"></script>
+
+<script>
+	$(function () {
+		$('.stepper').activateStepper();
+	});
+</script>
+</html>

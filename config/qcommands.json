@@ -1,0 +1,23 @@
+{
+  "Scene" :
+  {
+    "Import texture" : [
+      "Ctrl+Alt+T",
+      "Import a new texture inside the editor"
+    ],
+    "New Sprite" : [
+      "Ctrl+Alt+S",
+      "Add a new sprite rfom a Texture in the interface"
+    ],
+    "New Object" : [
+      "Ctrl+Alt+N",
+      "Add a new object to the Scene"
+    ]
+  },
+  "Game" : {
+    "Play" : [
+      "Ctrl+Shift+P",
+      "Start the game in the browser"
+    ]
+  }
+}
