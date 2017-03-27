@@ -4,7 +4,8 @@
 
 
 ##Hacking the editor
-In this editor, all is **plugin**
+In this editor, everything is a **plugin**
+
 You can extend the editor as well as the UI itself.
 
 You can :
@@ -14,3 +15,4 @@ You can :
 This way, even if the offical plugin is updated, you can still use yours with your functions
 
 ### [Submit an issue](https://github.com/Xtruct/Editor/issues).
+
