@@ -15,7 +15,7 @@ let Preview        = x.require("core.Preview", true);
 let Console        = x.require("core.Console");
 let PluginLoader   = x.require("core.PluginLoader", true);
 let Navbar         = x.require("core.Navbar", true);
-let VersionManager = x.require('core.versionManager', true);
+let VersionManager = x.require('core.VersionManager', true);
 
 const Modal = x.require("core.Modal", false);
 

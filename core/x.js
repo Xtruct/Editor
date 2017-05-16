@@ -18,7 +18,7 @@ module.exports = class x {
 		let p   = path.join(ROOT.toString(), file);
 		let ret = false;
 
-		p = p.split(".").join("\\");
+		p = p.split(".").join(path.sep);
 		ext.forEach((elem) => {
 			if (fs.existsSync(p + elem)) {
 				ret = require(p);
