@@ -1,8 +1,10 @@
-const fs        = require("fs");
-const path      = require("path");
-const dialog    = require('electron').remote.dialog;
-const camelCase = require('camelcase');
-const is        = require("is");
+const fs              = require("fs");
+const path            = require("path");
+const dialog          = require('electron').remote.dialog;
+const remote          = require('electron').remote;
+const camelCase       = require('camelcase');
+const is              = require("is");
+const openAboutWindow = remote.require('about-window').default;
 
 const Console = x.require("core.Console");
 
@@ -19,25 +21,49 @@ module.exports = class Navbar {
 		/* Navbar dropdown */
 		this.generateDropDowns();
 		this.addCallback("newproject", "click", () => {
-			$('#newProjectModal').modal('open');
+			//TODO need to fix the stepper
+			//$('#newProjectModal').modal('open');
+
+			global.Project.newProject();
 		});
 
 		this.addCallback("open", "click", () => {
-			Project.loadAskPath();
+			global.Project.loadAskPath();
 		});
 
 		this.addCallback("reopen", "click", () => {
-			Project.openLast();
+			global.Project.openLast();
 		});
 
 		this.addCallback("start", "click", () => {
-			Project.openExternal();
+			global.Project.openExternal();
+		});
+
+		this.addCallback("about", "click", () => {
+			let year = new Date().getFullYear();
+
+			//TODO make our own about window
+			openAboutWindow({
+				icon_path       : path.join(ROOT.toString(), 'logos/about.png'),
+				copyright       : `Copyright (c) 2017-${year} Armaldio`,
+				package_json_dir: path.join(ROOT.toString(), 'package.json'),
+				homepage        : "https://github.com/Xtruct/Editor",
+				bug_report_url  : "https://github.com/Xtruct/Editor/issues",
+				win_options     : {
+					icon     : path.join(ROOT.toString(), 'build/icon.ico'),
+					width    : 550,
+					resizable: false
+				},
+				description     : "The hackable 2D Game Editor",
+				css_path        : path.join(ROOT.toString(), 'style/About.css'),
+				open_devtools   : true
+			});
 		});
 
 		/* Other */
 		$("#modalValidateCustomProject").on('click', () => {
-			let projectPath = Project.newProject();
-			Project.load(projectPath);
+			let projectPath = global.Project.newProject();
+			global.Project.load(projectPath);
 		});
 
 		$(".dropdown-button").dropdown({

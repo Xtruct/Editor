@@ -3,7 +3,7 @@
     "windowWidth" : "800",
     "windowHeight" : "600",
     "defaultPreview" : "in-editor",
-    "startScene" : ""
+    "startScene" : "start"
   },
   "assetsPath": "assets",
   "objectsPath": "object",

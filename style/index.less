@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  background: @dark-background !important;
+  /* background: @dark-background !important;*/
+
   color: @text-color !important;
 }
 
@@ -105,9 +106,21 @@ tr {
   text-align: center;
 }
 
-.modal .mod80 {
-  height: 80%;
+.mod80 {
+  height: 80% !important;
   top: auto !important;
+  overflow-y: hidden !important;
+  .step-actions {
+	background: #414141 !important;
+  }
+
+  .previous-step {
+	color: white;
+  }
+
+  .step {
+	background-color: #353535;
+  }
 }
 
 .modal-background-box {
@@ -165,5 +178,9 @@ tr {
 }
 
 .collection-item:hover {
-  background: red;
+  background: #404040;
+}
+
+.step-content {
+  overflow-y: hidden !important;
 }

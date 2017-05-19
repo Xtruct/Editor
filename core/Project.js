@@ -6,12 +6,12 @@ const server = require('node-static');
 const tmp    = require('tmp');
 const opn    = require("opn");
 
-const db     = low('db.json');
+const db = low('db.json');
 
 const Preview = x.require("core.Preview");
 const Console = x.require("core.Console");
 
-const ConfigurationLoader = x.require("core.ConfigurationLoader");
+const ConfigurationLoader = x.require("core.ConfigurationLoader", true);
 
 const dialog = require('electron').remote.dialog;
 let window   = require('electron').remote.getCurrentWindow();
@@ -41,25 +41,26 @@ module.exports = class Project {
 			let p            = pathname[0];
 			self.projectPath = p;
 
-			//Create project file
-			fs.writeFileSync(path.join(p, "Project.xtruct"), ConfigurationLoader.load("defaultproject", false), 'utf8');
-			Console.say("Project file created");
+			let err;
 
 			//Create assets folder
-			mkdirp(path.join(p, "assets"), function (err) {
-				if (err) console.error(err); else RegularConsole.say('Assets created!')
-			});
+			err = mkdirp(path.join(p, "assets"));
+			if (err) console.error(err); else Console.say('Assets created!');
 
 			//Create scenes folder
-			mkdirp(path.join(p, "scenes"), function (err) {
-				if (err) console.error(err); else RegularConsole.say('Scenes created!')
-			});
+			err = mkdirp(path.join(p, "scenes"));
+			if (err) console.error(err); else Console.say('Scenes created!');
 
 			//Create objects folder
-			mkdirp(path.join(p, "objects"), function (err) {
-				if (err) console.error(err); else RegularConsole.say('Objects created!')
-			});
+			err = mkdirp(path.join(p, "objects"));
+			if (err) console.error(err); else Console.say('Objects created!');
 
+			//Create project file
+			fs.writeFileSync(path.join(p, "Project.xtruct"), ConfigurationLoader.load("defaultproject", false), 'utf8');
+			fs.writeFileSync(path.join(p, "scenes/start.xscn"), "{}", 'utf8');
+			Console.say("Project file created");
+
+			this.load(path.join(p, "Project.xtruct"));
 		});
 	};
 
@@ -78,6 +79,8 @@ module.exports = class Project {
 	load (p) {
 		global.Editor.project     = JSON.parse(fs.readFileSync(p, 'utf8'));
 		global.Editor.projectPath = path.dirname(p);
+
+		console.log(global.Editor);
 
 		db.set('editor.lastProjectPath', p).value();
 
@@ -107,16 +110,16 @@ module.exports = class Project {
 	 */
 	loadScenes (scene) {
 
-		Editor.canvas = this.canvasSetup();
+		global.Editor.canvas = this.canvasSetup();
 
-		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
-		Editor.canvas.loadFromJSON(sceneAsJson, Editor.canvas.renderAll.bind(Editor.canvas), (o, object) => {
+		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
+		global.Editor.canvas.loadFromJSON(sceneAsJson, global.Editor.canvas.renderAll.bind(global.Editor.canvas), (o, object) => {
 
 			console.log(o, object);
-			console.log(Editor.canvas.toJSON());
+			console.log(global.Editor.canvas.toJSON());
 		});
 
-		this.resizeCanvas(Editor.canvas);
+		this.resizeCanvas(global.Editor.canvas);
 		$("#currentLayout").show();
 	}
 
@@ -333,7 +336,7 @@ module.exports = class Project {
 	 * Load textures from project
 	 */
 	loadTextures () {
-		let textures = Editor.project.textures;
+		let textures = global.Editor.project.textures;
 		textures     = [{
 			name: "paddle",
 			path: "paddle.png"
@@ -357,7 +360,7 @@ module.exports = class Project {
 		$("#texture-modal-list").empty();
 		$.each(textures, (index, value) => {
 			$("#texture-modal-list").append(`<div class="col s3 section center">
-                <img class="center" height="32" src="${Editor.projectPath}/assets/${value.path}" alt="icon">
+                <img class="center" height="32" src="${global.Editor.projectPath}/assets/${value.path}" alt="icon">
                 <h5>${value.name}</h5>
             </div>`);
 		});

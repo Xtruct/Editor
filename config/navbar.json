@@ -17,7 +17,8 @@
   },
   "Options": {
     "Editor settings": "editorsettings",
-    "Account settings": "accountsettings"
+    "Account settings": "accountsettings",
+    "About": "about"
   },
   "Export": {
     "Desktop": {

@@ -5,7 +5,7 @@ html {
   font-size: 14px !important;
 }
 body {
-  background: #212121 !important;
+  /* background: @dark-background !important;*/
   color: white !important;
 }
 .modal-content {
@@ -69,12 +69,22 @@ tr {
 .newProject-header {
   text-align: center;
 }
-.modal .mod80 {
-  height: 80%;
+.mod80 {
+  height: 80% !important;
   top: auto !important;
+  overflow-y: hidden !important;
+}
+.mod80 .step-actions {
+  background: #414141 !important;
+}
+.mod80 .previous-step {
+  color: white;
+}
+.mod80 .step {
+  background-color: #353535;
 }
 .modal-background-box {
-  background-color: #313131;
+  /* background-color: @dark-1-background; */
   padding-top: 10px !important;
   border-radius: 2px !important;
 }
@@ -115,5 +125,11 @@ tr {
   border-radius: 10px 10px 0 0;
 }
 .step-actions {
-  background: #333 !important;
+  background: #333;
+}
+.collection-item:hover {
+  background: #404040;
+}
+.step-content {
+  overflow-y: hidden !important;
 }
