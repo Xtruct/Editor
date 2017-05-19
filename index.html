@@ -6,11 +6,20 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-base.css">
-    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
     <link rel="stylesheet" href="node_modules/nprogress/nprogress.css">
+
+    <!-- Materialize -->
+    <!--
     <link rel="stylesheet" href="lib/materialize/sass/materialize.css">
     <link rel="stylesheet" href="lib/materialize-stepper.min.css">
+     -->
+
+
+    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-base.css">
+    <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
+
+    <!-- Semantic -->
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
 
     <link rel="stylesheet" href="style/index.css">
 </head>
@@ -19,19 +28,21 @@
 
 <!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
 
-<div id="navbardropdowns">
+<div class="ui menu" id="navbar">
+    <!--
+    <div class="right menu">
+        <div class="ui right aligned category search item">
+            <a class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
+            <p class="right" id="project-name">No opened project</p>
+        </div>
+    </div>
+     -->
 
 </div>
 
-<nav id="nav" class="grey darken-4">
-    <div class="nav-wrapper">
-        <a class="brand-logo right"><img src="logos/logo.png" alt="Logo"></a>
-        <ul id="navbar" class="left"></ul>
-        <p class="right" id="project-name">No opened project</p>
-    </div>
-</nav>
 
 <!-- New project Modal -->
+<!--
 <div id="newProjectModal" class="modal mod80">
     <div class="modal-content">
         <ul class="stepper horizontal linear">
@@ -139,13 +150,13 @@
             </li>
         </ul>
     </div>
-</div>
+</div>-->
 
 <!-- NAVBAR ----------------------------------------------------------------------------------------------------------->
 
 
 <!-- Choose Object Modal-->
-<div id="chooseObjectModal" class="modal mod80">
+<!--<div id="chooseObjectModal" class="modal mod80">
     <div class="modal-content">
         <div class="row" id="objects-modal-list">
         </div>
@@ -158,10 +169,10 @@
            class="modal-action modal-close waves-effect waves-green btn-flat white-text">Add</a>
         <a class="modal-action modal-close waves-effect waves-red btn-flat white-text">Cancel</a>
     </div>
-</div>
+</div>-->
 
 <!-- Modal textures -->
-<div id="texturesModal" class="modal mod80">
+<!--<div id="texturesModal" class="modal mod80">
     <div class="modal-content">
         <div class="row" id="texture-modal-list">
         </div>
@@ -171,38 +182,7 @@
            class="modal-action modal-close waves-effect waves-green btn-flat white-text">Import</a>
         <a class="modal-action modal-close waves-effect waves-red btn-flat white-text">Back</a>
     </div>
-</div>
-
-
-<!-- FAB -------------------------------------------------------------------------------------------------------------->
-<div class="fixed-action-btn horizontal">
-    <a class="btn-floating btn-large grey darken-3 z-depth-4">
-        <i class="large material-icons">add_circle</i>
-    </a>
-    <ul id="quick-add">
-        <li class="waves-effect waves-light"><a id="FABaddNewObject" class="btn btn-floating red tooltipped"
-                                                data-position="top"
-                                                data-delay="50" data-tooltip="New object"><i class="material-icons">insert_chart</i></a>
-        </li>
-        <li class="waves-effect waves-light"><a id="FABaddNewScene" class="btn-floating red tooltipped"
-                                                data-position="top"
-                                                data-delay="50" data-tooltip="New Actions page"><i
-                class="material-icons">insert_chart</i></a>
-        </li>
-        <li class="waves-effect waves-light"><a class="btn-floating red tooltipped" data-position="top"
-                                                data-delay="50" data-tooltip="New Scene"><i class="material-icons">insert_chart</i></a>
-        </li>
-        <li class="waves-effect waves-light"><a class="btn-floating red tooltipped" data-position="top"
-                                                data-delay="50" data-tooltip="New layer"><i class="material-icons">insert_chart</i></a>
-        </li>
-        <li class="waves-effect waves-light"><a class="btn-floating red tooltipped" data-position="top"
-                                                data-delay="50" data-tooltip="Import ressource"><i
-                class="material-icons">insert_chart</i></a>
-        </li>
-    </ul>
-</div>
-<!-- FAB -------------------------------------------------------------------------------------------------------------->
-
+</div>-->
 
 <div id="versions">
     <span id="xtruct-version">Xtruct 0.0.3 pre-alpha</span>
@@ -219,22 +199,17 @@
 </div>
 </body>
 
-<script src="node_modules/hammerjs/hammer.min.js"></script>
+<!-- <script src="node_modules/hammerjs/hammer.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="lib/materialize/js/bin/materialize.js"></script>
+<script>window.$ = window.jQuery = require("jquery");</script>
+<!-- <script src="lib/materialize/js/bin/materialize.js"></script> -->
 <script src="lib/jquery-sortable-lists.min.js"></script>
 <script src="lib/fabric.min.js"></script>
-<script src="lib/materialize-stepper.min.js"></script>
+<!-- <script src="lib/materialize-stepper.min.js"></script> -->
+<script src="semantic/dist/semantic.min.js"></script>
 
 <script>
-
-	$(function () {
-		$('.stepper').activateStepper();
-	});
-</script>
-
-<script>
-	require('./renderer.js');
+    require('./renderer.js');
 </script>
 
 </html>

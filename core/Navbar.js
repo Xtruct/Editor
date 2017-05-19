@@ -9,14 +9,14 @@ const openAboutWindow = remote.require('about-window').default;
 const Console = x.require("core.Console");
 
 module.exports = class Navbar {
-	constructor () {
-		this.config = JSON.parse(fs.readFileSync(path.join(ROOT.toString(), "config/navbar.json"), 'utf8'));
-	}
+    constructor() {
+        this.config = JSON.parse(fs.readFileSync(path.join(ROOT.toString(), "config/navbar.json"), 'utf8'));
+    }
 
-	/**
-	 * Initialize navbar and trigger events
-	 */
-	init () {
+    /**
+     * Initialize navbar and trigger events
+     */
+    init() {
 
 		/* Navbar dropdown */
 		this.generateDropDowns();
@@ -66,53 +66,49 @@ module.exports = class Navbar {
 			global.Project.load(projectPath);
 		});
 
-		$(".dropdown-button").dropdown({
-			constrainWidth: false
-		});
-	}
+        $('.ui.dropdown').dropdown();
+    }
 
-	/**
-	 * Generate callbacks for navbar elements
-	 * @param elem
-	 * @param event
-	 * @param callback
-	 */
-	addCallback (elem, event, callback) {
-		if (typeof callback === "function") {
-			$(`#${elem}-item`).on(event, callback);
-		}
-		else {
-			console.error("Callback is not a function");
-		}
-	}
+    /**
+     * Generate callbacks for navbar elements
+     * @param elem
+     * @param event
+     * @param callback
+     */
+    addCallback(elem, event, callback) {
+        if (typeof callback === "function") {
+            $(`#${elem}-item`).on(event, callback);
+        }
+        else {
+            console.error("Callback is not a function");
+        }
+    }
 
-	/**
-	 * Generate HTML navabar
-	 */
-	generateDropDowns () {
-		$.each(this.config, (key, values) => {
+    /**
+     * Generate HTML navabar
+     */
+    generateDropDowns() {
+        $.each(this.config, (key, values) => {
 
-			let navbar = $("#navbar");
-			let li;
-			if (!is.object(values)) {
-				li = `<li><a id="${values}-item">${key}</a></li>`;
-			}
-			else {
-				li = `<li><a class="dropdown-button" data-beloworigin="true" data-activates="${camelCase(key)}-dropdown">${key}<i
-                    class="material-icons right">arrow_drop_down</i></a></li>`;
+            let navbar = $("#navbar");
+            let li;
+            if (!is.object(values)) {
+                li = `<div class="item" id="${values}-item">${key}</div>`;
+            }
+            else {
+                li = `<div class="ui dropdown link item">
+					  	<span class="text">${key}</span>
+					  	<i class="dropdown icon"></i>
+					  	<div class="menu">`;
 
-				let dd = `<ul id="${camelCase(key)}-dropdown" class="dropdown-content">`;
+                $.each(values, (k, v) => {
+                    li += `<div class="item" id="${v}-item" >${k}</div>`
+                });
 
-				$.each(values, (k, v) => {
-					dd += `<li><a id="${v}-item" >${k}</a></li>`
-				});
+                li += `</div>`;
+            }
 
-				dd += `</ul>`;
-
-				$("#navbardropdowns").append(dd);
-			}
-
-			navbar.append(li);
-		});
-	}
+            navbar.append(li);
+        });
+    }
 };
