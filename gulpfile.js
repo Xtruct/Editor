@@ -8,11 +8,11 @@ let fs       = require("fs");
 gulp.task('serve', function () {
 	electron.start();
 
-	gulp.watch('main.js', electron.restart);
+	//gulp.watch('main.js', electron.restart);
 
-	gulp.watch(['renderer.js', 'layout/*.html', 'index.html', 'testfile.html'], electron.reload);
+	//gulp.watch(['renderer.js', 'layout/*.html', 'index.html', 'testfile.html'], electron.reload);
 
-	gulp.watch(["./style/*.css"], console.log("Reload"));
+	//gulp.watch(["./style/*.css"], console.log("Reload"));
 });
 
 gulp.task('doc', function () {

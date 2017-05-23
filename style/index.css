@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  width: 100%;
   -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeSpeed;
   font-size: 14px !important;
@@ -7,6 +8,10 @@ html {
 body {
   /* background: @dark-background !important;*/
   color: white !important;
+}
+#layout {
+  width: 100%;
+  height: 100%;
 }
 .modal-content {
   background: #212121;
@@ -25,9 +30,6 @@ body {
   bottom: 3px;
   z-index: 9999;
 }
-/**
-Layouts
- */
 #projects-dropdown {
   z-index: 9999;
 }
@@ -84,7 +86,6 @@ tr {
   background-color: #353535;
 }
 .modal-background-box {
-  /* background-color: @dark-1-background; */
   padding-top: 10px !important;
   border-radius: 2px !important;
 }
@@ -132,4 +133,10 @@ tr {
 }
 .step-content {
   overflow-y: hidden !important;
+}
+.item {
+  cursor: pointer;
+}
+body {
+  background-color: #222;
 }

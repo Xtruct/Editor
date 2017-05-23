@@ -1,4 +1,13 @@
 ![Xtruct logo](https://cdn.discordapp.com/attachments/276347001980059659/276752307020890113/xtruct-logo2-1.png)
+
+[![Build Status](https://travis-ci.org/Xtruct/Editor.svg?branch=master)](https://travis-ci.org/Xtruct/Editor)
+[![Github All Releases](https://img.shields.io/github/downloads/xtruct/editor/total.svg)](https://github.com/Xtruct/Editor)
+[![Website](https://img.shields.io/website-up-down-green-red/http/xtruct.github.io.svg?label=Xtruct)](https://xtruct.github.io/)
+[![GitHub (pre-)release](https://img.shields.io/github/release/xtruct/xtruct/all.svg)]()
+[![GitHub release](https://img.shields.io/github/release/Xtruct/Xtruct.svg)](https://github.com/Xtruct/Xtruct/releases)
+[![Discord](https://img.shields.io/discord/276340633801850890.svg)](https://discord.gg/ZwCcTYs)
+
+
 # Xtruct Editor - *The hackable 2D Game Editor*
 ### Part of [Xtruct](https://github.com/Xtruct/Xtruct)
 

@@ -19,8 +19,10 @@ global.ROOT = require('app-root-path');
 
 //core modules
 const VersionManager = x.require("core.VersionManager");
-
+const unhandled = require("electron-unhandled");
 let mainWindow;
+
+unhandled();
 
 app.setAppUserModelId("com.editor.xtruct");
 

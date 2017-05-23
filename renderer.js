@@ -2,6 +2,7 @@
 global.ROOT  = require('app-root-path');
 global.x     = require("./core/x.js");
 const remote = require('electron').remote;
+const unhandled = require('electron-unhandled');
 
 global.Editor  = x.require("core.Editor");
 global.Project = x.require("core.Project", true);
@@ -22,6 +23,9 @@ const Modal = x.require("core.Modal", false);
 VersionManager.patchBuild();
 
 const nprogress = require("nprogress");
+
+//catch any unhandled error
+unhandled();
 
 $(document).ready(() => {
 	nprogress.start();

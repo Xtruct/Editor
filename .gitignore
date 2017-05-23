@@ -40,3 +40,4 @@ jspm_packages
 builds/
 /db.json
 dist/
+semantic/

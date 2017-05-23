@@ -113,14 +113,34 @@ module.exports = class Project {
 		global.Editor.canvas = this.canvasSetup();
 
 		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
-		global.Editor.canvas.loadFromJSON(sceneAsJson, global.Editor.canvas.renderAll.bind(global.Editor.canvas), (o, object) => {
+		global.Editor.canvas.loadFromJSON(sceneAsJson, () => {
+			global.Editor.canvas.renderAll.bind(global.Editor.canvas)
 
-			console.log(o, object);
-			console.log(global.Editor.canvas.toJSON());
+			var sceneRect           = new fabric.Rect({
+				left           : 0,
+				top            : 0,
+				width          : global.Editor.project.windowWidth,
+				height         : global.Editor.project.windowHeight,
+				fill           : 'rgba(240, 240, 240, 1)',
+				strokeDashArray: [25, 10],
+				stroke         : 'black',
+				strokeWidth    : 5
+			});
+			sceneRect.lockMovementX = sceneRect.lockMovementY = true;
+			sceneRect.selectable = false;
+			global.Editor.canvas.add(sceneRect);
+			global.Editor.canvas.sendToBack(sceneRect);
+			global.Editor.canvas.renderAll();
+
+			console.log("scene", global.Editor.project.windowWidth);
+
+			this.resizeCanvas(global.Editor.canvas);
+			$("#currentLayout").show();
+		}, (o, object) => {
+
+			console.log("O", o, "Object", object);
+			console.log("Canvas.TOJson", global.Editor.canvas.toJSON());
 		});
-
-		this.resizeCanvas(global.Editor.canvas);
-		$("#currentLayout").show();
 	}
 
 	/**
@@ -147,20 +167,20 @@ module.exports = class Project {
 
 		//Manage panning and selection
 		canvas.on('mouse:up', function (e) {
-			if (e.e.which == MIDDLE_CLICK) {
+			if (e.e.which === MIDDLE_CLICK) {
 				panning          = false;
 				canvas.selection = true;
 			}
 		});
 
 		canvas.on('mouse:down', function (e) {
-			if (e.e.which == MIDDLE_CLICK) {
+			if (e.e.which === MIDDLE_CLICK) {
 				panning          = true;
 				canvas.selection = false
 			}
 		});
 		canvas.on('mouse:move', function (e) {
-			if (panning && e && e.e && e.e.which == MIDDLE_CLICK) {
+			if (panning && e && e.e && e.e.which === MIDDLE_CLICK) {
 				let units = 10;
 				let delta = new fabric.Point(e.e.movementX, e.e.movementY);
 				canvas.relativePan(delta);
@@ -224,22 +244,22 @@ module.exports = class Project {
 					let points = this.get('points');
 
 					for (let i = 0; i < points.length; i++) {
-						if (typeof (minX) == undefined) {
+						if (minX === undefined) {
 							minX = points[i].x;
 						} else if (points[i].x < minX) {
 							minX = points[i].x;
 						}
-						if (typeof (minY) == undefined) {
+						if (minY === undefined) {
 							minY = points[i].y;
 						} else if (points[i].y < minY) {
 							minY = points[i].y;
 						}
-						if (typeof (maxX) == undefined) {
+						if (maxX === undefined) {
 							maxX = points[i].x;
 						} else if (points[i].x > maxX) {
 							maxX = points[i].x;
 						}
-						if (typeof (maxY) == undefined) {
+						if (maxY === undefined) {
 							maxY = points[i].y;
 						} else if (points[i].y > maxY) {
 							maxY = points[i].y;
@@ -264,13 +284,22 @@ module.exports = class Project {
 		document.addEventListener("mousewheel", function (e) {
 			let evt     = window.event || e;
 			let delta   = evt.detail ? evt.detail * (-120) : evt.wheelDelta;
-			let curZoom = canvas.getZoom(), newZoom = curZoom + delta / 4000, x = e.offsetX, y = e.offsetY;
+			let curZoom = canvas.getZoom();
+			let newZoom = curZoom + delta / 5000;
+			let x = e.offsetX;
+			let y = e.offsetY;
+
+			console.log(newZoom);
+			if (newZoom < 0.05)
+				newZoom = 0.05;
+			if (newZoom > 3)
+				newZoom = 3;
 			//applying zoom values.
 			canvas.zoomToPoint({
 				x: x,
 				y: y
 			}, newZoom);
-			if (e != null) e.preventDefault();
+			if (e !== null) e.preventDefault();
 			return false;
 		}, false);
 
@@ -327,7 +356,7 @@ module.exports = class Project {
 		});
 
 		canvas.selectionBorderColor = 'rgba(255, 0, 0, 0.3)';
-		canvas.setBackgroundColor('rgba(220, 220, 220, 1)', canvas.renderAll.bind(canvas));
+		canvas.setBackgroundColor('rgba(21, 21, 21, 1)', canvas.renderAll.bind(canvas));
 
 		return (canvas);
 	}
