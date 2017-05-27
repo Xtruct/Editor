@@ -12,7 +12,7 @@
 ### Part of [Xtruct](https://github.com/Xtruct/Xtruct)
 
 
-##Hacking the editor
+## Hacking the editor
 In this editor, everything is a **plugin**
 
 You can extend the editor as well as the UI itself.

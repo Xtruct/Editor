@@ -1,15 +1,19 @@
 /* Required */
-global.ROOT  = require('app-root-path');
-global.x     = require("./core/x.js");
-const remote = require('electron').remote;
+
+// @flow
+
+global.ROOT     = require('app-root-path');
+global.x        = require("./core/x.js");
+const remote    = require('electron').remote;
 const unhandled = require('electron-unhandled');
+const chokidar  = require('chokidar');
 
 global.Editor  = x.require("core.Editor");
 global.Project = x.require("core.Project", true);
 
-Editor.project     = {};
-Editor.projectPath = "";
-Editor.plugins     = [];
+global.Editor.project     = {};
+global.Editor.projectPath = "";
+global.Editor.plugins     = [];
 
 let Layout         = x.require("core.Layout", true);
 let Preview        = x.require("core.Preview", true);
@@ -27,35 +31,54 @@ const nprogress = require("nprogress");
 //catch any unhandled error
 unhandled();
 
+var watcher = chokidar.watch(['./style/**/*.css',
+							  './semantic/dist/semantic.min.css'], {
+	//ignored: /(^|[\/\\])\../,
+	//persistent: true
+});
+
+function liveCSS () {
+	let styles = document.querySelectorAll('link[rel=stylesheet]');
+	for (let i = 0; i < styles.length; i++) {
+		let restyled = styles[i].getAttribute('href') + '?v=' + Math.random(0, 10000);
+		styles[i].setAttribute('href', restyled);
+	}
+}
+
+watcher
+	.on('add', path => liveCSS())
+	.on('change', path => liveCSS())
+	.on('unlink', path => liveCSS());
+
 $(document).ready(() => {
 	nprogress.start();
 
 	/* UNCOMMENT TO TEST
-	let modal1 = new Modal({
-		title  : "Title",
-		message: "Message",
-		buttons: [
-			{
-				name : "Cancel",
-				id   : "cancel",
-				color: "red",
-				func : () => {
-					console.log("Cancelled");
-				}
-			},
-			{
-				name : "Ok",
-				id   : "ok",
-				color: "#ff0000",
-				func : () => {
-					console.log("OK");
-				}
-			},
-		]
-	});
+	 let modal1 = new Modal({
+	 title  : "Title",
+	 message: "Message",
+	 buttons: [
+	 {
+	 name : "Cancel",
+	 id   : "cancel",
+	 color: "red",
+	 func : () => {
+	 console.log("Cancelled");
+	 }
+	 },
+	 {
+	 name : "Ok",
+	 id   : "ok",
+	 color: "#ff0000",
+	 func : () => {
+	 console.log("OK");
+	 }
+	 },
+	 ]
+	 });
 
-	modal1.show();
-	*/
+	 modal1.show();
+	 */
 
 	Layout.setup();
 	Console.say("Layout loaded");

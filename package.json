@@ -28,17 +28,19 @@
     "@types/jquery": "^2.0.45",
     "ava": "^0.19.1",
     "devtron": "^1.4.0",
-    "electron": "^1.6.8",
-    "electron-builder": "^17.10.0",
+    "electron": "^1.6.10",
+    "electron-builder": "^18.0.1",
     "electron-connect": "^0.6.1",
-    "flow-bin": "^0.42.0",
+    "flow-bin": "^0.46.0",
     "gulp": "^3.9.1",
-    "gulp-documentation": "^3.1.0"
+    "gulp-documentation": "^3.1.0",
+    "live-reload": "^1.1.0"
   },
   "dependencies": {
     "about-window": "^1.6.1",
     "app-root-path": "^2.0.1",
     "camelcase": "^4.1.0",
+    "chokidar": "^1.7.0",
     "electron-is-dev": "^0.1.2",
     "electron-localshortcut": "^1.1.1",
     "electron-unhandled": "^0.2.0",

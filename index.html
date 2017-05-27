@@ -5,15 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/nprogress/nprogress.css">
-
-    <!-- Materialize -->
-    <!--
-    <link rel="stylesheet" href="lib/materialize/sass/materialize.css">
-    <link rel="stylesheet" href="lib/materialize-stepper.min.css">
-     -->
-
 
     <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-base.css">
     <link rel="stylesheet" href="node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
@@ -208,8 +200,10 @@
 <!-- <script src="lib/materialize-stepper.min.js"></script> -->
 <script src="semantic/dist/semantic.min.js"></script>
 
+<script>require('electron-connect').client.create()</script>
+
 <script>
-    require('./renderer.js');
+	require('./renderer.js');
 </script>
 
 </html>
