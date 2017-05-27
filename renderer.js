@@ -41,7 +41,7 @@ function liveCSS () {
 }
 
 if (isDev) {
-	var watcher = chokidar.watch(['./style/**/*.css',
+	/*var watcher = chokidar.watch(['./style/!**!/!*.css',
 								  './semantic/dist/semantic.min.css'], {
 		persistent: true
 	});
@@ -49,7 +49,7 @@ if (isDev) {
 	watcher
 		.on('add', path => liveCSS())
 		.on('change', path => liveCSS())
-		.on('unlink', path => liveCSS());
+		.on('unlink', path => liveCSS());*/
 }
 
 $(document).ready(() => {

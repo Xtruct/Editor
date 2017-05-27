@@ -155,8 +155,8 @@ module.exports = class Project {
 
         let layout = $("#layout");
 
-        canvas.setHeight(layout.parent().height() * 0.95);
-        canvas.setWidth(layout.parent().width() * 0.95);
+        canvas.setHeight(layout.parent().height());
+        canvas.setWidth(layout.parent().width());
         canvas.renderAll();
     }
 
@@ -196,7 +196,7 @@ module.exports = class Project {
 
         canvas.on('object:selected', function (s) {
             let p = s.target;
-            $("#selection-pos").text(`x : ${p.left}, y : ${p.top}`);
+            $("#selection-pos").text(`x : ${Math.round(p.left)}, y : ${Math.round(p.top)}`);
         });
 
         //Resize object stroke on scale
@@ -306,6 +306,8 @@ module.exports = class Project {
                 newZoom = 0.05;
             if (newZoom > 3)
                 newZoom = 3;
+
+            $("#zoom-level").text(`Zoom: ${Math.round(newZoom * 100)}%`);
             //applying zoom values.
             canvas.zoomToPoint({
                 x: x,
