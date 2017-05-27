@@ -38,6 +38,5 @@ jspm_packages
 
 \.idea/
 builds/
-/db.json
+db.json
 dist/
-semantic/
