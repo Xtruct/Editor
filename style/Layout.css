@@ -5,8 +5,8 @@
   transform: translate(-50%, -50%);
 }
 #currentLayout {
-  /*outline: 2px dashed grey;
-  outline-offset: 5px;*/
+  outline: 2px dashed grey;
+  outline-offset: 5px;
   background-color: #222222;
   display: none;
 }

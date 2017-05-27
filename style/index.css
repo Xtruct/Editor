@@ -140,3 +140,8 @@ tr {
 body {
   background-color: #222;
 }
+.bottom-left-canvas {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}

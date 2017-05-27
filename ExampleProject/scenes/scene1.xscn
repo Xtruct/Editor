@@ -34,7 +34,7 @@
       "alignX": "none",
       "alignY": "none",
       "meetOrSlice": "meet",
-      "src": "file:///D:/Projects/Xtruct/editor/Exampleproject/assets/ball.png",
+      "src": "ExampleProject/assets/ball.png",
       "filters": [],
       "resizeFilters": []
     },
@@ -72,7 +72,7 @@
       "alignX": "none",
       "alignY": "none",
       "meetOrSlice": "meet",
-      "src": "file:///D:/Projects/Xtruct/editor/Exampleproject/assets/paddle.png",
+      "src": "ExampleProject/assets/paddle.png",
       "filters": [],
       "resizeFilters": []
     },
@@ -110,7 +110,7 @@
       "alignX": "none",
       "alignY": "none",
       "meetOrSlice": "meet",
-      "src": "file:///D:/Projects/Xtruct/editor/Exampleproject/assets/paddle.png",
+      "src": "ExampleProject/assets/paddle.png",
       "filters": [],
       "resizeFilters": []
     }
