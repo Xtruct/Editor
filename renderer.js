@@ -7,6 +7,7 @@ global.x        = require("./core/x.js");
 const remote    = require('electron').remote;
 const unhandled = require('electron-unhandled');
 const chokidar  = require('chokidar');
+const isDev     = require("electron-is-dev");
 
 global.Editor  = x.require("core.Editor");
 global.Project = x.require("core.Project", true);
@@ -31,12 +32,6 @@ const nprogress = require("nprogress");
 //catch any unhandled error
 unhandled();
 
-var watcher = chokidar.watch(['./style/**/*.css',
-							  './semantic/dist/semantic.min.css'], {
-	//ignored: /(^|[\/\\])\../,
-	//persistent: true
-});
-
 function liveCSS () {
 	let styles = document.querySelectorAll('link[rel=stylesheet]');
 	for (let i = 0; i < styles.length; i++) {
@@ -45,10 +40,17 @@ function liveCSS () {
 	}
 }
 
-watcher
-	.on('add', path => liveCSS())
-	.on('change', path => liveCSS())
-	.on('unlink', path => liveCSS());
+if (isDev) {
+	var watcher = chokidar.watch(['./style/**/*.css',
+								  './semantic/dist/semantic.min.css'], {
+		persistent: true
+	});
+
+	watcher
+		.on('add', path => liveCSS())
+		.on('change', path => liveCSS())
+		.on('unlink', path => liveCSS());
+}
 
 $(document).ready(() => {
 	nprogress.start();

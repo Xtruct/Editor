@@ -1,0 +1,701 @@
+/*!
+ * # Semantic UI - Reveal
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+/*******************************
+            Theme
+*******************************/
+/*
+
+████████╗██╗  ██╗███████╗███╗   ███╗███████╗███████╗
+╚══██╔══╝██║  ██║██╔════╝████╗ ████║██╔════╝██╔════╝
+   ██║   ███████║█████╗  ██╔████╔██║█████╗  ███████╗
+   ██║   ██╔══██║██╔══╝  ██║╚██╔╝██║██╔══╝  ╚════██║
+   ██║   ██║  ██║███████╗██║ ╚═╝ ██║███████╗███████║
+   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚══════╝╚══════╝
+
+*/
+/*******************************
+        Theme Selection
+*******************************/
+/* To override a theme for an individual element
+   specify theme name below
+*/
+/* Global */
+/* Elements */
+/* Collections */
+/* Modules */
+/* Views */
+/*******************************
+            Folders
+*******************************/
+/* Path to theme packages */
+/* Path to site override folder */
+/*******************************
+         Import Theme
+*******************************/
+/*******************************
+        Import Directives
+*******************************/
+/*------------------
+       Theme
+-------------------*/
+/*--------------------
+   Site Variables
+---------------------*/
+/* Default site.variables */
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/* This is the single variable that controls them all */
+/* The size of page text  */
+/*-------------------
+    Border Radius
+--------------------*/
+/* See Power-user section below
+   for explanation of @px variables
+*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*--------------
+   Form Input
+---------------*/
+/* This adjusts the default form input across all elements */
+/* Input Text Color */
+/* Line Height Default For Inputs in Browser (Descendors are 17px at 14px base em) */
+/*-------------------
+    Focused Input
+--------------------*/
+/* Used on inputs, textarea etc */
+/* Used on dropdowns, other larger blocks */
+/*-------------------
+        Sizes
+--------------------*/
+/*
+  Sizes are all expressed in terms of 14px/em (default em)
+  This ensures these "ratios" remain constant despite changes in EM
+*/
+/*-------------------
+        Page
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Loader
+--------------------*/
+/*-------------------
+        Grid
+--------------------*/
+/*-------------------
+     Transitions
+--------------------*/
+/*-------------------
+     Breakpoints
+--------------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*--- Colored Backgrounds ---*/
+/*--- Colored Headers ---*/
+/*--- Colored Text ---*/
+/*--- Colored Border ---*/
+/*-------------------
+     Alpha Colors
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* Differentiating Neutrals */
+/* Differentiating Layers */
+/*******************************
+           Power-User
+*******************************/
+/*-------------------
+    Emotive Colors
+--------------------*/
+/* Positive */
+/* Negative */
+/* Info */
+/* Warning */
+/*-------------------
+        Paths
+--------------------*/
+/* For source only. Modified in gulp for dist */
+/*-------------------
+       Em Sizes
+--------------------*/
+/*
+  This rounds @size values to the closest pixel then expresses that value in (r)em.
+  This ensures all size values round to exact pixels
+*/
+/* em */
+/* rem */
+/*-------------------
+       Icons
+--------------------*/
+/* Maximum Glyph Width of Icon */
+/*-------------------
+     Neutral Text
+--------------------*/
+/*-------------------
+     Brand Colors
+--------------------*/
+/*-------------------
+      Borders
+--------------------*/
+/*-------------------
+    Derived Values
+--------------------*/
+/* Loaders Position Offset */
+/* Rendered Scrollbar Width */
+/* Maximum Single Character Glyph Width, aka Capital "W" */
+/* Used to match floats with text */
+/* Header Spacing */
+/* Minimum Mobile Width */
+/* Positive / Negative Dupes */
+/* Responsive */
+/*-------------------
+  Exact Pixel Values
+--------------------*/
+/*
+  These are used to specify exact pixel values in em
+  for things like borders that remain constantly
+  sized as emSize adjusts
+
+  Since there are many more sizes than names for sizes,
+  these are named by their original pixel values.
+
+*/
+/* Columns */
+/*******************************
+             States
+*******************************/
+/*-------------------
+      Disabled
+--------------------*/
+/*-------------------
+        Hover
+--------------------*/
+/*---  Shadows  ---*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Focus
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+    Down (:active)
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Active
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/* Packaged site.variables */
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/*--------------
+      Page
+---------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*-------------------
+        Paths
+--------------------*/
+/*--------------
+   Paragraphs
+---------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* 4px @ default em */
+/* Component's site.variables */
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/* This is the single variable that controls them all */
+/* The size of page text  */
+/*-------------------
+    Border Radius
+--------------------*/
+/* See Power-user section below
+   for explanation of @px variables
+*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*--------------
+   Form Input
+---------------*/
+/* This adjusts the default form input across all elements */
+/* Input Text Color */
+/* Line Height Default For Inputs in Browser (Descendors are 17px at 14px base em) */
+/*-------------------
+    Focused Input
+--------------------*/
+/* Used on inputs, textarea etc */
+/* Used on dropdowns, other larger blocks */
+/*-------------------
+        Sizes
+--------------------*/
+/*
+  Sizes are all expressed in terms of 14px/em (default em)
+  This ensures these "ratios" remain constant despite changes in EM
+*/
+/*-------------------
+        Page
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Loader
+--------------------*/
+/*-------------------
+        Grid
+--------------------*/
+/*-------------------
+     Transitions
+--------------------*/
+/*-------------------
+     Breakpoints
+--------------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*--- Colored Backgrounds ---*/
+/*--- Colored Headers ---*/
+/*--- Colored Text ---*/
+/*--- Colored Border ---*/
+/*-------------------
+     Alpha Colors
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* Differentiating Neutrals */
+/* Differentiating Layers */
+/*******************************
+           Power-User
+*******************************/
+/*-------------------
+    Emotive Colors
+--------------------*/
+/* Positive */
+/* Negative */
+/* Info */
+/* Warning */
+/*-------------------
+        Paths
+--------------------*/
+/* For source only. Modified in gulp for dist */
+/*-------------------
+       Em Sizes
+--------------------*/
+/*
+  This rounds @size values to the closest pixel then expresses that value in (r)em.
+  This ensures all size values round to exact pixels
+*/
+/* em */
+/* rem */
+/*-------------------
+       Icons
+--------------------*/
+/* Maximum Glyph Width of Icon */
+/*-------------------
+     Neutral Text
+--------------------*/
+/*-------------------
+     Brand Colors
+--------------------*/
+/*-------------------
+      Borders
+--------------------*/
+/*-------------------
+    Derived Values
+--------------------*/
+/* Loaders Position Offset */
+/* Rendered Scrollbar Width */
+/* Maximum Single Character Glyph Width, aka Capital "W" */
+/* Used to match floats with text */
+/* Header Spacing */
+/* Minimum Mobile Width */
+/* Positive / Negative Dupes */
+/* Responsive */
+/*-------------------
+  Exact Pixel Values
+--------------------*/
+/*
+  These are used to specify exact pixel values in em
+  for things like borders that remain constantly
+  sized as emSize adjusts
+
+  Since there are many more sizes than names for sizes,
+  these are named by their original pixel values.
+
+*/
+/* Columns */
+/*******************************
+             States
+*******************************/
+/*-------------------
+      Disabled
+--------------------*/
+/*-------------------
+        Hover
+--------------------*/
+/*---  Shadows  ---*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Focus
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+    Down (:active)
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Active
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/* Site theme site.variables */
+/*******************************
+     User Global Variables
+*******************************/
+/*-------------------
+ Component Variables
+---------------------*/
+/* Default */
+/*******************************
+            Reveal
+*******************************/
+/* Types */
+/* Packaged Theme */
+/*******************************
+            Reveal
+*******************************/
+/* Types */
+/* Site Theme */
+/*******************************
+    User Variable Overrides
+*******************************/
+/*******************************
+             Mix-ins
+*******************************/
+/*------------------
+       Fonts
+-------------------*/
+/*------------------
+     Overrides
+-------------------*/
+/* End Config */
+/*******************************
+            Reveal
+*******************************/
+.ui.reveal {
+  display: inherit;
+  position: relative !important;
+  font-size: 0em !important;
+}
+.ui.reveal > .visible.content {
+  position: absolute !important;
+  top: 0em !important;
+  left: 0em !important;
+  z-index: 3 !important;
+  transition: all 0.5s ease 0.1s;
+}
+.ui.reveal > .hidden.content {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Make sure hovered element is on top of other reveal */
+.ui.active.reveal .visible.content,
+.ui.reveal:hover .visible.content {
+  z-index: 4 !important;
+}
+/*******************************
+              Types
+*******************************/
+/*--------------
+      Slide
+---------------*/
+.ui.slide.reveal {
+  position: relative !important;
+  overflow: hidden !important;
+  white-space: nowrap;
+}
+.ui.slide.reveal > .content {
+  display: block;
+  width: 100%;
+  float: left;
+  margin: 0em;
+  transition: transform 0.5s ease 0.1s;
+}
+.ui.slide.reveal > .visible.content {
+  position: relative !important;
+}
+.ui.slide.reveal > .hidden.content {
+  position: absolute !important;
+  left: 0% !important;
+  width: 100% !important;
+  transform: translateX(100%) !important;
+}
+.ui.slide.active.reveal > .visible.content,
+.ui.slide.reveal:hover > .visible.content {
+  transform: translateX(-100%) !important;
+}
+.ui.slide.active.reveal > .hidden.content,
+.ui.slide.reveal:hover > .hidden.content {
+  transform: translateX(0%) !important;
+}
+.ui.slide.right.reveal > .visible.content {
+  transform: translateX(0%) !important;
+}
+.ui.slide.right.reveal > .hidden.content {
+  transform: translateX(-100%) !important;
+}
+.ui.slide.right.active.reveal > .visible.content,
+.ui.slide.right.reveal:hover > .visible.content {
+  transform: translateX(100%) !important;
+}
+.ui.slide.right.active.reveal > .hidden.content,
+.ui.slide.right.reveal:hover > .hidden.content {
+  transform: translateX(0%) !important;
+}
+.ui.slide.up.reveal > .hidden.content {
+  transform: translateY(100%) !important;
+}
+.ui.slide.up.active.reveal > .visible.content,
+.ui.slide.up.reveal:hover > .visible.content {
+  transform: translateY(-100%) !important;
+}
+.ui.slide.up.active.reveal > .hidden.content,
+.ui.slide.up.reveal:hover > .hidden.content {
+  transform: translateY(0%) !important;
+}
+.ui.slide.down.reveal > .hidden.content {
+  transform: translateY(-100%) !important;
+}
+.ui.slide.down.active.reveal > .visible.content,
+.ui.slide.down.reveal:hover > .visible.content {
+  transform: translateY(100%) !important;
+}
+.ui.slide.down.active.reveal > .hidden.content,
+.ui.slide.down.reveal:hover > .hidden.content {
+  transform: translateY(0%) !important;
+}
+/*--------------
+      Fade
+---------------*/
+.ui.fade.reveal > .visible.content {
+  opacity: 1;
+}
+.ui.fade.active.reveal > .visible.content,
+.ui.fade.reveal:hover > .visible.content {
+  opacity: 0;
+}
+/*--------------
+      Move
+---------------*/
+.ui.move.reveal {
+  position: relative !important;
+  overflow: hidden !important;
+  white-space: nowrap;
+}
+.ui.move.reveal > .content {
+  display: block;
+  float: left;
+  margin: 0em;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1) 0.1s;
+}
+.ui.move.reveal > .visible.content {
+  position: relative !important;
+}
+.ui.move.reveal > .hidden.content {
+  position: absolute !important;
+  left: 0% !important;
+  width: 100% !important;
+}
+.ui.move.active.reveal > .visible.content,
+.ui.move.reveal:hover > .visible.content {
+  transform: translateX(-100%) !important;
+}
+.ui.move.right.active.reveal > .visible.content,
+.ui.move.right.reveal:hover > .visible.content {
+  transform: translateX(100%) !important;
+}
+.ui.move.up.active.reveal > .visible.content,
+.ui.move.up.reveal:hover > .visible.content {
+  transform: translateY(-100%) !important;
+}
+.ui.move.down.active.reveal > .visible.content,
+.ui.move.down.reveal:hover > .visible.content {
+  transform: translateY(100%) !important;
+}
+/*--------------
+     Rotate
+---------------*/
+.ui.rotate.reveal > .visible.content {
+  transition-duration: 0.5s;
+  transform: rotate(0deg);
+}
+.ui.rotate.reveal > .visible.content,
+.ui.rotate.right.reveal > .visible.content {
+  transform-origin: bottom right;
+}
+.ui.rotate.active.reveal > .visible.content,
+.ui.rotate.reveal:hover > .visible.content,
+.ui.rotate.right.active.reveal > .visible.content,
+.ui.rotate.right.reveal:hover > .visible.content {
+  transform: rotate(110deg);
+}
+.ui.rotate.left.reveal > .visible.content {
+  transform-origin: bottom left;
+}
+.ui.rotate.left.active.reveal > .visible.content,
+.ui.rotate.left.reveal:hover > .visible.content {
+  transform: rotate(-110deg);
+}
+/*******************************
+              States
+*******************************/
+.ui.disabled.reveal:hover > .visible.visible.content {
+  position: static !important;
+  display: block !important;
+  opacity: 1 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+}
+.ui.disabled.reveal:hover > .hidden.hidden.content {
+  display: none !important;
+}
+/*******************************
+           Variations
+*******************************/
+/*--------------
+     Visible
+---------------*/
+.ui.visible.reveal {
+  overflow: visible;
+}
+/*--------------
+     Instant
+---------------*/
+.ui.instant.reveal > .content {
+  transition-delay: 0s !important;
+}
+/*--------------
+     Sizing
+---------------*/
+.ui.reveal > .content {
+  font-size: 1rem !important;
+}
+/*******************************
+         Theme Overrides
+*******************************/
+/*******************************
+         Site Overrides
+*******************************/

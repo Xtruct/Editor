@@ -1,0 +1,658 @@
+/*!
+ * # Semantic UI - Dimmer
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+/*******************************
+            Theme
+*******************************/
+/*
+
+████████╗██╗  ██╗███████╗███╗   ███╗███████╗███████╗
+╚══██╔══╝██║  ██║██╔════╝████╗ ████║██╔════╝██╔════╝
+   ██║   ███████║█████╗  ██╔████╔██║█████╗  ███████╗
+   ██║   ██╔══██║██╔══╝  ██║╚██╔╝██║██╔══╝  ╚════██║
+   ██║   ██║  ██║███████╗██║ ╚═╝ ██║███████╗███████║
+   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚══════╝╚══════╝
+
+*/
+/*******************************
+        Theme Selection
+*******************************/
+/* To override a theme for an individual element
+   specify theme name below
+*/
+/* Global */
+/* Elements */
+/* Collections */
+/* Modules */
+/* Views */
+/*******************************
+            Folders
+*******************************/
+/* Path to theme packages */
+/* Path to site override folder */
+/*******************************
+         Import Theme
+*******************************/
+/*******************************
+        Import Directives
+*******************************/
+/*------------------
+       Theme
+-------------------*/
+/*--------------------
+   Site Variables
+---------------------*/
+/* Default site.variables */
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/* This is the single variable that controls them all */
+/* The size of page text  */
+/*-------------------
+    Border Radius
+--------------------*/
+/* See Power-user section below
+   for explanation of @px variables
+*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*--------------
+   Form Input
+---------------*/
+/* This adjusts the default form input across all elements */
+/* Input Text Color */
+/* Line Height Default For Inputs in Browser (Descendors are 17px at 14px base em) */
+/*-------------------
+    Focused Input
+--------------------*/
+/* Used on inputs, textarea etc */
+/* Used on dropdowns, other larger blocks */
+/*-------------------
+        Sizes
+--------------------*/
+/*
+  Sizes are all expressed in terms of 14px/em (default em)
+  This ensures these "ratios" remain constant despite changes in EM
+*/
+/*-------------------
+        Page
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Loader
+--------------------*/
+/*-------------------
+        Grid
+--------------------*/
+/*-------------------
+     Transitions
+--------------------*/
+/*-------------------
+     Breakpoints
+--------------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*--- Colored Backgrounds ---*/
+/*--- Colored Headers ---*/
+/*--- Colored Text ---*/
+/*--- Colored Border ---*/
+/*-------------------
+     Alpha Colors
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* Differentiating Neutrals */
+/* Differentiating Layers */
+/*******************************
+           Power-User
+*******************************/
+/*-------------------
+    Emotive Colors
+--------------------*/
+/* Positive */
+/* Negative */
+/* Info */
+/* Warning */
+/*-------------------
+        Paths
+--------------------*/
+/* For source only. Modified in gulp for dist */
+/*-------------------
+       Em Sizes
+--------------------*/
+/*
+  This rounds @size values to the closest pixel then expresses that value in (r)em.
+  This ensures all size values round to exact pixels
+*/
+/* em */
+/* rem */
+/*-------------------
+       Icons
+--------------------*/
+/* Maximum Glyph Width of Icon */
+/*-------------------
+     Neutral Text
+--------------------*/
+/*-------------------
+     Brand Colors
+--------------------*/
+/*-------------------
+      Borders
+--------------------*/
+/*-------------------
+    Derived Values
+--------------------*/
+/* Loaders Position Offset */
+/* Rendered Scrollbar Width */
+/* Maximum Single Character Glyph Width, aka Capital "W" */
+/* Used to match floats with text */
+/* Header Spacing */
+/* Minimum Mobile Width */
+/* Positive / Negative Dupes */
+/* Responsive */
+/*-------------------
+  Exact Pixel Values
+--------------------*/
+/*
+  These are used to specify exact pixel values in em
+  for things like borders that remain constantly
+  sized as emSize adjusts
+
+  Since there are many more sizes than names for sizes,
+  these are named by their original pixel values.
+
+*/
+/* Columns */
+/*******************************
+             States
+*******************************/
+/*-------------------
+      Disabled
+--------------------*/
+/*-------------------
+        Hover
+--------------------*/
+/*---  Shadows  ---*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Focus
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+    Down (:active)
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Active
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/* Packaged site.variables */
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/*--------------
+      Page
+---------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*-------------------
+        Paths
+--------------------*/
+/*--------------
+   Paragraphs
+---------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* 4px @ default em */
+/* Component's site.variables */
+/*******************************
+         Site Settings
+*******************************/
+/*-------------------
+       Fonts
+--------------------*/
+/*-------------------
+      Base Sizes
+--------------------*/
+/* This is the single variable that controls them all */
+/* The size of page text  */
+/*-------------------
+    Border Radius
+--------------------*/
+/* See Power-user section below
+   for explanation of @px variables
+*/
+/*-------------------
+    Brand Colors
+--------------------*/
+/*--------------
+  Page Heading
+---------------*/
+/*--------------
+   Form Input
+---------------*/
+/* This adjusts the default form input across all elements */
+/* Input Text Color */
+/* Line Height Default For Inputs in Browser (Descendors are 17px at 14px base em) */
+/*-------------------
+    Focused Input
+--------------------*/
+/* Used on inputs, textarea etc */
+/* Used on dropdowns, other larger blocks */
+/*-------------------
+        Sizes
+--------------------*/
+/*
+  Sizes are all expressed in terms of 14px/em (default em)
+  This ensures these "ratios" remain constant despite changes in EM
+*/
+/*-------------------
+        Page
+--------------------*/
+/*-------------------
+      Paragraph
+--------------------*/
+/*-------------------
+       Links
+--------------------*/
+/*-------------------
+  Highlighted Text
+--------------------*/
+/*-------------------
+       Loader
+--------------------*/
+/*-------------------
+        Grid
+--------------------*/
+/*-------------------
+     Transitions
+--------------------*/
+/*-------------------
+     Breakpoints
+--------------------*/
+/*-------------------
+      Site Colors
+--------------------*/
+/*---  Colors  ---*/
+/*---  Light Colors  ---*/
+/*---   Neutrals  ---*/
+/*--- Colored Backgrounds ---*/
+/*--- Colored Headers ---*/
+/*--- Colored Text ---*/
+/*--- Colored Border ---*/
+/*-------------------
+     Alpha Colors
+--------------------*/
+/*-------------------
+       Accents
+--------------------*/
+/* Differentiating Neutrals */
+/* Differentiating Layers */
+/*******************************
+           Power-User
+*******************************/
+/*-------------------
+    Emotive Colors
+--------------------*/
+/* Positive */
+/* Negative */
+/* Info */
+/* Warning */
+/*-------------------
+        Paths
+--------------------*/
+/* For source only. Modified in gulp for dist */
+/*-------------------
+       Em Sizes
+--------------------*/
+/*
+  This rounds @size values to the closest pixel then expresses that value in (r)em.
+  This ensures all size values round to exact pixels
+*/
+/* em */
+/* rem */
+/*-------------------
+       Icons
+--------------------*/
+/* Maximum Glyph Width of Icon */
+/*-------------------
+     Neutral Text
+--------------------*/
+/*-------------------
+     Brand Colors
+--------------------*/
+/*-------------------
+      Borders
+--------------------*/
+/*-------------------
+    Derived Values
+--------------------*/
+/* Loaders Position Offset */
+/* Rendered Scrollbar Width */
+/* Maximum Single Character Glyph Width, aka Capital "W" */
+/* Used to match floats with text */
+/* Header Spacing */
+/* Minimum Mobile Width */
+/* Positive / Negative Dupes */
+/* Responsive */
+/*-------------------
+  Exact Pixel Values
+--------------------*/
+/*
+  These are used to specify exact pixel values in em
+  for things like borders that remain constantly
+  sized as emSize adjusts
+
+  Since there are many more sizes than names for sizes,
+  these are named by their original pixel values.
+
+*/
+/* Columns */
+/*******************************
+             States
+*******************************/
+/*-------------------
+      Disabled
+--------------------*/
+/*-------------------
+        Hover
+--------------------*/
+/*---  Shadows  ---*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Focus
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+    Down (:active)
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/*-------------------
+        Active
+--------------------*/
+/*---  Colors  ---*/
+/*---  Emotive  ---*/
+/*---  Brand   ---*/
+/*---  Dark Tones  ---*/
+/*---  Light Tones  ---*/
+/* Site theme site.variables */
+/*******************************
+     User Global Variables
+*******************************/
+/*-------------------
+ Component Variables
+---------------------*/
+/* Default */
+/*******************************
+            Dimmer
+*******************************/
+/* Hidden (Default) */
+/* Content */
+/* Visible */
+/*-------------------
+        Types
+--------------------*/
+/* Page Dimmer*/
+/*-------------------
+      Variations
+--------------------*/
+/* Inverted */
+/* Simple */
+/* Packaged Theme */
+/*******************************
+            Dimmer
+*******************************/
+/* Hidden (Default) */
+/* Content */
+/* Visible */
+/*-------------------
+        Types
+--------------------*/
+/* Page Dimmer*/
+/*-------------------
+      Variations
+--------------------*/
+/* Inverted */
+/* Simple */
+/* Site Theme */
+/*******************************
+    User Variable Overrides
+*******************************/
+/*******************************
+             Mix-ins
+*******************************/
+/*------------------
+       Fonts
+-------------------*/
+/*------------------
+     Overrides
+-------------------*/
+/* End Config */
+/*******************************
+            Dimmer
+*******************************/
+.dimmable:not(.body) {
+  position: relative;
+}
+.ui.dimmer {
+  display: none;
+  position: absolute;
+  top: 0em !important;
+  left: 0em !important;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  line-height: 1;
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
+  transition: background-color 0.5s linear;
+  user-select: none;
+  will-change: opacity;
+  z-index: 1000;
+}
+/* Dimmer Content */
+.ui.dimmer > .content {
+  width: 100%;
+  height: 100%;
+  display: table;
+  user-select: text;
+}
+.ui.dimmer > .content > * {
+  display: table-cell;
+  vertical-align: middle;
+  color: #FFFFFF;
+}
+/* Loose Coupling */
+.ui.segment > .ui.dimmer {
+  border-radius: inherit !important;
+}
+/*******************************
+            States
+*******************************/
+.animating.dimmable:not(body),
+.dimmed.dimmable:not(body) {
+  overflow: hidden;
+}
+.dimmed.dimmable > .ui.animating.dimmer,
+.dimmed.dimmable > .ui.visible.dimmer,
+.ui.active.dimmer {
+  display: block;
+  opacity: 1;
+}
+.ui.disabled.dimmer {
+  width: 0 !important;
+  height: 0 !important;
+}
+/*******************************
+           Variations
+*******************************/
+/*--------------
+      Page
+---------------*/
+.ui.page.dimmer {
+  position: fixed;
+  transform-style: '';
+  perspective: 2000px;
+  transform-origin: center center;
+}
+body.animating.in.dimmable,
+body.dimmed.dimmable {
+  overflow: hidden;
+}
+body.dimmable > .dimmer {
+  position: fixed;
+}
+/*--------------
+    Blurring
+---------------*/
+.blurring.dimmable > :not(.dimmer) {
+  filter: blur(0px) grayscale(0);
+  transition: 800ms filter ease;
+}
+.blurring.dimmed.dimmable > :not(.dimmer) {
+  filter: blur(5px) grayscale(0.7);
+}
+/* Dimmer Color */
+.blurring.dimmable > .dimmer {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.blurring.dimmable > .inverted.dimmer {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+/*--------------
+    Aligned
+---------------*/
+.ui.dimmer > .top.aligned.content > * {
+  vertical-align: top;
+}
+.ui.dimmer > .bottom.aligned.content > * {
+  vertical-align: bottom;
+}
+/*--------------
+    Inverted
+---------------*/
+.ui.inverted.dimmer {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+.ui.inverted.dimmer > .content > * {
+  color: #FFFFFF;
+}
+/*--------------
+     Simple
+---------------*/
+/* Displays without javascript */
+.ui.simple.dimmer {
+  display: block;
+  overflow: hidden;
+  opacity: 1;
+  width: 0%;
+  height: 0%;
+  z-index: -100;
+  background-color: rgba(0, 0, 0, 0);
+}
+.dimmed.dimmable > .ui.simple.dimmer {
+  overflow: visible;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1;
+}
+.ui.simple.inverted.dimmer {
+  background-color: rgba(255, 255, 255, 0);
+}
+.dimmed.dimmable > .ui.simple.inverted.dimmer {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+/*******************************
+         Theme Overrides
+*******************************/
+/*******************************
+        User Overrides
+*******************************/
