@@ -9,16 +9,11 @@ let out = new Console();
 module.exports = class Preview {
 	constructor () {
 		this.$game = $("#game");
-		this.size  = {
-			width : 600,
-			height: 400
-		}
-
 	};
 
 	start () {
 
-		let game = new Phaser.Game(this.size.width, this.size.height, Phaser.AUTO, 'game', {
+		/*let game = new Phaser.Game(this.size.width, this.size.height, Phaser.AUTO, 'game', {
 			preload: preload,
 			create : create,
 			update : update
@@ -64,7 +59,7 @@ module.exports = class Preview {
 				out.game.say("Player 1 Scored");
 
 			game.debug.text(game.time.fps + " FPS" || '--', 2, 14, "#00ff00");
-		}
+		}*/
 
 		/*function launchBall() {
 		 if (ballLaunched) {
@@ -81,7 +76,7 @@ module.exports = class Preview {
 		 }
 		 */
 
-		function createPaddle (x, y) {
+		/*function createPaddle (x, y) {
 			let paddle = game.add.sprite(x, y, "pad");
 			paddle.anchor.setTo(.5, .5);
 			paddle.scale.setTo(0.25, 0.25);
@@ -101,7 +96,7 @@ module.exports = class Preview {
 
 			return (ball);
 		}
-
+*/
 		/*
 		 function controlPaddle(paddle, y) {
 		 paddle.y = y;

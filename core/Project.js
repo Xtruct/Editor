@@ -5,6 +5,7 @@ const low    = require("lowdb");
 const server = require('node-static');
 const tmp    = require('tmp');
 const opn    = require("opn");
+const copy   = require('recursive-copy');
 
 const db = low('db.json');
 
@@ -116,25 +117,45 @@ module.exports = class Project {
 		global.Editor.currentScene = scene;
 
 		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
+
+		/**
+		 * Load as json by changing src to correct path
+		 */
+		$.each(sceneAsJson.objects, (index, value) => {
+			if (value.type === 'image') {
+				let src = value.src;
+				//console.log(global.Editor.projectPath.split(path.sep).pop());
+				let dir = global.Editor.projectPath.split(path.sep).pop();
+				src = path.join(dir, src);
+				sceneAsJson.objects[index].src = src;
+			}
+		});
+		//------------------
+
 		global.Editor.canvas.loadFromJSON(sceneAsJson, () => {
 			global.Editor.canvas.renderAll.bind(global.Editor.canvas);
 
-			let sceneRect           = new fabric.Rect({
-				left  : 0,
-				top   : 0,
-				width : global.Editor.project.windowWidth,
-				height: global.Editor.project.windowHeight,
-				fill  : 'rgba(240, 240, 240, 1)',
+			let w = global.Editor.project.windowWidth;
+			let h = global.Editor.project.windowHeight;
+
+			console.log(w, h);
+
+			let sceneRect = new fabric.Rect({
+				left: 0,
+				top : 0,
+				fill: 'rgba(240, 240, 240, 1)',
 			});
+
 			sceneRect.lockMovementX = sceneRect.lockMovementY = true;
 			sceneRect.selectable = false;
 			sceneRect.evented    = false;
+			sceneRect.setWidth(w - 1);
+			sceneRect.setHeight(h - 1);
+			sceneRect.excludeFromExport = true;
 			global.Editor.canvas.add(sceneRect);
 			sceneRect.sendToBack();
 
 			global.Editor.canvas.renderAll();
-
-			console.log("scene", global.Editor.project.windowWidth);
 
 			this.resizeCanvas(global.Editor.canvas);
 			$("#currentLayout").show();
@@ -203,7 +224,7 @@ module.exports = class Project {
 
 		//Resize object stroke on scale
 		canvas.observe('object:modified', function (e) {
-			e.target.resizeToScale();
+			//e.target.resizeToScale();
 		});
 
 		//Better scale without losing aspect ratio
@@ -363,11 +384,12 @@ module.exports = class Project {
 
 		//Set default selector
 		fabric.Object.prototype.set({
-			transparentCorners: false,
-			cornerColor       : '#0000ff',
-			borderColor       : '#ff0000',
-			cornerSize        : 12,
-			padding           : 5
+			transparentCorners      : false,
+			cornerColor             : '#0070ff',
+			borderColor             : '#ff4800',
+			cornerSize              : 10,
+			padding                 : 10,
+			selectionBackgroundColor: "#c1d2e7"
 		});
 
 		canvas.selectionBorderColor = 'rgba(255, 0, 0, 0.3)';
@@ -441,5 +463,34 @@ module.exports = class Project {
 	startPreview () {
 		let preview = new Preview();
 		preview.start();
+	}
+
+	export () {
+		dialog.showOpenDialog(window, {
+			properties: ['openDirectory', 'createDirectory']
+		}, (pathname) => {
+			let p = pathname[0];
+
+			console.log("Export to " + p);
+
+			copy(path.join(ROOT.toString(), "phaser-template"), p, {overwrite: true})
+				.then(function (results) {
+					console.info('Copied ' + results.length + ' files');
+
+					console.log(global.Editor.projectPath);
+
+					copy(global.Editor.projectPath, p, {overwrite: true})
+						.then(function (results) {
+							console.info('Copied ' + results.length + ' files');
+
+						})
+						.catch(function (error) {
+							console.error('Copy failed: ' + error);
+						});
+				})
+				.catch(function (error) {
+					console.error('Copy failed: ' + error);
+				});
+		});
 	}
 };

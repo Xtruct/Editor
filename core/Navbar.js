@@ -32,7 +32,25 @@ module.exports = class Navbar {
 		});
 
 		this.addCallback("save", "click", () => {
-			let json = JSON.stringify(global.Editor.canvas.toJSON(), null, '\t');
+
+			let json = global.Editor.canvas.toJSON();
+
+			/**
+			 * Set each image src to a relative path
+			 */
+			$.each(json.objects, (index, value) => {
+				if (value.type === 'image') {
+					let src = value.src.replace("file:///", "");
+					src = path.relative(global.Editor.projectPath, src);
+					console.log(global.Editor.projectPath);
+					console.log(src);
+					json.objects[index].src = src;
+				}
+			});
+
+			//-------------------
+
+			json      = JSON.stringify(json, null, '\t');
 			let scene = global.Editor.currentScene;
 			fs.writeFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), json, "utf8");
 			console.log("Saved to ", path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`));
@@ -44,6 +62,10 @@ module.exports = class Navbar {
 
 		this.addCallback("start", "click", () => {
 			global.Project.openExternal();
+		});
+
+		this.addCallback("quickexport", "click", () => {
+			global.Project.export();
 		});
 
 		this.addCallback("about", "click", () => {
@@ -99,9 +121,9 @@ module.exports = class Navbar {
 	 * Generate HTML navabar
 	 */
 	generateDropDowns () {
+		let navbar = $("#navbar");
 		$.each(this.config, (key, values) => {
 
-			let navbar = $("#navbar");
 			let li;
 			if (!is.object(values)) {
 				li = `<div class="item" id="${values}-item">${key}</div>`;
