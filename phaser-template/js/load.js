@@ -1,6 +1,8 @@
 let loadState = {
     preload: function () {
-        console.log('load')
+        window.runtime = {};
+
+        console.log('load');
 
         /**
 	 * Images
@@ -11,7 +13,7 @@ let loadState = {
         /**
          * Load files
          */
-        game.load.text("objects", "config/objects.json");
+        game.load.text("objects", "scenes/scene1.xscn");
 
         /**
          * Bitmap
@@ -24,7 +26,9 @@ let loadState = {
     create: function () {
         let instances = window.instances = [];
 
-        bar = game.add.image(game.world.centerX, game.world.centerY, 'loading-bar');
+		game.stage.backgroundColor = "#222";
+
+		bar = game.add.image(game.world.centerX, game.world.centerY, 'loading-bar');
         bar.anchor.set(0.5);
 
         let bar_bg = game.add.sprite(game.world.centerX, game.world.centerY, 'loading-bar-bg');
@@ -47,24 +51,24 @@ let loadState = {
         loadingText.setTextBounds(0, game.world.centerY, game.world.width, 100);
 
         let objects = JSON.parse(game.cache.getText("objects")).objects;
-        console.log(objects);
+        window.runtime.objects = objects;
+        console.log(window.runtime);
         bar.width = 0;
         for (let object of objects) {
-            console.log("Object : ", objects.length);
             //bar.width += 350 / objects.length;
         }
 
         //Just to fake a login
-        game.time.events.add(Phaser.Timer.SECOND * 0.5, function () {
+        game.time.events.add(Phaser.Timer.SECOND * 0.25, function () {
             bar.width += 350 / objects.length;
 
-            game.time.events.add(Phaser.Timer.SECOND * 0.5, function () {
+            game.time.events.add(Phaser.Timer.SECOND * 0.25, function () {
                 bar.width += 350 / objects.length;
 
-                game.time.events.add(Phaser.Timer.SECOND * 0.5, function () {
+                game.time.events.add(Phaser.Timer.SECOND * 0.25, function () {
                     bar.width += 350 / objects.length;
 
-                    game.time.events.add(Phaser.Timer.SECOND * 0.5, function () {
+                    game.time.events.add(Phaser.Timer.SECOND * 0.25, function () {
                         game.state.start('game');
                     }, this);
 

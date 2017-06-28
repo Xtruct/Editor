@@ -19,7 +19,7 @@ global.ROOT = require('app-root-path');
 
 //core modules
 const VersionManager = x.require("core.VersionManager");
-const unhandled = require("electron-unhandled");
+const unhandled      = require("electron-unhandled");
 let mainWindow;
 
 unhandled();
@@ -37,7 +37,8 @@ function createWindow () {
 		icon           : path.join(__dirname, 'build/icon.ico'),
 		backgroundColor: '#2e2c29',
 		width          : width,
-		height         : height
+		height         : height,
+		//frame          : false
 	});
 
 	// and load the index.html of the app.
@@ -81,7 +82,7 @@ app.on('browser-window-created', function (e, window) {
 app.on('ready', () => {
 	Updater.checkForUpdates().then((update) => {
 		if (update)
-			//Ask if he wants to update
+		//Ask if he wants to update
 			console.log("Do you want to update ?");
 		else
 			console.log("Sorry no updates");

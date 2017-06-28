@@ -146,3 +146,10 @@ body {
   bottom: 5px;
   mix-blend-mode: difference;
 }
+#navbar {
+  -webkit-app-region: drag;
+}
+.dropdown,
+.item {
+  -webkit-app-region: no-drag;
+}

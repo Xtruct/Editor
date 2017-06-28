@@ -1,10 +1,10 @@
-const fs = require("fs");
-const path = require("path");
+const fs     = require("fs");
+const path   = require("path");
 const mkdirp = require("mkdirp");
-const low = require("lowdb");
+const low    = require("lowdb");
 const server = require('node-static');
-const tmp = require('tmp');
-const opn = require("opn");
+const tmp    = require('tmp');
+const opn    = require("opn");
 
 const db = low('db.json');
 
@@ -14,430 +14,432 @@ const Console = x.require("core.Console");
 const ConfigurationLoader = x.require("core.ConfigurationLoader", true);
 
 const dialog = require('electron').remote.dialog;
-let window = require('electron').remote.getCurrentWindow();
+let window   = require('electron').remote.getCurrentWindow();
 
-const LEFT_CLICK = 1;
+const LEFT_CLICK   = 1;
 const MIDDLE_CLICK = 2;
-const RIGHT_CLICK = 3;
+const RIGHT_CLICK  = 3;
 
 /**
  * Project manager
  * @type {Project}
  */
 module.exports = class Project {
-    constructor() {
-    };
+	constructor () {
+	};
 
-    /**
-     * Create a new project
-     */
-    newProject() {
-        let self = this;
+	/**
+	 * Create a new project
+	 */
+	newProject () {
+		let self = this;
 
-        //Open a dialog that ask where to save your project
-        dialog.showOpenDialog(window, {
-            properties: ['openDirectory', 'createDirectory']
-        }, (pathname) => {
-            let p = pathname[0];
-            self.projectPath = p;
+		//Open a dialog that ask where to save your project
+		dialog.showOpenDialog(window, {
+			properties: ['openDirectory', 'createDirectory']
+		}, (pathname) => {
+			let p            = pathname[0];
+			self.projectPath = p;
 
-            let err;
+			let err;
 
-            //Create assets folder
-            err = mkdirp(path.join(p, "assets"));
-            if (err) console.error(err); else Console.say('Assets created!');
+			//Create assets folder
+			err = mkdirp(path.join(p, "assets"));
+			if (err) console.error(err); else Console.say('Assets created!');
 
-            //Create scenes folder
-            err = mkdirp(path.join(p, "scenes"));
-            if (err) console.error(err); else Console.say('Scenes created!');
+			//Create scenes folder
+			err = mkdirp(path.join(p, "scenes"));
+			if (err) console.error(err); else Console.say('Scenes created!');
 
-            //Create objects folder
-            err = mkdirp(path.join(p, "objects"));
-            if (err) console.error(err); else Console.say('Objects created!');
+			//Create objects folder
+			err = mkdirp(path.join(p, "objects"));
+			if (err) console.error(err); else Console.say('Objects created!');
 
-            //Create project file
-            fs.writeFileSync(path.join(p, "Project.xtruct"), ConfigurationLoader.load("defaultproject", false), 'utf8');
-            fs.writeFileSync(path.join(p, "scenes/start.xscn"), "{}", 'utf8');
-            Console.say("Project file created");
+			//Create project file
+			fs.writeFileSync(path.join(p, "Project.xtruct"), ConfigurationLoader.load("defaultproject", false), 'utf8');
+			fs.writeFileSync(path.join(p, "scenes/start.xscn"), "{}", 'utf8');
+			Console.say("Project file created");
 
-            this.load(path.join(p, "Project.xtruct"));
-        });
-    };
+			this.load(path.join(p, "Project.xtruct"));
+		});
+	};
 
-    /**
-     * Quickly open last project
-     */
-    openLast() {
-        let lastPath = db.get('editor.lastProjectPath').value();
-        this.load(lastPath);
-    }
+	/**
+	 * Quickly open last project
+	 */
+	openLast () {
+		let lastPath = db.get('editor.lastProjectPath').value();
+		this.load(lastPath);
+	}
 
-    /**
-     * Load a project from a .xtruct file
-     * @param p
-     */
-    load(p) {
-        console.log(p);
+	/**
+	 * Load a project from a .xtruct file
+	 * @param p
+	 */
+	load (p) {
+		console.log(p);
 
-        global.Editor.project = JSON.parse(fs.readFileSync(p, 'utf8'));
-        global.Editor.projectPath = path.dirname(p);
+		global.Editor.project     = JSON.parse(fs.readFileSync(p, 'utf8'));
+		global.Editor.projectPath = path.dirname(p);
 
-        console.log(global.Editor);
+		console.log(global.Editor);
 
-        db.set('editor.lastProjectPath', p).value();
+		db.set('editor.lastProjectPath', p).value();
 
-        $("#project-name").text(global.Editor.project.name);
-        console.log(global.Editor.project.name);
+		$("#project-name").text(global.Editor.project.name);
+		console.log(global.Editor.project.name);
 
-        this.loadScenes(global.Editor.project.startScene);
+		this.loadScenes(global.Editor.project.startScene);
 
-        this.loadTextures();
-    };
+		this.loadTextures();
+	};
 
-    /**
-     * Ask for path then load the project
-     */
-    loadAskPath() {
-        dialog.showOpenDialog(window, {
-            properties: ['openFile']
-        }, (pathname) => {
-            let p = pathname[0];
-            this.load(p);
-        });
-    }
+	/**
+	 * Ask for path then load the project
+	 */
+	loadAskPath () {
+		dialog.showOpenDialog(window, {
+			properties: ['openFile']
+		}, (pathname) => {
+			let p = pathname[0];
+			this.load(p);
+		});
+	}
 
-    /**
-     * Load scenes from project
-     * @param {Object} scene
-     */
-    loadScenes(scene) {
+	/**
+	 * Load scenes from project
+	 * @param {Object} scene
+	 */
+	loadScenes (scene) {
 
-        global.Editor.canvas = this.canvasSetup();
+		global.Editor.canvas       = this.canvasSetup();
+		global.Editor.currentScene = scene;
 
-        let sceneAsJson = JSON.parse(fs.readFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
-        global.Editor.canvas.loadFromJSON(sceneAsJson, () => {
-            global.Editor.canvas.renderAll.bind(global.Editor.canvas);
+		let sceneAsJson = JSON.parse(fs.readFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), 'utf8'));
+		global.Editor.canvas.loadFromJSON(sceneAsJson, () => {
+			global.Editor.canvas.renderAll.bind(global.Editor.canvas);
 
-            let sceneRect = new fabric.Rect({
-                left: 0,
-                top: 0,
-                width: global.Editor.project.windowWidth,
-                height: global.Editor.project.windowHeight,
-                fill: 'rgba(240, 240, 240, 1)',
-                strokeDashArray: [25, 10],
-                stroke: 'black',
-                strokeWidth: 5
-            });
-            sceneRect.lockMovementX = sceneRect.lockMovementY = true;
-            sceneRect.selectable = false;
-            sceneRect.evented = false;
-            global.Editor.canvas.add(sceneRect);
-            sceneRect.sendToBack();
+			let sceneRect           = new fabric.Rect({
+				left  : 0,
+				top   : 0,
+				width : global.Editor.project.windowWidth,
+				height: global.Editor.project.windowHeight,
+				fill  : 'rgba(240, 240, 240, 1)',
+			});
+			sceneRect.lockMovementX = sceneRect.lockMovementY = true;
+			sceneRect.selectable = false;
+			sceneRect.evented    = false;
+			global.Editor.canvas.add(sceneRect);
+			sceneRect.sendToBack();
 
-            global.Editor.canvas.renderAll();
+			global.Editor.canvas.renderAll();
 
-            console.log("scene", global.Editor.project.windowWidth);
+			console.log("scene", global.Editor.project.windowWidth);
 
-            this.resizeCanvas(global.Editor.canvas);
-            $("#currentLayout").show();
-        }, (o, object) => {
+			this.resizeCanvas(global.Editor.canvas);
+			$("#currentLayout").show();
+		}, (o, object) => {
 
-            console.log("O", o, "Object", object);
-            console.log("Canvas.TOJson", global.Editor.canvas.toJSON());
-        });
-    }
+			console.log("O", o, "Object", object);
+			console.log("Canvas.TOJson", global.Editor.canvas.toJSON());
+		});
+	}
 
-    /**
-     * Resize canvas
-     * @param canvas
-     */
-    resizeCanvas(canvas) {
+	/**
+	 * Resize canvas
+	 * @param canvas
+	 */
+	resizeCanvas (canvas) {
 
-        let layout = $("#layout");
+		let layout = $("#layout");
 
-        canvas.setHeight(layout.parent().height());
-        canvas.setWidth(layout.parent().width());
-        canvas.renderAll();
-    }
+		canvas.setHeight(layout.parent().height());
+		canvas.setWidth(layout.parent().width());
+		canvas.renderAll();
+	}
 
-    /**
-     * Setup canvas
-     * @returns {*}
-     */
-    canvasSetup() {
-        let canvas = new fabric.Canvas('currentLayout');
+	/**
+	 * Setup canvas
+	 * @returns {*}
+	 */
+	canvasSetup () {
+		let canvas = new fabric.Canvas('currentLayout');
 
-        let panning = false;
+		let panning = false;
 
-        //Manage panning and selection
-        canvas.on('mouse:up', function (e) {
-            if (e.e.which === MIDDLE_CLICK) {
-                panning = false;
-                canvas.selection = true;
-            }
-        });
+		//Manage panning and selection
+		canvas.on('mouse:up', function (e) {
+			if (e.e.which === MIDDLE_CLICK) {
+				panning          = false;
+				canvas.selection = true;
+			}
+		});
 
-        canvas.on('mouse:down', function (e) {
-            if (e.e.which === MIDDLE_CLICK) {
-                panning = true;
-                canvas.selection = false
-            }
-        });
-        canvas.on('mouse:move', function (e) {
-            if (panning && e && e.e && e.e.which === MIDDLE_CLICK) {
-                let units = 10;
-                let delta = new fabric.Point(e.e.movementX, e.e.movementY);
-                canvas.relativePan(delta);
-            }
+		canvas.on('mouse:down', function (e) {
+			if (e.e.which === MIDDLE_CLICK) {
+				panning          = true;
+				canvas.selection = false
+			}
+		});
+		canvas.on('mouse:move', function (e) {
+			if (panning && e && e.e && e.e.which === MIDDLE_CLICK) {
+				let units = 10;
+				let delta = new fabric.Point(e.e.movementX, e.e.movementY);
+				canvas.relativePan(delta);
+			}
 
-            //console.log(e.e);
+			let pointer = canvas.getPointer(event.e);
+			let posX    = pointer.x;
+			let posY    = pointer.y;
 
-        });
+			$("#mouse-pos").text(`x: ${Math.round(posX)}, y: ${Math.round(posY)}`);
 
-        canvas.on('object:selected', function (s) {
-            let p = s.target;
-            $("#selection-pos").text(`x : ${Math.round(p.left)}, y : ${Math.round(p.top)}`);
-        });
+		});
 
-        //Resize object stroke on scale
-        canvas.observe('object:modified', function (e) {
-            e.target.resizeToScale();
-        });
+		canvas.on('object:selected', function (s) {
+			let p = s.target;
+			$("#selection-pos").text(`x : ${Math.round(p.left)}, y : ${Math.round(p.top)}`);
+		});
 
-        //Better scale without losing aspect ratio
-        fabric.Object.prototype.resizeToScale = function () {
-            switch (this.type) {
-                case "circle":
-                    this.radius *= this.scaleX;
-                    this.scaleX = 1;
-                    this.scaleY = 1;
-                    break;
-                case "ellipse":
-                    this.rx *= this.scaleX;
-                    this.ry *= this.scaleY;
-                    this.width = this.rx * 2;
-                    this.height = this.ry * 2;
-                    this.scaleX = 1;
-                    this.scaleY = 1;
-                    break;
-                case "polygon":
-                case "polyline":
-                    let points = this.get('points');
-                    for (let i = 0; i < points.length; i++) {
-                        let p = points[i];
-                        p.x *= this.scaleX;
-                        p.y *= this.scaleY;
-                    }
-                    this.scaleX = 1;
-                    this.scaleY = 1;
-                    this.width = this.getBoundingBox().width;
-                    this.height = this.getBoundingBox().height;
-                    break;
-                case "triangle":
-                case "line":
-                case "rect":
-                    this.width *= this.scaleX;
-                    this.height *= this.scaleY;
-                    this.scaleX = 1;
-                    this.scaleY = 1;
-                default:
-                    break;
-            }
-        };
+		//Resize object stroke on scale
+		canvas.observe('object:modified', function (e) {
+			e.target.resizeToScale();
+		});
 
-        fabric.Object.prototype.getBoundingBox = function () {
-            let minX = null;
-            let minY = null;
-            let maxX = null;
-            let maxY = null;
-            switch (this.type) {
-                case "polygon":
-                case "polyline":
-                    let points = this.get('points');
+		//Better scale without losing aspect ratio
+		fabric.Object.prototype.resizeToScale = function () {
+			switch (this.type) {
+				case "circle":
+					this.radius *= this.scaleX;
+					this.scaleX = 1;
+					this.scaleY = 1;
+					break;
+				case "ellipse":
+					this.rx *= this.scaleX;
+					this.ry *= this.scaleY;
+					this.width  = this.rx * 2;
+					this.height = this.ry * 2;
+					this.scaleX = 1;
+					this.scaleY = 1;
+					break;
+				case "polygon":
+				case "polyline":
+					let points = this.get('points');
+					for (let i = 0; i < points.length; i++) {
+						let p = points[i];
+						p.x *= this.scaleX;
+						p.y *= this.scaleY;
+					}
+					this.scaleX = 1;
+					this.scaleY = 1;
+					this.width  = this.getBoundingBox().width;
+					this.height = this.getBoundingBox().height;
+					break;
+				case "triangle":
+				case "line":
+				case "rect":
+					this.width *= this.scaleX;
+					this.height *= this.scaleY;
+					this.scaleX = 1;
+					this.scaleY = 1;
+				default:
+					break;
+			}
+		};
 
-                    for (let i = 0; i < points.length; i++) {
-                        if (minX === undefined) {
-                            minX = points[i].x;
-                        } else if (points[i].x < minX) {
-                            minX = points[i].x;
-                        }
-                        if (minY === undefined) {
-                            minY = points[i].y;
-                        } else if (points[i].y < minY) {
-                            minY = points[i].y;
-                        }
-                        if (maxX === undefined) {
-                            maxX = points[i].x;
-                        } else if (points[i].x > maxX) {
-                            maxX = points[i].x;
-                        }
-                        if (maxY === undefined) {
-                            maxY = points[i].y;
-                        } else if (points[i].y > maxY) {
-                            maxY = points[i].y;
-                        }
-                    }
-                    break;
-                default:
-                    minX = this.left;
-                    minY = this.top;
-                    maxX = this.left + this.width;
-                    maxY = this.top + this.height;
-            }
-            return {
-                topLeft: new fabric.Point(minX, minY),
-                bottomRight: new fabric.Point(maxX, maxY),
-                width: maxX - minX,
-                height: maxY - minY
-            }
-        };
+		fabric.Object.prototype.getBoundingBox = function () {
+			let minX = null;
+			let minY = null;
+			let maxX = null;
+			let maxY = null;
+			switch (this.type) {
+				case "polygon":
+				case "polyline":
+					let points = this.get('points');
 
-        //Zoom
-        document.addEventListener("mousewheel", function (e) {
-            let evt = window.event || e;
-            let delta = evt.detail ? evt.detail * (-120) : evt.wheelDelta;
-            let curZoom = canvas.getZoom();
-            let newZoom = curZoom + delta / 5000;
-            let x = e.offsetX;
-            let y = e.offsetY;
+					for (let i = 0; i < points.length; i++) {
+						if (minX === undefined) {
+							minX = points[i].x;
+						} else if (points[i].x < minX) {
+							minX = points[i].x;
+						}
+						if (minY === undefined) {
+							minY = points[i].y;
+						} else if (points[i].y < minY) {
+							minY = points[i].y;
+						}
+						if (maxX === undefined) {
+							maxX = points[i].x;
+						} else if (points[i].x > maxX) {
+							maxX = points[i].x;
+						}
+						if (maxY === undefined) {
+							maxY = points[i].y;
+						} else if (points[i].y > maxY) {
+							maxY = points[i].y;
+						}
+					}
+					break;
+				default:
+					minX = this.left;
+					minY = this.top;
+					maxX = this.left + this.width;
+					maxY = this.top + this.height;
+			}
+			return {
+				topLeft    : new fabric.Point(minX, minY),
+				bottomRight: new fabric.Point(maxX, maxY),
+				width      : maxX - minX,
+				height     : maxY - minY
+			}
+		};
 
-            console.log(newZoom);
-            if (newZoom < 0.05)
-                newZoom = 0.05;
-            if (newZoom > 3)
-                newZoom = 3;
+		//Zoom
+		document.addEventListener("mousewheel", function (e) {
+			let evt     = window.event || e;
+			let delta   = evt.detail ? evt.detail * (-120) : evt.wheelDelta;
+			let curZoom = canvas.getZoom();
+			let newZoom = curZoom + delta / 5000;
+			let x       = e.offsetX;
+			let y       = e.offsetY;
 
-            $("#zoom-level").text(`Zoom: ${Math.round(newZoom * 100)}%`);
-            //applying zoom values.
-            canvas.zoomToPoint({
-                x: x,
-                y: y
-            }, newZoom);
-            if (e !== null) e.preventDefault();
-            return false;
-        }, false);
+			if (newZoom < 0.05)
+				newZoom = 0.05;
+			if (newZoom > 3)
+				newZoom = 3;
 
-        $(document).on("dblclick", () => {
-            $("#objects-modal-list").empty();
-            $.each(global.Editor.plugins, (index, value) => {
-                if (!value.instanciable)
-                    return true;
-                $("#objects-modal-list").append(`<div class="col s2 section center">
+			$("#zoom-level").text(`Zoom: ${Math.round(newZoom * 100)}%`);
+			//applying zoom values.
+			canvas.zoomToPoint({
+				x: x,
+				y: y
+			}, newZoom);
+			if (e !== null) e.preventDefault();
+			return false;
+		}, false);
+
+		$(document).on("dblclick", () => {
+			$("#objects-modal-list").empty();
+			$.each(global.Editor.plugins, (index, value) => {
+				if (!value.instanciable)
+					return true;
+				$("#objects-modal-list").append(`<div class="col s2 section center">
 					<div class="avail-plugins" data-uid="${value.uid}">
                 		<img class="center" height="48" src="${ROOT.toString() + "/plugins/" + (value.icon === "" ? "Default.png" : value.icon)}" alt="icon">
                 		<p>${value.name}</p>
                 	</div>
             	</div>`);
-            });
+			});
 
-            $("#chooseObjectModal").modal('open');
-        });
+			$("#chooseObjectModal").modal('open');
+		});
 
-        $("#modalValidateAddObject").on("click", () => {
-            let uid = $(".avail-plugins.selected").data("uid");
+		$("#modalValidateAddObject").on("click", () => {
+			let uid = $(".avail-plugins.selected").data("uid");
 
-            //this.addEntity(global.Editor.plugins[uid]);
-            console.log("Adding ", global.Editor.plugins[uid]);
-        });
+			//this.addEntity(global.Editor.plugins[uid]);
+			console.log("Adding ", global.Editor.plugins[uid]);
+		});
 
-        $(document).on("click", ".avail-plugins", (el) => {
-            let item = $(el.currentTarget);
+		$(document).on("click", ".avail-plugins", (el) => {
+			let item = $(el.currentTarget);
 
-            $(".avail-plugins").removeClass("selected");
-            item.addClass("selected");
+			$(".avail-plugins").removeClass("selected");
+			item.addClass("selected");
 
-            $(".avail-plugins").css("background-color", "#212121");
-            item.css("background-color", "#353535");
+			$(".avail-plugins").css("background-color", "#212121");
+			item.css("background-color", "#353535");
 
-            console.log(item);
-            let pluginId = item.data("uid");
-            console.log("Plugin Id", pluginId);
+			console.log(item);
+			let pluginId = item.data("uid");
+			console.log("Plugin Id", pluginId);
 
-            let plugin = global.Editor.plugins[pluginId];
-            $("#modal-description").html(`
+			let plugin = global.Editor.plugins[pluginId];
+			$("#modal-description").html(`
 					<p><b>${plugin.inheritanceTree.join("</b> > <b>")}</b></p>
 					<p>${(plugin.description === undefined ? "<b>No description</b>" : plugin.description)}</p>`);
-            //			modalValidateAddObject
-        });
+			//			modalValidateAddObject
+		});
 
-        //Set default selector
-        fabric.Object.prototype.set({
-            transparentCorners: false,
-            cornerColor: '#0000ff',
-            borderColor: '#ff0000',
-            cornerSize: 12,
-            padding: 5
-        });
+		//Set default selector
+		fabric.Object.prototype.set({
+			transparentCorners: false,
+			cornerColor       : '#0000ff',
+			borderColor       : '#ff0000',
+			cornerSize        : 12,
+			padding           : 5
+		});
 
-        canvas.selectionBorderColor = 'rgba(255, 0, 0, 0.3)';
-        canvas.setBackgroundColor('rgba(21, 21, 21, 1)', canvas.renderAll.bind(canvas));
+		canvas.selectionBorderColor = 'rgba(255, 0, 0, 0.3)';
+		canvas.setBackgroundColor('rgba(21, 21, 21, 1)', canvas.renderAll.bind(canvas));
 
-        return (canvas);
-    }
+		return (canvas);
+	}
 
-    /**
-     * Load textures from project
-     */
-    loadTextures() {
-        let textures = global.Editor.project.textures;
-        textures = [{
-            name: "paddle",
-            path: "paddle.png"
-        }, {
-            name: "gamepad",
-            path: "gamepad.svg"
-        }, {
-            name: "ball",
-            path: "ball.png"
-        }, {
-            name: "paddle",
-            path: "paddle.png"
-        }, {
-            name: "gamepad",
-            path: "gamepad.svg"
-        }, {
-            name: "ball",
-            path: "ball.png"
-        }];
+	/**
+	 * Load textures from project
+	 */
+	loadTextures () {
+		let textures = global.Editor.project.textures;
+		textures     = [{
+			name: "paddle",
+			path: "paddle.png"
+		}, {
+			name: "gamepad",
+			path: "gamepad.svg"
+		}, {
+			name: "ball",
+			path: "ball.png"
+		}, {
+			name: "paddle",
+			path: "paddle.png"
+		}, {
+			name: "gamepad",
+			path: "gamepad.svg"
+		}, {
+			name: "ball",
+			path: "ball.png"
+		}];
 
-        $("#texture-modal-list").empty();
-        $.each(textures, (index, value) => {
-            $("#texture-modal-list").append(`<div class="col s3 section center">
+		$("#texture-modal-list").empty();
+		$.each(textures, (index, value) => {
+			$("#texture-modal-list").append(`<div class="col s3 section center">
                 <img class="center" height="32" src="${global.Editor.projectPath}/assets/${value.path}" alt="icon">
                 <h5>${value.name}</h5>
             </div>`);
-        });
-    };
+		});
+	};
 
-    /**
-     * Run the project in chrome
-     */
-    openExternal() {/*
-     let tmpobj = tmp.dirSync();
-     console.log('Dir: ', tmpobj.name);
+	/**
+	 * Run the project in chrome
+	 */
+	openExternal () {
+		/*
+		 let tmpobj = tmp.dirSync();
+		 console.log('Dir: ', tmpobj.name);
 
-     fs.writeFileSync(tmpobj.name + "/index.html", `
-     <p>Hello world!</p>`, 'utf8');
+		 fs.writeFileSync(tmpobj.name + "/index.html", `
+		 <p>Hello world!</p>`, 'utf8');
 
-     let folder = new server.Server(tmpobj.name);
+		 let folder = new server.Server(tmpobj.name);
 
-     opn('http://127.0.0.1:8080');
-     require('http').createServer(function (request, response) {
-     console.log(request, response);
+		 opn('http://127.0.0.1:8080');
+		 require('http').createServer(function (request, response) {
+		 console.log(request, response);
 
-     request.addListener('end', function () {
-     folder.serve(request, response);
+		 request.addListener('end', function () {
+		 folder.serve(request, response);
 
-     }).resume();
-     }).listen(8080);*/
+		 }).resume();
+		 }).listen(8080);*/
 
-        this.startPreview();
+		this.startPreview();
 
-        //tmpobj.removeCallback();
-    }
+		//tmpobj.removeCallback();
+	}
 
-    startPreview() {
-        let preview = new Preview();
-        preview.start();
-    }
+	startPreview () {
+		let preview = new Preview();
+		preview.start();
+	}
 };

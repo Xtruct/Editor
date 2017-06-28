@@ -31,6 +31,13 @@ module.exports = class Navbar {
 			global.Project.loadAskPath();
 		});
 
+		this.addCallback("save", "click", () => {
+			let json = JSON.stringify(global.Editor.canvas.toJSON(), null, '\t');
+			let scene = global.Editor.currentScene;
+			fs.writeFileSync(path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`), json, "utf8");
+			console.log("Saved to ", path.join(global.Editor.projectPath, "scenes", `${scene}.xscn`));
+		});
+
 		this.addCallback("reopen", "click", () => {
 			global.Project.openLast();
 		});

@@ -35,8 +35,6 @@ module.exports = class Preview {
 
 			game.stage.backgroundColor = "#ffffff";
 
-			$.each($("#"))
-
 			game.load.image('pad', 'ExampleProject/assets/paddle.png');
 			game.load.image('ball', 'ExampleProject/assets/ball.png');
 		}
